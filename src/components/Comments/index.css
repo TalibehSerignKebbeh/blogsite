@@ -1,0 +1,23 @@
+.comment-card{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background-color: #edf2f6;
+    box-shadow: 0px 10px 15px -26px rgba(0,0,0,0.1);
+    /* min-height: 400px; */
+}
+.message-wrapper>*{
+    line-height: .9rem;
+}
+.comment_sub_wrapper{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.reactions_wrapper{
+    width: auto;
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}

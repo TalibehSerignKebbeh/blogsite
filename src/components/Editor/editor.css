@@ -1,0 +1,27 @@
+.preview-btn{
+    position: relative;
+    margin: auto;
+    padding: 15px 13px;
+   background-image: linear-gradient(to right, rgb(66, 97, 183) , rgb(8, 69, 236));
+    /* background-image: linear-gradient( to right, rgba(109, 2, 30, 0.912), rgba(221, 87, 123, 0.912)); */
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    color: white;
+    font-size: 1rem;
+}
+
+
+.strike{
+    background-color: rgb(233, 227, 227);
+}
+
+.text-hilighted{
+    font-size: inherit;
+    background-color: rgb(156, 238, 238);
+}
+
+.highlight{
+    color: #fff;
+    background-color: #333;
+}

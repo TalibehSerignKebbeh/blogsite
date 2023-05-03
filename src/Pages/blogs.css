@@ -1,0 +1,29 @@
+.blogs-landing{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    gap: 10px 15px;
+    padding: 20px 0px 20px 0px;
+    text-align: center;
+    place-content: start center;
+}
+.blogs-wrapper{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 10px 15px;
+    margin: 20px 20px;
+    text-align: center;
+    place-content: start center;
+}
+
+.pagination-wrapper{
+    margin: 10px auto;
+    text-align: center;
+}
+
+@media (max-width: 500px) {
+    .blogs-wrapper{
+        margin: 4px;
+    }
+}

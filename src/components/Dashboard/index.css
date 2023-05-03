@@ -1,0 +1,65 @@
+
+
+.card-stats{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: baseline;
+    padding: 20px 0px;
+    margin: 10px 10px;
+    width: auto;
+    background-color: white;
+    box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.8);
+}
+
+.dash_card{
+    width: auto;
+    max-width: 200px;
+    min-width: 150px;
+    display: flex;
+
+flex-direction: row;
+align-items: center;
+/* justify-content: safe; */
+    /* width: -moz-fit-content;
+    width: fit-content;           */
+    height: auto;
+    padding: auto;
+    /* padding-block: 10px; */
+    padding: 10px 0px 10px 0px;
+    background-color: beige;
+    text-align: center;
+    overflow: hidden;
+}
+.dash_card hr{
+    width: 100%;
+}
+.dash_card .icon-wrapper{
+    flex-grow: 0;
+    min-width: 60px;
+    /* height: 100%; */
+}
+.content
+{
+    width: 100%;
+    align-items: stretch;
+}
+.dash_card>h2{
+    font-size: 24px;
+    font-family: inherit;
+    opacity: .8;
+}
+
+.dash_card>h1{
+    font-size: 20px;
+}
+
+
+/* recent section */
+
+.recent-container{
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-template-rows: auto;
+    width: 100%;
+}

@@ -1,0 +1,117 @@
+.signup-wrapper {
+    /* min-height: 100vh; */
+    width: 100%;
+    height: fit-content;
+    align-self: baseline;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-family: serif;
+    margin: auto;
+    flex: 1;
+    /* overflow-y: scroll; */
+}
+
+.signup-form {
+    justify-self: baseline;
+    padding: 10px 45px;
+    width: -moz-fit-content;
+    width: fit-content;
+    background-color: #eeeded;
+    box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.08);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin: 10px auto 0px auto;
+}
+
+.signup-title {
+    font-size: 1.3rem;
+    padding: 0px;
+}
+
+.input-wrapper {
+    width: 240px;
+    height: auto;
+    display: grid;
+    grid-template-rows: auto auto;
+    margin: auto;
+    /* margin-bottom: 15px; */
+}
+
+.input-wrapper>label {
+    font-size: 1rem;
+    margin-left: 1px;
+    padding: 5px auto;
+    color: #333;
+    /* opacity: .6; */
+    margin-right: auto;
+    margin-bottom: 2px;
+    text-transform: capitalize;
+    font-weight: 500;
+}
+
+.textinput {
+    padding: 9px 8px;
+    outline: none;
+    border: 1.6px solid #336;
+    width: 100%;
+    font-size: 1.2rem;
+    font-weight: 500;
+    font-family: serif;
+    border-radius: 4px;
+}
+
+.textinput::placeholder {
+    font-size: .9rem;
+}
+
+.error-span{
+  color: red;
+  text-align: start;
+}
+.error-span::first-letter{
+    text-transform: uppercase;
+}
+
+.input-wrapper>button {
+    width: 100%;
+    height: auto;
+    padding: 13px 7px;
+    border: none;
+    border-radius: 7px;
+    cursor: pointer;
+    font-size: #333;
+    color: #fff;
+    background-color: rgba(97, 7, 7, 0.631);
+}
+
+.profile-input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+@media (max-width: 480px) {
+    .signup-form {
+        padding: 10px 30px 10px 20px;
+    }
+
+    .input-wrapper {
+        width: 200px;
+    }
+
+
+}
+
+@media (max-width: 373px) {
+    .signup-form {
+        padding: auto;
+    }
+
+    .input-wrapper {
+        width: 95%;
+    }
+
+}

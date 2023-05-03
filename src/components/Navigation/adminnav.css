@@ -1,0 +1,116 @@
+.sidebar-wrapper{
+    background-color: rgb(244,245,247);
+    box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.6),0px 1px 2px 0px rgba(0, 0, 0, 0.6);
+    color: #fff;
+    height: 100vh;
+    width: 260px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    position: relative;
+    margin-left: -270px;
+    transition: .5s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    flex-shrink: 0;
+}
+.sidebar-wrapper.active{
+    margin-left: 0;
+}
+
+.infor-wrapper{
+    flex-grow: 0;
+   padding: 0px;
+   padding-top: 20px;
+   padding-bottom: 20px;
+    margin-bottom: auto;
+    padding: 6px auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    /* justify-content: space-between; */
+    height: auto;
+}
+.dashbordtitle{
+    opacity: .8;
+}
+.links-ul-wrapper{
+    min-width: 130px;
+    /* padding: 20px 4px; */
+    text-align: center;
+    /* margin: 0px auto auto 20px; */
+    flex-grow: 1;
+    background-color: #7494a436;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    width: 100%;
+    
+    /* background-color: #c0bcbc; */
+}
+.admin-links{
+    align-self: baseline;
+    margin-bottom: auto;
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+    row-gap: 10px;
+    width: 100%;
+    /* justify-content: flex-start;
+    align-items: baseline;
+    text-align: start; */
+    margin: 30px auto auto 20px;
+}
+button{
+    cursor: pointer !important;
+}
+.toggle-btn{
+    color: black;
+    font-size: 26px;
+    background-color: #c0bcbc;
+    padding: 1px 3px;
+    outline: none;
+    border: none;
+    position: absolute;
+    right: 105px;
+    /* margin-right: -200px; */
+}
+
+.sidebar-wrapper.active .toggle-btn{
+    right: 5px;
+}
+
+li{
+    list-style: none;
+    list-style-type: none;
+}
+ .logout-btn{
+  margin: auto;
+  /* height: 35px; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 8px;
+  border-radius: 5px;
+  border: none;
+  font-size: 17px;
+  font-family: serif;
+  align-self: flex-start;
+  background-color: lightgray;
+ }
+
+
+.bottom-elem{
+    flex-grow: 0;
+    margin-top: auto;
+    height: auto;
+    width: 100%;
+    border-top: 1px solid #000;
+    /* background-color: magenta; */
+    /* padding:20px  auto; */
+    padding-top: 20px;
+    padding-bottom: 20px;
+    text-align: center;
+}

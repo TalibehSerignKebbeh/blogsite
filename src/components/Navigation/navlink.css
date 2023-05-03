@@ -1,0 +1,81 @@
+.main-list {
+    list-style-type: none;
+    text-decoration: none;
+    position: relative;
+    margin: auto;
+    width: 100%;    
+    max-width: 180px;
+    align-self: center;
+    text-align: start;
+}
+.main-list .icon{
+   transform: rotate(0deg);
+   transition: all .5s;
+   font-size: .8rem;
+   color: rgb(47, 135, 223);
+}
+.main-list.active .icon{
+   transform: rotate(90deg);
+}
+
+
+.nav-link {
+    text-align: start;
+    font-size: 17px;
+    text-transform: capitalize;
+    color: #172b4d;
+    font-weight: 500;
+    line-height: 1.7rem;
+}
+
+
+.nav-title-btn {
+    font-size: 20px;
+    display: flex;
+    justify-content: space-between;
+    padding: 25px auto;
+    border: none;
+    outline: none;
+    background-color: inherit;
+    color: rgb(23, 23, 23);
+    width: 100%;
+    cursor: pointer;
+}
+
+.expand-title{
+    text-align: start;
+    font-size: 16px;
+    position: relative;
+    margin: auto 0px;
+    text-transform: capitalize;
+    color: rgb(38, 36, 36);
+    font-weight: 400;
+}
+.icon{
+    font-size: 16px; 
+    position: relative;
+    float: right;
+    color: black;
+    font-weight: 700;
+
+}
+
+
+
+.nav-link {
+    font-size: 20px;
+    text-align: start;
+}
+
+.child-links {
+    overflow: hidden;
+
+    position: relative;
+    float: right;
+    right: 20px;
+    transition: height .5s ease;
+}
+
+.child-links.active{
+    /* padding:14px 0px 14px 0px; */
+}

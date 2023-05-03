@@ -1,0 +1,72 @@
+
+.actions-btns{
+    display: flex;
+    gap: 40px;
+    align-items: center;
+    width: auto;
+    max-width: 300px;
+    margin: auto 10px;
+    width: 100%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left: auto;
+}
+
+.btn{
+    padding: 8px 15px;
+    border-radius: 3px;
+    outline: none;
+    font-size: .9rem;
+    color: white;
+}
+.del{   
+    background-color: rgb(243, 46, 46);
+}
+.del:hover{
+    background-color: rgb(90, 35, 35);
+}
+.error-elem{
+    background-color: white;
+    color: red;
+}
+.edit{
+    /* background-color: rgb(4, 72, 140); */
+    /* color: white !important; */
+    /* color: white; */
+}
+
+.edit:hover{
+    background-color: rgb(63, 132, 200);
+}
+
+@media (max-width: 760px) {
+    .actions-btns{
+        gap: 20px;
+    }
+    .btn{
+            padding: 5px 10px;
+    border-radius: 3px;
+    font-size: .8rem;
+
+    }
+    
+}
+/* @media only screen and (max-width: 576px) {
+    .actions-btns{
+        background-color: aqua;
+    }
+    
+} */
+@media only screen and (max-width: 375px) {
+    .actions-btns{
+        gap: 15px;
+        background: none;
+    }
+    .btn{
+            padding: 4px 7px;
+    border-radius: 3px;
+    font-size: .7rem;
+
+    }
+    
+}

@@ -1,0 +1,41 @@
+.upload-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 20px auto;
+    align-self: stretch;
+    /* align-self: flex-start; */
+    height: auto;
+    width: auto;
+    overflow-y: auto;
+}
+.blog-submit{
+    position: relative;
+    margin: auto;
+    padding: 15px 13px;
+   background-image: linear-gradient(to right, rgb(124, 83, 164) , rgb(102, 45, 159));
+    /* background-image: linear-gradient( to right, rgba(109, 2, 30, 0.912), rgba(221, 87, 123, 0.912)); */
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    color: white;
+    font-size: 1rem;
+}
+.blog-submit:hover{
+   background-image: linear-gradient(to right, rgb(42, 3, 81) , rgb(114, 7, 222));
+    /* background-image: linear-gradient( to right, rgba(245, 4, 68, 0.777), rgba(45, 31, 197, 0.862)); */
+
+}
+
+.preview-btn{
+     position: relative;
+    margin: auto;
+    padding: 7px 13px;
+   background-image: linear-gradient(to right, rgb(3, 68, 18) , rgb(151, 242, 109));
+    /* background-image: linear-gradient( to right, rgba(109, 2, 30, 0.912), rgba(221, 87, 123, 0.912)); */
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    color: white;
+    font-size: 1rem;
+}

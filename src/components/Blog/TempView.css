@@ -1,0 +1,131 @@
+.container{
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    max-width: 100%;
+    width: 70%;
+    margin: auto;
+    text-align: start;
+    padding: 20px 30px;
+    font-size: 20px;
+    font-family: serif;
+}
+.title{
+    padding-top:4px;
+    font-weight: 600;
+  }
+   img {
+      display: block;
+      width: 85%;
+      height: 300px;
+      margin-left: 0;
+      margin-right: auto;
+      object-fit: cover;
+    }
+  .blog-banner{
+    width:100%;
+    height:400px;
+    margin-bottom:20px; 
+  }
+  .tags{
+     margin:10px 0px;
+  }
+h1,h2,h3,h4,h5,h6{
+        position: relative;
+        margin:10px 0px;
+        text-align:start;
+    }
+    h1 {
+        font-size: 30px;
+    }
+    h2{
+      font-size:27px;
+    }
+    h3{
+      font-size:24px; 
+    }
+    h4 {
+        font-size: 22px;
+        color: #616161;
+    }
+     h4 {
+        font-size: 21px;
+        color: #616161;
+    }
+
+  .content  > * + * {
+      margin: 0.75em 0px;
+    }
+    /* outline: none; */
+    ul,
+    ol {
+      padding: 0 1rem;
+    }
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      line-height: 1.1;
+    }
+    .blog-link{
+      color:#006699; 
+      cursor: pointer;
+    }
+    p,code,pre,code{
+      text-align:start;
+    }
+ 
+    p{
+      font-size:18px !important;
+    }
+    code {
+      background-color: rgba(#616161, 0.1);
+      color: #616161;
+    }
+    pre {
+      background: #0d0d0d;
+      color: #fff;
+      /* font-family: "JetBrainsMono", monospace; */
+      padding: 0.75rem 1rem;
+      border-radius: 0.5rem;
+      
+    }
+  pre>code {
+        color: inherit;
+        padding: 0;
+        background: none;
+        font-size: 0.9rem;
+      }
+    blockquote {
+      padding-left: 1rem;
+      border-left: 2px solid rgba(#0d0d0d, 0.1);
+    }
+    hr {
+      border: none;
+      border-top: 2px solid rgba(#0d0d0d, 0.1);
+      margin: 2rem 0;
+    }
+  
+
+
+@media (max-width: 760px) {
+    .container{
+        width: 90%;
+        padding: 12px 10px;
+        text-overflow: clip;
+        word-break: break-all;
+    }
+    
+}
+
+@media (max-width: 480px) {
+    .container{
+        width: 100%;
+        padding: 12px 10px;
+        text-overflow: clip;
+        word-break: break-all;
+    }
+    
+}

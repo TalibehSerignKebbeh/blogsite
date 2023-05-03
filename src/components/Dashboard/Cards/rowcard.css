@@ -1,0 +1,52 @@
+
+.row-card{
+    min-width: 110px;
+    max-width: -moz-fit-content;
+    max-width: fit-content;
+    padding: 10px 10px 10px 10px;
+    background-color: lightgray;
+    display: flex;
+    gap: 30px;
+    justify-content: center;
+    align-items: center;
+    margin: 10px 20px;
+    border-radius: 4px;
+}
+
+.text-wrapper{
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+.row-card .title{
+    font-size: 18px;
+    font-weight: 700;
+    opacity: .7;
+}
+.row-card .subtitle{
+    font-size: 16px;
+    font-weight: 400;
+    text-align: center;
+}
+
+
+.icon_wrapper{
+    width: 70px;
+    height: 70px;
+    vertical-align: middle;
+    text-align: center;
+    position: relative;
+    border-radius: 50%;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    /* background-color: pink; */
+    background-color: rgb(21, 4, 97);
+    color: white;
+}
+
+.icon_wrapper .card-icon{
+    margin: auto;
+    /* transform: translateX(-50%); */
+}
