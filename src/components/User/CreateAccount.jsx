@@ -1,9 +1,9 @@
 import React from 'react';
-import UseInput from '../input/UseInput';
 import './createaccount.css'
 import { useState } from 'react';
 import { AxiosInstance } from '../../api';
 import { useNavigate } from 'react-router-dom';
+import UseInput from '../input/UseInput'
 
 const CreateAccount = () => {
     const navigate = useNavigate()
