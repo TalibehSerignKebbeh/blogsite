@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import UseInput from '../input/UseInput'
+// import UseInput from '../input/UseInput'
 import './Login.css'
 import { AxiosInstance } from '../../api';
 import { useContextHook } from '../../context/AuthContext'
@@ -52,13 +52,13 @@ const Login = () => {
                 {errorMessage?.length ? <span className='error-message'>{errorMessage}</span> : null}
                 <div className='input-wrapper'>
                     <label htmlFor='username'>username</label>
-                    <UseInput type={'text'} value={user?.username}
+                    <input type={'text'} value={user?.username}
                         name={'username'} id={"username"} classname={'textinput'}
                         handleChange={handleChange} placeholder={"username ..."} />
                 </div>
                 <div className='input-wrapper'>
                     <label htmlFor='password'>password</label>
-                    <UseInput type={'password'} value={user?.password}
+                    <input type={'password'} value={user?.password}
                         name={'password'} id={"password"} classname={'textinput'}
                         handleChange={handleChange} placeholder={"password ..."} />
                 </div>

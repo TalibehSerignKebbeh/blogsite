@@ -3,7 +3,7 @@ import './createaccount.css'
 import { useState } from 'react';
 import { AxiosInstance } from '../../api';
 import { useNavigate } from 'react-router-dom';
-import UseInput from '../input/UseInput'
+// import UseInput from '../input/UseInput'
 
 const CreateAccount = () => {
     const navigate = useNavigate()
@@ -100,7 +100,7 @@ const CreateAccount = () => {
                 <h3 className='signup-title'>Create Account</h3>
                 <div className='input-wrapper'>
                     <label htmlFor="firstName">firstName</label>
-                    <UseInput type={'text'} name={'firstName'}
+                    <input type={'text'} name={'firstName'}
                         classname={'textinput'} handleChange={handleChange}
                         value={user?.firstName} placeholder={'firstname...'}
                         handleBlur={handleBlur} />
@@ -109,7 +109,7 @@ const CreateAccount = () => {
                 </div>
                 <div className='input-wrapper'>
                     <label htmlFor="lastName">LastName</label>
-                    <UseInput type={'text'} name={'lastName'}
+                    <input type={'text'} name={'lastName'}
                         classname={'textinput'} handleChange={handleChange}
                         value={user?.lastName} placeholder={'lastname...'}
                         handleBlur={handleBlur} />
@@ -118,7 +118,7 @@ const CreateAccount = () => {
                 </div>
                 <div className='input-wrapper'>
                     <label htmlFor="username">Username</label>
-                    <UseInput type={'text'} name={'username'}
+                    <input type={'text'} name={'username'}
                         classname={'textinput'} handleChange={handleChange}
                         value={user?.username} placeholder={'username...'}
                         handleBlur={handleBlur} />
@@ -126,7 +126,7 @@ const CreateAccount = () => {
                 </div>
                 <div className='input-wrapper'>
                     <label htmlFor="password">password</label>
-                    <UseInput type={'password'} name={'password'}
+                    <input type={'password'} name={'password'}
                         classname={'textinput'} handleChange={handleChange}
                         value={user?.password} placeholder={'password...'}
                         handleBlur={handleBlur} />
@@ -134,7 +134,7 @@ const CreateAccount = () => {
                 </div>
                 <div className='input-wrapper'>
                     <label htmlFor="confirmPassword">confirmPassword</label>
-                    <UseInput type={'password'} name={'confirmPassword'}
+                    <input type={'password'} name={'confirmPassword'}
                         classname={'textinput'} handleChange={handleChange}
                         value={user?.confirmPassword} placeholder={'confirmpassword...'}
                         handleBlur={handleBlur} />
@@ -142,7 +142,7 @@ const CreateAccount = () => {
                 </div>
                 <div className='input-wrapper'>
                     <label htmlFor="profile">Profile</label>
-                    <UseInput type={'file'} name={'profile'} id={'profile'}
+                    <input type={'file'} name={'profile'} id={'profile'}
                         classname={'profile-input'} handleChange={handleProfileChange} handleBlur={handleBlur} />
                 </div>
                 <div className='input-wrapper'>

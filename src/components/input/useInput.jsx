@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import react from 'react';
 
 const UseInput = ({ type, value, name, 
     handleChange, handleBlur, classname,
