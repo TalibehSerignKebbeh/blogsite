@@ -100,7 +100,7 @@ const CreateAccount = () => {
                 <h3 className='signup-title'>Create Account</h3>
                 <div className='input-wrapper'>
                     <label htmlFor="firstName">firstName</label>
-                    <input type={'text'} name={'firstName'}
+                    <input autoComplete='on' type={'text'} name={'firstName'}
                         classname={'textinput'} handleChange={handleChange}
                         value={user?.firstName} placeholder={'firstname...'}
                         handleBlur={handleBlur} />
@@ -109,7 +109,7 @@ const CreateAccount = () => {
                 </div>
                 <div className='input-wrapper'>
                     <label htmlFor="lastName">LastName</label>
-                    <input type={'text'} name={'lastName'}
+                    <input autoComplete='on' type={'text'} name={'lastName'}
                         classname={'textinput'} handleChange={handleChange}
                         value={user?.lastName} placeholder={'lastname...'}
                         handleBlur={handleBlur} />
@@ -118,7 +118,7 @@ const CreateAccount = () => {
                 </div>
                 <div className='input-wrapper'>
                     <label htmlFor="username">Username</label>
-                    <input type={'text'} name={'username'}
+                    <input autoComplete='on' type={'text'} name={'username'}
                         classname={'textinput'} handleChange={handleChange}
                         value={user?.username} placeholder={'username...'}
                         handleBlur={handleBlur} />
@@ -126,7 +126,7 @@ const CreateAccount = () => {
                 </div>
                 <div className='input-wrapper'>
                     <label htmlFor="password">password</label>
-                    <input type={'password'} name={'password'}
+                    <input autoComplete='off' type={'password'} name={'password'}
                         classname={'textinput'} handleChange={handleChange}
                         value={user?.password} placeholder={'password...'}
                         handleBlur={handleBlur} />
@@ -134,7 +134,7 @@ const CreateAccount = () => {
                 </div>
                 <div className='input-wrapper'>
                     <label htmlFor="confirmPassword">confirmPassword</label>
-                    <input type={'password'} name={'confirmPassword'}
+                    <input autoComplete='off' type={'password'} name={'confirmPassword'}
                         classname={'textinput'} handleChange={handleChange}
                         value={user?.confirmPassword} placeholder={'confirmpassword...'}
                         handleBlur={handleBlur} />
@@ -142,7 +142,7 @@ const CreateAccount = () => {
                 </div>
                 <div className='input-wrapper'>
                     <label htmlFor="profile">Profile</label>
-                    <input type={'file'} name={'profile'} id={'profile'}
+                    <input autoComplete='on' type={'file'} name={'profile'} id={'profile'}
                         classname={'profile-input'} handleChange={handleProfileChange} handleBlur={handleBlur} />
                 </div>
                 <div className='input-wrapper'>

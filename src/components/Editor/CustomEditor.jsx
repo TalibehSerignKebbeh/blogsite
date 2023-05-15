@@ -102,12 +102,12 @@ export default ({ blog, setblog, setPreview, preview }) => {
       <div>
         <UploadImage />
         <div>
-          <input type="text" name="title" onChange={handleData}
+          <input autoComplete='on' type="text" name="title" onChange={handleData}
             value={blog?.title}
             placeholder="blog title here..." className="title-inp" />
         </div>
         <div>
-          <input type="text" name="image" onChange={handleData}
+          <input autoComplete='on' type="text" name="image" onChange={handleData}
             value={blog?.image}
             placeholder="blog banner image url..." className="title-inp" />
         </div>
@@ -115,7 +115,7 @@ export default ({ blog, setblog, setPreview, preview }) => {
         <EditorContent editor={editor} className="content-editor" />
         {/* <Editor /> */}
         <div>
-          <input type="text" name="tags" onChange={handleData}
+          <input autoComplete='on' type="text" name="tags" onChange={handleData}
             value={blog?.tags?.join(' ')}
             placeholder="tags nature technology" className="tags" />
         </div>
