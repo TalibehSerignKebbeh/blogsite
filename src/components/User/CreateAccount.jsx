@@ -101,49 +101,49 @@ const CreateAccount = () => {
                 <div className='input-wrapper'>
                     <label htmlFor="firstName">firstName</label>
                     <input autoComplete='on' type={'text'} name={'firstName'}
-                        classname={'textinput'} handleChange={handleChange}
+                        className={'textinput'} onChange={handleChange}
                         value={user?.firstName} placeholder={'firstname...'}
-                        handleBlur={handleBlur} />
+                        onBlur={handleBlur} />
                     {touch?.firstName && errors?.firstName && <span className='error-span'>{errors?.firstName}</span>}
 
                 </div>
                 <div className='input-wrapper'>
                     <label htmlFor="lastName">LastName</label>
                     <input autoComplete='on' type={'text'} name={'lastName'}
-                        classname={'textinput'} handleChange={handleChange}
+                        className={'textinput'} onChange={handleChange}
                         value={user?.lastName} placeholder={'lastname...'}
-                        handleBlur={handleBlur} />
+                        onBlur={handleBlur} />
                     {touch?.lastName && errors?.lastName && <span className='error-span'>{errors?.lastName}</span>}
 
                 </div>
                 <div className='input-wrapper'>
                     <label htmlFor="username">Username</label>
                     <input autoComplete='on' type={'text'} name={'username'}
-                        classname={'textinput'} handleChange={handleChange}
+                        className={'textinput'} onChange={handleChange}
                         value={user?.username} placeholder={'username...'}
-                        handleBlur={handleBlur} />
+                        onBlur={handleBlur} />
                     {touch?.username && errors?.username && <span className='error-span'>{errors?.username}</span>}
                 </div>
                 <div className='input-wrapper'>
                     <label htmlFor="password">password</label>
                     <input autoComplete='off' type={'password'} name={'password'}
-                        classname={'textinput'} handleChange={handleChange}
+                        className={'textinput'} onChange={handleChange}
                         value={user?.password} placeholder={'password...'}
-                        handleBlur={handleBlur} />
+                        onBlur={handleBlur} />
                     {touch?.password && errors?.password && <span className='error-span'>{errors?.password}</span>}
                 </div>
                 <div className='input-wrapper'>
                     <label htmlFor="confirmPassword">confirmPassword</label>
                     <input autoComplete='off' type={'password'} name={'confirmPassword'}
-                        classname={'textinput'} handleChange={handleChange}
+                        className={'textinput'} onChange={handleChange}
                         value={user?.confirmPassword} placeholder={'confirmpassword...'}
-                        handleBlur={handleBlur} />
+                        onBlur={handleBlur} />
                     {touch?.confirmPassword && errors?.confirmPassword && <span className='error-span'>{errors?.confirmPassword}</span>}
                 </div>
                 <div className='input-wrapper'>
                     <label htmlFor="profile">Profile</label>
                     <input autoComplete='on' type={'file'} name={'profile'} id={'profile'}
-                        classname={'profile-input'} handleChange={handleProfileChange} handleBlur={handleBlur} />
+                        className={'profile-input'} onChange={handleProfileChange} onBlur={handleBlur} />
                 </div>
                 <div className='input-wrapper'>
                     <button type='submit' >{uploading ? "uploading" : `Submit`}</button>

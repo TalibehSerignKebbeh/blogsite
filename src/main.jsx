@@ -23,6 +23,8 @@ import UploadImage from './components/ImageUpload/UploadImage';
 import EditBlog from './components/Blog/Edit/EditBlog';
 import UserPage from './Pages/UserPage'
 import AdminBlogs from './Pages/AdminBlogs';
+import UseAuth from './hooks/useAuth';
+
 const token = localStorage.getItem('authToken')
 
 const config = {
@@ -32,7 +34,6 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
-    errorElement: <ErrorPage />,
 
     children: [
       {
@@ -124,9 +125,7 @@ const router = createBrowserRouter([
         // errorElement: <ErrorPage />
       },
     ],
-    
-
-  
+    errorElement: <ErrorPage />,
   },
  
 ]);

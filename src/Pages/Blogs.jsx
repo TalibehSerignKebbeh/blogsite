@@ -39,13 +39,15 @@ const Blogs = () => {
   return (
     <div style={{ textAlign: "center" }}>
       <div className="blogs-landing">
-        {loading ? (
+        {!blogsToDisplay?.length && loading ? (
           <div>
             <h3>Loading...</h3>
           </div>
         ) : (
           <div>
-            <div className="blogs-wrapper">
+              <div className="blogs-wrapper">
+                {!blogsToDisplay?.length && loading
+                && <div> <h3>Loading more ...</h3> </div>}
               {blogsToDisplay?.map((blog, id) => (
                 <BlogCard blog={blog} key={id} />
               ))}

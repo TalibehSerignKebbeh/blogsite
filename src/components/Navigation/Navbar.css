@@ -64,8 +64,8 @@ cursor: pointer;
   margin-right: 8px;
   border-radius: 10%;
   background-color: white;
+  border-radius: 3px;
   color: rgb(125, 34, 34);
-
  } 
 
  .logout-btn{

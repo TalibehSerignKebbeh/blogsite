@@ -16,7 +16,7 @@ const BlogCard = ({ blog }) => {
     const formattedTitle = `${blog?.title?.toLowerCase()?.split(' ')?.join('-')}`
     const createdDate = new Date(blog?.created_at)
     const authorName = `${blog?.author?.firstName} ${blog?.author?.lastName}` 
-    const profileLink = blog?.profile? `${ImageUrl}/${log?.author?.profile}` : profile
+    const profileLink = blog?.profile? `${ImageUrl}/${blog?.author?.profile}` : profile
     let blogLink = `blogs/${formattedTitle}`;
     if (['admin', 'editor'].includes(role)) {
         blogLink=`/dash/blogs/view/${formattedTitle}`

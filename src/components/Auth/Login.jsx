@@ -24,8 +24,6 @@ const Login = () => {
         await AxiosInstance.post(`/auth`, user,)
             .then((res) => {
                 const token = res?.data?.token;
-                // console.log(token);
-                clearAuthToken()
                 storeAuthToken(token)
                 navigate('/')
                 // console.log(role);
@@ -53,14 +51,14 @@ const Login = () => {
                 <div className='input-wrapper'>
                     <label htmlFor='username'>username</label>
                     <input autoComplete='on' type={'text'} value={user?.username}
-                        name={'username'} id={"username"} classname={'textinput'}
-                        handleChange={handleChange} placeholder={"username ..."} />
+                        name={'username'} id={"username"} className={'textinput'}
+                        onChange={handleChange} placeholder={"username ..."} />
                 </div>
                 <div className='input-wrapper'>
                     <label htmlFor='password'>password</label>
                     <input autoComplete='off' type={'password'} value={user?.password}
-                        name={'password'} id={"password"} classname={'textinput'}
-                        handleChange={handleChange} placeholder={"password ..."} />
+                        name={'password'} id={"password"} className={'textinput'}
+                        onChange={handleChange} placeholder={"password ..."} />
                 </div>
                 <div className='input-wrapper'>
                     <button type='submit' >{uploading ? "uploading" : `Submit`}</button>

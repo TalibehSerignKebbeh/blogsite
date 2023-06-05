@@ -22,14 +22,16 @@ function NavbarLanding() {
   };
   useEffect(() => {
 
-    if (showMenu) {
-      window.addEventListener('click', (e) => {
+    window.addEventListener('click', (e) => {
+      if (showMenu) {
+        console.log(`window click from navbarlanding page`)
         if (!menuRef?.current?.contains(e.target)) {
           setShowMenu(false)
         }
+      }
       })
-    }
-  }, []);
+    
+  }, [showMenu]);
  
   return (
     <nav>
