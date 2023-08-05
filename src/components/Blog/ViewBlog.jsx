@@ -6,7 +6,6 @@ import { useContextHook } from '../../context/AuthContext';
 import banner from '../../assets/flat-mountains.png'
 import ABlog from './ABlog';
 import CommentEditor from '../Editor/CommentEditor/CommentEditor';
-import axios from 'axios';
 import CommentCard from '../Comments/CommentCard';
 import UseAuth from '../../hooks/useAuth';
 import CommentList from './CommentList';

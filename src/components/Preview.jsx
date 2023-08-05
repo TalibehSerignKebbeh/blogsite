@@ -2,26 +2,26 @@ import React from 'react';
 import styled from 'styled-components';
 import parse from 'html-react-parser';
 
-const Preview = ({blog, preview }) => {
+const Preview = ({ blog, preview }) => {
 
-  
-    return (
-      <BlogContainer className={`${preview}? "show":""`}
-      style={{height: preview? 'auto': '0px',transition:'height ease .5s'}}>
-                    <h1 className='title'>{blog?.title}</h1>
-                    <h4>{blog?.date}</h4>
-                    {blog?.image && <img className='blog-banner' src={`${blog?.image}`} />}
-                {/* </div> */}
-                <div className='blog'>
-                    {parse(blog?.content || '')}
-                </div>
-                {blog?.tags?.length ?
-                <p className='tags'>
-                    {blog?.tags?.map((tag, id) =>
-                        (<small className='tag' key={id}>{tag}</small>))}
-                </p> : null}
-        </BlogContainer>
-    );
+
+  return (
+    <BlogContainer className={`${preview}? "show":""`}
+      style={{ height: preview ? 'auto' : '0px', transition: 'height ease .5s' }}>
+      <h1 className='title'>{blog?.title}</h1>
+      <h4>{blog?.date}</h4>
+      {blog?.image && <img className='blog-banner' src={`${blog?.image}`} />}
+      {/* </div> */}
+      <div className='blog'>
+        {parse(blog?.content || '')}
+      </div>
+      {blog?.tags?.length ?
+        <p className='tags'>
+          {blog?.tags?.map((tag, id) =>
+            (<small className='tag' key={id}>{tag}</small>))}
+        </p> : null}
+    </BlogContainer>
+  );
 }
 
 export default Preview;
@@ -35,10 +35,11 @@ export const BlogContainer = styled.div`
   background: #fff;
   text-align:start;
   height:auto;
-  box-shadow:2px 1px 5px 0px rgba(0,0,0,0.09), 0px 1px 5px 2px rgba(0,0,0,0.09);
+  ${'' /* box-shadow:2px 1px 5px 0px rgba(0,0,0,0.09), 0px 1px 5px 2px rgba(0,0,0,0.09); */}
+  box-shadow: 0px 22px 56px -44px rgba(0,0,0,0.1);
   .title{
     padding-top:4px;
-    font-weigth: 600;
+    font-weigth: 400;
   }
    img {
      display: block;
@@ -90,6 +91,7 @@ export const BlogContainer = styled.div`
   .content {
     > * + * {
       margin: 0.75em 0px;
+      font-weigth:400;
     }
     outline: none;
     ${'' /* margin: 0 1rem; */}
@@ -97,6 +99,7 @@ export const BlogContainer = styled.div`
     ol {
       padding: 0 1rem;
     }
+   
     h1,
     h2,
     h3,
@@ -104,6 +107,12 @@ export const BlogContainer = styled.div`
     h5,
     h6 {
       line-height: 1.1;
+      margin-top:10px;
+    }
+      h1,
+    h2,
+    h3{
+      margin-top:20px;
     }
     .blog-link{
       color:#006699; 

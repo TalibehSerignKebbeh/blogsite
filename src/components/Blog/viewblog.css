@@ -15,6 +15,7 @@
     text-align: start;
     padding: 20px 30px;
     font-size: 20px;
+    box-shadow: 7px 31px 70px 0px rgba(0,0,0,0.1);
 }
 
 .comments_section{
@@ -69,6 +70,25 @@ code {
       border: none;
       border-top: 2px solid rgba(#0d0d0d, 0.1);
       margin: 2rem 0;
+    }
+ h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      line-height: 1.1;
+      margin-top:10px;
+      font-weight: 500;
+      color: #333131;
+
+    }
+      h1,
+    h2,
+    h3{
+      margin-top:20px;
+      font-weight: 500;
+      color: #333131;
     }
 
 @media (max-width: 760px) {
