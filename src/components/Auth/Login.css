@@ -1,4 +1,4 @@
-.signin-wrapper {
+.login_wrapper {
     /* min-height: 100vh; */
     align-self: stretch;
     height: 100%;
@@ -10,7 +10,7 @@
     justify-content: center;
     font-family: serif;
 }
-.error-message{
+.error_message.content{
     font-size: 1.2rem;
     color: red;
     text-align: center;
@@ -18,7 +18,7 @@
     border-radius: 3px;
     background-color: rgb(249, 246, 246);
 }
-.signin-form{
+.login_form{
        justify-self: center;
     padding: 10px 45px;
     width: -moz-fit-content;
@@ -30,27 +30,56 @@
     flex-direction: column;
     gap: 14px;
     margin: 10px auto 0px auto;
+    position: relative;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+.login_form .title-wrapper{
+    width: 100%;
+    /* box-sizing: content-box; */
+    position: absolute;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    height: 50px;
+    /* margin-inline: ; */
+    top: 0;
+    left: 0;
+    right: 0;
+    /* margin-bottom: 200px; */
+    padding: 15px auto;
+    /* bottom: 10px; */
+    background-color: #0066ff;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+}
+.title-wrapper h3{
+    color: white;
 }
 
-.signin-form:last-child{
+.login_form:last-child{
     margin-bottom: 14px;
 }
 
-.signin-form div{
+.login_form .input_wrapper{
     width: 230px;
     display: grid;
     grid-template-rows: auto auto;
 }
 
-
-.input-wrapper label {
-    font-size: .9rem;
+.input_wrapper label {
+    font-size: 1rem;
+    color: #636363;
+    font-weight: 600;
     margin-left: 1px;
     margin-right: auto;
-    font-weight: 600;
+    font-family: serif;
 }
 
-.input-wrapper label::first-letter {
+
+.input_wrapper label::first-letter {
     text-transform: uppercase;
 }
 
@@ -69,15 +98,25 @@
     font-size: 1rem;
 }
 
-.error-span{
-  color: red;
+.error_message{
+     color: rgb(168, 5, 5);
   text-align: start;
+  margin-top: 50px;
 }
-.error-span::first-letter{
+.error_message.content{
+  color: rgb(168, 5, 5);
+  text-align: start;
+  padding: 5px auto;
+  background-color: #fff;
+  margin-top: 50px;
+  /* margin-bottom: -80px; */
+}
+
+.error_message.content::first-letter{
     text-transform: uppercase;
 }
 
-.input-wrapper>button {
+.input_wrapper>button {
     width: 100%;
     height: auto;
     padding: 13px 7px;
@@ -85,7 +124,8 @@
     border-radius: 7px;
     cursor: pointer;
     margin-bottom: 14px;
-    font-size: #333;
+    margin-top: 20px;
+    font-size: 1.3rem;
     color: #fff;
-    background-color: rgba(97, 7, 7, 0.631);
+    background-color: #0066ff;
 }

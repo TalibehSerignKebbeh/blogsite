@@ -10,6 +10,10 @@ export const GetError = (err) => {
     if (err?.response?.status === 413 ) {
         return "Request entity is too large ";
     }
+     if (err?.response?.status === 400 ) {
+        return err?.response?.data?.message;
+    }
+    
     if (err?.response?.data?.errors?.length) return err?.response?.data?.errors
     return err?.response?.data?.message
 

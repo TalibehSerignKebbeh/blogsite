@@ -8,8 +8,9 @@ import OtherSamples from "../components/Blog/Cards/OtherSamples";
 const Blogs = () => {
   const responseData = useLoaderData();
   const [loading, setloading] = useState(false);
+  const [refetchSuccess, setrefetchSuccess] = useState(false);
     const { blogs, total, pageCount, size, page } = responseData;
-    console.log(responseData);
+    // console.log(responseData);
   const [pageSize, setPageSize] = useState(size);
   const [pageNum, setPageNum] = useState(page == 0 ? 1 : page);
   const [blogsToDisplay, setblogsToDisplay] = useState([...blogs]);
@@ -21,6 +22,7 @@ const Blogs = () => {
         `/blogs?page=${Number(pageNum) - 1}&size=${Number(pageSize)}`
       )
         .then((res) => {
+          // console.log(res?.data);
           setblogsToDisplay(res?.data?.blogs);
           setPageSize(res?.data?.size);
           setpage(res?.data?.page);
@@ -37,7 +39,7 @@ const Blogs = () => {
   }, [pageNum, pageSize]);
 
   return (
-    <div style={{ textAlign: "center" }}>
+    <div style={{ }}>
       <div className="blogs-landing">
         {!blogsToDisplay?.length && loading ? (
           <div>
@@ -47,7 +49,9 @@ const Blogs = () => {
           <div>
               <div className="blogs-wrapper">
                 {!blogsToDisplay?.length && loading
-                && <div> <h3>Loading more ...</h3> </div>}
+                  &&
+                  <div> <h3>Loading more ...</h3> </div>
+                }
               {blogsToDisplay?.map((blog, id) => (
                 <BlogCard blog={blog} key={id} />
               ))}

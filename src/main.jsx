@@ -24,11 +24,12 @@ import EditBlog from './components/Blog/Edit/EditBlog';
 import UserPage from './Pages/UserPage'
 import AdminBlogs from './Pages/AdminBlogs';
 import UseAuth from './hooks/useAuth';
-
-const token = localStorage.getItem('authToken')
+import { jwttoken } from './hooks/useAuth';
+import TagsBlogs from './Pages/TagsBlogs';
+// const jwttoken = localStorage.getItem('authToken')
 
 const config = {
-  headers:{Authorization: `Bearer ${token}`}
+  headers:{Authorization: `Bearer ${jwttoken}`}
 }
 const router = createBrowserRouter([
   {
@@ -44,7 +45,7 @@ const router = createBrowserRouter([
           return responseData;
         },
         element: <Blogs  />,
-        // errorElement: <ErrorPage />
+        errorElement: <ErrorPage />
       },
       {
         path:`/dash`,
@@ -52,12 +53,14 @@ const router = createBrowserRouter([
         children: [
           {
             index: true,
-            loader: async () => {
-              const res = await AxiosInstance.get(`/blogs/stats`, config)
-              const responseData = res?.data
-              return responseData;
-            },
-            element: <Dashboard />
+            // loader: async () => {
+            //   const res = await AxiosInstance.get(`/blogs/stats`, config)
+            //   const responseData = res?.data
+            //   return responseData;
+            // },
+            element: <Dashboard />,
+        errorElement: <ErrorPage />
+
           },
            {
              path: "/dash/blogs",
@@ -66,15 +69,21 @@ const router = createBrowserRouter([
           const responseData = res?.data
           return responseData;
         },
-            element: <AdminBlogs />,
+             element: <AdminBlogs />,
+        errorElement: <ErrorPage />
+            
           },
           {
             path: "/dash/blogs/newblog",
             element: <UploadBlog />,
+        errorElement: <ErrorPage />
+
           },
           {
             path: "/dash/users",
             element: <UserPage />,
+        errorElement: <ErrorPage />
+
           },
           {
             path: "/dash/blogs/:blogId/edit",
@@ -103,27 +112,33 @@ const router = createBrowserRouter([
         path: '/blogs/:title',
         element: <ViewBlog />,
         loader: async ({ params }) => {
-          const res = await AxiosInstance.get(`${apiUrl}/blogs/single?title=${params?.title}`)
+          const res = await AxiosInstance.get(`${apiUrl}/blogs/single?title=${params?.title}`,
+          {headers:{Authorization: `Bearer ${jwttoken}`}})
           // console.log(res);
           const blog = res?.data?.blog;
           return blog;
         },
+        errorElement: <ErrorPage />
+        
       },
       {
-        path: "/signup",
+        path: "/register",
         element: <CreateAccount />,
-        // errorElement: <ErrorPage />
+        errorElement: <ErrorPage />
       },
       {
-        path: "/signin",
+        path: "/login",
         element: <Login />,
-        // errorElement: <ErrorPage />
+        errorElement: <ErrorPage />
       },
       {
         path: "/unauthorized",
         element: <UnAuthorized />,
-        // errorElement: <ErrorPage />
+        errorElement: <ErrorPage />
       },
+      {
+        path: '/blogs/tags/:tag',
+      element:<TagsBlogs />}
     ],
     errorElement: <ErrorPage />,
   },

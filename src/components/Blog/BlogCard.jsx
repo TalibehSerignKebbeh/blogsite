@@ -6,6 +6,10 @@ import { Link } from 'react-router-dom';
 import './blogcard.css'
 import ActionBtn from './ActionBtn';
 import UseAuth from '../../hooks/useAuth';
+import format from 'date-fns/format';
+import parseISO from 'date-fns/parseISO';
+import isValid from 'date-fns/isValid';
+
 const BlogCard = ({ blog }) => {
     const {role, username} = UseAuth()
     // const blogImageurl = blog?.image ? `${ImageUrl}/${blog?.image}` : image
@@ -23,28 +27,34 @@ const BlogCard = ({ blog }) => {
     }
     return (
         <div className='blog-card-wrapper'>
-                {/* <small className='author-identifier'>Author</small>
-            <div className='profile-wrapper'>
-                <img className='profile'
-                    src={profileLink} alt='profile'
-                />
-                <div className=''>
-                    <h4>{authorName}</h4>
-                    <small>{createdDate?.toLocaleDateString() }</small>
-                </div>
-                </div> */}
+                
             <img src={blogImageurl} alt='banner' />
+            <div className='content'>
+            <span
+                className='blog_posted_date'>
+                {isValid(parseISO(blog?.created_at)) ?
+                    format(parseISO(blog?.created_at), 'MMM, do yyyy') :''}
+            </span>
             {blog?.tags?.length ?
                  <p className='tags'>
                     {blog?.tags?.map((tag, id) =>
-                        tag?.length? <small className='tag' key={id}>{tag}</small>: null)}
-                </p> : null}
+                        tag?.length ?
+                            <Link
+                                to={`blogs/tags/${tag}`}
+                                className='tag' key={id}>{tag}
+                            </Link> : null)}
+                </p> :
+                null
+            }
+            
             <Link className='blog-link' to={blogLink}  >
-                <h3 className='blog-title'>{blog?.title}</h3>
+                    <h3 className='blog-title'>{blog?.title}</h3>
+                    <span></span>
             </Link>
             {(role === "admin" || username === blog?.author?.username) ?
                 <ActionBtn blog={blog} onDoneFunction={() => { }} />
-                : null}
+                    : null}
+            </div>
         </div>
     );
 }

@@ -1,4 +1,8 @@
-import { EditorContent, Editor, PasteRule, pasteRulesPlugin, resolveFocusPosition, useEditor } from '@tiptap/react'
+import {
+  EditorContent,
+  Editor, PasteRule, pasteRulesPlugin,
+  resolveFocusPosition, useEditor
+} from '@tiptap/react'
 import StarterKit from '@tiptap/starter-kit'
 import Image from '@tiptap/extension-image'
 import Highlight, { pasteRegex } from "@tiptap/extension-highlight";
@@ -60,10 +64,13 @@ export default ({ comment, setcomment, setPreview, preview }) => {
 
     ],
  
-    content: comment?.content, injectCSS: true,
+    content: comment, injectCSS: true,
     onBlur: ({ editor }) => {
       setcomment(editor.getHTML())
     },
+    onUpdate: ({ editor }) => {
+      setcomment(editor.getHTML())
+    }
   })
 
 
@@ -74,18 +81,9 @@ export default ({ comment, setcomment, setPreview, preview }) => {
         
         <MenuBar editor={editor} />
         <EditorContent editor={editor} className="content-editor" />
-        {/* <Editor /> */}
-        
-        {/* <div>
-          <button className="preview-btn" onClick={() => {
-            setPreview(!preview)
-          }}>Preview</button>
-        </div> */}
+       
       </div>
       <div>
-
-        {/* {preview && <Preview comment={comment} preview={preview}
-        />} */}
       </div>
     </Container>
   )

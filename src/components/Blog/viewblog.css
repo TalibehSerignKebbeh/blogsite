@@ -17,11 +17,22 @@
     font-size: 20px;
 }
 
+.comments_section{
+  margin-top: 40px;
+  display: grid;
+  grid-template-columns: minmax(1fr, 90%);
+  row-gap: 13px;
+  box-shadow: 2px 2px 4px rgba(#0d0d0d, 0.1);
+}
+
 .content-wrapper{
   padding: 20px auto;
   padding-bottom: 20px;
 }
 
+.comment_alert{
+  text-align: start;
+}
 
 code {
       background-color: rgba(#616161, 0.1);
@@ -67,7 +78,9 @@ code {
         text-overflow: clip;
         word-break: break-all;
     }
-    
+.comments_section{
+  grid-template-columns: minmax(1fr, 90%);
+}
 }
 
 .comment-wrapper{
@@ -75,6 +88,7 @@ code {
   flex-direction: column;
   justify-content: center;
   align-items: baseline;
+  margin-bottom: 50px;
 }
 
 @media (max-width: 500px) {
@@ -84,14 +98,19 @@ code {
         text-overflow: clip;
         word-break: break-all;
     }
-    
+    .comments_section{
+  grid-template-columns: minmax(1fr, 95%);
 }
-@media (max-width: 480px) {
+}
+@media (max-width: 400px) {
     .view-container{
         width: 100%;
         padding: 7px 2px;
         text-overflow: clip;
         word-break: break-all;
     }
+    .comments_section{
+  grid-template-columns: minmax(1fr, 95%);
+}
     
 }

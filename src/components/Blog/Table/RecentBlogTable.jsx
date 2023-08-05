@@ -1,12 +1,14 @@
 import React,{useState} from 'react';
 import { DataGrid, GridActionsCellItem } from "@mui/x-data-grid";
 import { Avatar, Box, Button, Stack, Typography } from "@mui/material";
-import { ImageUrl } from '../../../api';
+import { AxiosInstance, ImageUrl } from '../../../api';
 import avatar from '../../../assets/mydefaultprofile.png'
 import { Link } from 'react-router-dom';
+import UseAuth from '../../../hooks/useAuth';
 
-const RecentBlogTable = ({ blogs,setblogs }) => {
-    const [publishToggle, setpublishToggle] = useState(false);
+const RecentBlogTable = ({ blogs, setblogs }) => {
+    const {token} = UseAuth()
+    const [publishingToggle, setpublishingToggle] = useState(false);
     const [publishToggleDone, setpublishToggleDone] = useState(false);
 
     function getFullName(author) {
@@ -14,33 +16,38 @@ const RecentBlogTable = ({ blogs,setblogs }) => {
     }
      const TogglePublished = async (row) => {
         console.log('toggle');
-        setpublishToggle(true)
+        setpublishingToggle(true)
         setpublishToggleDone(false)
 
-        await AxiosInstance.patch(`/blogs/${row?._id}`)
+        await AxiosInstance.patch(`/blogs/${row?._id}`,
+        {headers:{Authorization:`Bearer ${token}`}})
             .then((res) => {
-                console.log(res);
+                console.log(res)    ;
                 setpublishToggleDone(true)
-                // message(res?.data?.message)
+                setpublishingToggle(false)
+
             }).then(async () => {
-                if (publishToggleDone) {
-                    await AxiosInstance.get(`/blogs/stats/recent`)
-                        .then((res) => {
-                            setblogs(res?.data?.recentBlogs);
-                        })
-                }
-
-
+                console.log('refreshing ');
+                await AxiosInstance.get(`/blogs/stats/recent`,
+                    { headers: { Authorization: `Bearer ${token}` }, })
+                    .then((res) => {
+                        // console.log(res?.data);
+                        setblogs(res?.data?.recentBlogs);
+                    }).catch((err) => {
+                        // console.log(err);
             })
-            .finally(() => {
-                setpublishToggle(false)
+            })
+            .catch(() => {
+                setpublishToggleDone(false)
+                setpublishingToggle(false)
             })
     }
     
 
 
     return (
-        <Box sx={{
+        <Box
+            sx={{
             '& .title-cell': {
                 textAlign: 'start',
                 textOverflow: 'initial',
@@ -68,32 +75,52 @@ const RecentBlogTable = ({ blogs,setblogs }) => {
             <DataGrid
                 columns={[
                     {
-                        field: 'title', headerName: 'Title', cellClassName: 'title-cell', description: ({ row }) => <Typography sx={{ fontSize: '1.2rem' }}>{row?.title}</Typography>,
-                        headerClassName: 'table-head', minWidth: 400, align: 'left'
+                        field: 'title', headerName: 'Title',
+                        cellClassName: 'title-cell',
+                        headerClassName: 'table-head',
+                        minWidth: 400, align: 'left'
                     },
                     {
-                        field: 'Author', headerName: 'Author',cellClassName: 'author-cell', headerClassName: 'table-head', width: 180,
+                        field: 'Author', headerName: 'Author',
+                        cellClassName: 'author-cell',
+                        headerClassName: 'table-head', width: 180,
                         disableExport: true,
                         renderCell: ({ row: { author } }) => (
-                            <Stack direction={'row'} spacing={1} alignItems={'center'}>
+                            <Stack direction={'row'}
+                                spacing={1} alignItems={'center'}>
                                 <Typography size="small">
                                     {getFullName(author)}
                                 </Typography>
                                 <Box>
                                     <img src={`${avatar}`} className='avatar' />
-                                    {/* {row?.author ? <img src={`${ImageUrl}/${row?.author?.profile}`} className='avatar' /> :
-                        <img src={`${avatar}`} className='avatar' />} */}
+                                   
                                 </Box>
                             </Stack>
                         )
                     },
                     {
-                        field: 'actions', headerName: 'Actions',cellClassName: 'table-cell', width: 200,
-                       headerClassName: 'table-head', sortable: false, editable: false,filterable:false,
+                        field: 'actions', headerName: 'Actions',
+                        cellClassName: 'table-cell', width: 200,
+                       headerClassName: 'table-head', sortable: 
+                       false, editable: false,filterable:false,
                         renderCell: ({row}) => (
                              <Stack direction={'row'} spacing={1}>
-                                <Button color={`success`} disabled={publishToggle} onClick={e=>TogglePublished(row)} sx={{ color: '#333' }} size='small'>{row?.publish ? <span className="">published</span> : 'publish'}</Button>
-                                            <Link to={`/dash/blogs/${row?._id}/edit`}><Button sx={{ color: '#333' }} size='small'>View</Button></Link>
+                                <Button color={`success`}
+                                    disabled={publishingToggle}
+                                    onClick={e => TogglePublished(row)}
+                                    sx={{ 
+                                         color: '#fff',
+                                                    bgcolor: row?.publish ? '#00cc00' : '#0047b3',
+                                        ':hover': {
+                                            bgcolor: row?.publish ? '#00cc00' : '#0047b3',
+                                        }
+                                    }} size='small'>
+                                    {row?.publish ? 'published' : 'publish'}
+                                </Button>
+                                <Link to={`/dash/blogs/${row?._id}/edit`}>
+                                    <Button sx={{ color: '#333' }} size='small'>
+                                        View</Button>
+                                </Link>
                                         </Stack>
 
                         )

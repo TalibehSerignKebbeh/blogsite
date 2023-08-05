@@ -11,7 +11,9 @@ const TopBar = ({isNavOpen, setisNavOpen}) => {
         <div className='topbar-wrapper' >
             <CustomBtn handleClick={()=> setisNavOpen(prev=>!prev)} 
                 buttonclas={'nav-toggle'}
-                text={<FontAwesomeIcon icon={faBars} size='xl'/>}
+                text={<FontAwesomeIcon icon={faBars} size='3x'
+
+                />}
             />
         </div>
     );

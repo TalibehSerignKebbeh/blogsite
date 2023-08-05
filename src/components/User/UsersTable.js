@@ -30,7 +30,7 @@ function UserList() {
       <DataGrid
         pagination
         pageSize={pageSize}
-        rowsPerPageOptions={[10, 20, 50]}
+        rowsPerPageOptions={[10, 20, 50,100]}
         rowCount={data.length}
         rows={data}
         columns={columns}

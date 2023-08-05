@@ -10,8 +10,9 @@ const AuthErrorPage = () => {
     console.log(error);
     const handleNavigateToLogin = () => {
         clearAuthToken()
-        navigate(`/signin`)
+        navigate(`/login`)
     }
+    console.log(error);
     if (error?.response?.status === 403)
         return (
             <div id='expired-component' className='error-container'>
@@ -28,7 +29,8 @@ const AuthErrorPage = () => {
             <h1>Oops!</h1>
             <p>Sorry, an unexpected error has occurred.</p>
             <p>
-                <i>{error.statusText || error.message}</i>
+                <i>{error?.statusText || error?.message
+                || error?.response?.message}</i>
                 <br />
                 <i>{JSON.stringify(error.data)}</i>
             </p>

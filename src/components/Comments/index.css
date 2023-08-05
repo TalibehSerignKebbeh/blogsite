@@ -1,23 +1,77 @@
 .comment-card{
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     gap: 10px;
     background-color: #edf2f6;
     box-shadow: 0px 10px 15px -26px rgba(0,0,0,0.1);
+    /* min-width: -webkit-fill-available; */
+    /* min-width: -moz-fit-content; */
+    min-width: min-content;
+
+    width: -moz-fit-content;
+    width: -webkit-fill-available;
+    width: fit-content;
+    padding: 10px;
     /* min-height: 400px; */
 }
+
+.profile_wrapper{
+    display: grid;
+    min-width: 40px;
+    min-height: 40px;
+    /* grid-template-columns: auto auto; */
+    grid-template-columns: auto ;
+    /* justify-items: center; */
+    /* align-items: center; */
+}
+.comment_body{
+    display: grid;
+    grid-template-columns: 1fr;
+    align-items: center;
+
+}
+.message-wrapper>*{
+    font-style: initial;
+    line-height: 1.3;
+}
+.message-wrapper p, li,ul, blockquote,prev,code{
+    line-height: 1.1;
+}
+.commentor_section{
+    padding: 4px;
+    padding-left: 0px;
+    text-align: start;
+
+}
+.commentor_section>h4{
+    cursor: pointer;
+    
+}
+.commentor_section>h4:hover{
+    color: rgb(58, 113, 3);
+}
+
 .message-wrapper>*{
     line-height: .9rem;
 }
 .comment_sub_wrapper{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
+    padding: 3px;
+
 }
 
 .reactions_wrapper{
+    margin-top: 10px;
+    align-self: flex-end;
     width: auto;
     display: flex;
     flex-direction: row;
     gap: 10px;
+}
+
+.reactions_wrapper>button{
+    display: flex;
+    gap: 4px;
+    align-items: center;
+    padding: 3px;
+    font-size: 1rem;
 }

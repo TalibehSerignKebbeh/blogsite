@@ -13,6 +13,12 @@ nav {
   flex-shrink: 0;
   /* z-index: 100; */
 }
+
+button{
+  outline: none;
+  border: none;
+}
+
 .logo{
   align-self: center;
   margin: auto 0px;
@@ -41,6 +47,7 @@ nav {
 .nav-links a {
   text-decoration: none;
   color: #fff;
+  text-transform: capitalize;
 }
 
 .menu-icon {
@@ -96,13 +103,15 @@ cursor: pointer;
     align-items: center;
     padding: 30px;
     row-gap: 40px;
-    right: -100vw;
-    transition: right 0.5s ease-in;
+    top: -100vh;
+    opacity: 0;
+    transition: top 0.5s ease-in;
+    transition: opacity 0.5s ease-in;
   }
   
   .nav-links.active{
-
-    right: 0px;
+    opacity: 1;
+    top: 0px;
   }
   .nav-links.active .close-btn{
     display: block;

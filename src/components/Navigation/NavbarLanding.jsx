@@ -22,14 +22,15 @@ function NavbarLanding() {
   };
   useEffect(() => {
 
-    window.addEventListener('click', (e) => {
-      if (showMenu) {
-        console.log(`window click from navbarlanding page`)
-        if (!menuRef?.current?.contains(e.target)) {
-          setShowMenu(false)
-        }
-      }
-      })
+    // window.addEventListener('click', (e) => {
+    //   if (showMenu) {
+    //     console.log(menuRef?.current?.contains(e.target));
+    //     console.log(`window click from navbarlanding page`)
+    //     if (menuRef?.current?.contains(e.target)) {
+    //       setShowMenu(false)
+    //     }
+    //   }
+    //   })
     
   }, [showMenu]);
  
@@ -43,7 +44,7 @@ function NavbarLanding() {
 
         <ul ref={menuRef} className={showMenu ? 'nav-links active' : 'nav-links'}>
           <li>
-            <Link to="/">Home</Link>
+            <Link className='nav_link' to="/">Home</Link>
           </li>
           {/* <DropdownUl childlinks={<>
              <li className=''>
@@ -59,13 +60,13 @@ function NavbarLanding() {
           {!authToken?.length ?
             <>
               <li>
-                <Link to="/signup">SignUp</Link>
+                <Link className='nav_link' to="/register">register</Link>
               </li>
               <li>
-                <Link to="/signin">SignIn</Link>
+                <Link className='nav_link' to="/login">login</Link>
               </li>
               {/* <li>
-                <Link to="/contact">Contact</Link>
+                <Link className='nav_link' to="/contact">Contact</Link>
               </li> */}
             </>
             :
