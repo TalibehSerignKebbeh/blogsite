@@ -14,12 +14,12 @@ const ErrorPage = () => {
     <div id="error-page">
       <h1>Oops!</h1>
       <p>Sorry, an unexpected error has occurred.</p>
-{errorMessageFromRequest?.length?     <p>{ errorMessageFromRequest}</p> : null}
-      <p>
+      {errorMessageFromRequest?.length ?
+        <p>{errorMessageFromRequest}</p> : null}
+      
         <p>{error.statusText || error.message}</p>
         <br />
         <p>{error.data}</p>
-      </p>
 
     </div>
   );

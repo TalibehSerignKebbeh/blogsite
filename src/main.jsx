@@ -26,11 +26,8 @@ import AdminBlogs from './Pages/AdminBlogs';
 import UseAuth from './hooks/useAuth';
 import { jwttoken } from './hooks/useAuth';
 import TagsBlogs from './Pages/TagsBlogs';
-// const jwttoken = localStorage.getItem('authToken')
 
-const config = {
-  headers:{Authorization: `Bearer ${jwttoken}`}
-}
+
 const router = createBrowserRouter([
   {
     path: "/",
