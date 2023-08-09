@@ -7,13 +7,19 @@ export const AuthContext = createContext();
 // Create a new provider component for the authentication token context
 export const AuthProvider = ({ children }) => {
   const [authToken, setAuthToken] = useState(localStorage.getItem('authToken') || null);
+  const [dark, setdark] = useState(localStorage.getItem('dark') || false);
 
   // Store the authentication token in local storage and update the context state
   const storeAuthToken = (token) => {
     localStorage.setItem('authToken', token);
-    setAuthToken(localStorage.getItem('authToken') || token);
+    setAuthToken(token);
   };
  
+  const toggleDark = () => {
+    localStorage.setItem('dark', !dark)
+    setdark(prev => !prev)
+    
+  }
   // Remove the authentication token from local storage and update the context state
   const clearAuthToken = () => {
     localStorage.removeItem('authToken');
@@ -22,7 +28,11 @@ export const AuthProvider = ({ children }) => {
 
   // Return the provider with the authentication token state and store/clear functions
   return (
-    <AuthContext.Provider value={{ authToken, storeAuthToken, clearAuthToken }}>
+    <AuthContext.Provider value={{
+      authToken, storeAuthToken,
+      clearAuthToken,
+      dark, setdark, toggleDark,
+    }}>
       {children}
     </AuthContext.Provider>
   );

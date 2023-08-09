@@ -26,6 +26,7 @@ import AdminBlogs from './Pages/AdminBlogs';
 import UseAuth from './hooks/useAuth';
 import { jwttoken } from './hooks/useAuth';
 import TagsBlogs from './Pages/TagsBlogs';
+import './utils/global.styles.css'
 
 
 const router = createBrowserRouter([
@@ -37,7 +38,7 @@ const router = createBrowserRouter([
       {
         index:true,
         loader: async () => {
-          const res = await AxiosInstance.get(`/blogs?page=${Number(0)}&size=${Number(5)}`)
+          const res = await AxiosInstance.get(`/blogs/infinite?page=${Number(1)}&size=${Number(6)}&offset=${Number(0)}`)
           const responseData = res?.data
           return responseData;
         },
@@ -86,7 +87,7 @@ const router = createBrowserRouter([
             path: "/dash/blogs/:blogId/edit",
             element: <EditBlog />,
             loader: async ({ params }) => {
-          const res = await AxiosInstance.get(`${apiUrl}/blogs/${params?.blogId}`)
+          const res = await AxiosInstance.get(`/blogs/${params?.blogId}`)
           // console.log(res);
          return res?.data;
         },
@@ -135,7 +136,13 @@ const router = createBrowserRouter([
       },
       {
         path: '/blogs/tags/:tag',
-      element:<TagsBlogs />}
+        element: <TagsBlogs />,
+        loader: async ({ params }) => {
+          const tag = params?.tag;
+          const response = await AxiosInstance.get(`/blogs/tags/${tag}?page={Number(0)}&pageSize={Number(10)}`)
+          return response.data;
+        },
+      }
     ],
     errorElement: <ErrorPage />,
   },

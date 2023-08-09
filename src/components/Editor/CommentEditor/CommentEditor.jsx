@@ -104,7 +104,7 @@ const Container = styled.div`
       margin: 1rem 0;
       padding: 0.2rem;
       border: none;
-      border-bottom: 1px solid #000;
+      border-bottom: 1px solid var(--text-color);
       outline: none;
       ${'' /* font-weight: 400; */}
       font-size: 1.2rem;
@@ -115,14 +115,14 @@ const Container = styled.div`
 }
   .menu-bar{
     width: 100%;
-    border: 1px solid #000;
+    border: 1px solid var(--text-color);
     padding: 0.2rem;
 
     button {
-    color: #000;
+    color: var(--text-color);
     outline: none;
     padding: 0.2rem;
-    border: 1px solid #000;
+    border: 1px solid var(--text-color);
     background: none;
     margin: 0.2rem 0.2rem;
     cursor: pointer;
@@ -136,14 +136,15 @@ const Container = styled.div`
     }
     button.is-active{
        background-color:#F5F5F5;
+       color:#333;
     }
   }
   .content-editor{
       width: 100%;
       border:none;
-      border-right: 1px solid #000;
-      border-bottom: 1px solid #000;
-      border-left: 1px solid #000;
+      border-right: 1px solid var(--text-color);
+      border-bottom: 1px solid var(--text-color);
+      border-left: 1px solid var(--text-color);
       padding: 0.2rem;
   }
   .tags{
@@ -152,7 +153,7 @@ const Container = styled.div`
       margin: 1rem 0;
       padding: 0.2rem;
       border: none;
-      border-bottom: 1px solid #000;
+      border-bottom: 1px solid var(--text-color);
       outline: none;
       ${'' /* font-weight: 600; */}
       font-size: 1.2rem;
@@ -217,7 +218,7 @@ const Container = styled.div`
 
   blockquote {
     padding-left: 1rem;
-    border-left: 2px solid #333;
+    border-left: 2px solid var(--text-color);
   }
 
   hr {

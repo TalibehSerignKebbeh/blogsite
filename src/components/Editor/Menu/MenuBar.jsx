@@ -1,4 +1,5 @@
-import React, {useCallback} from "react"
+import React, { useCallback } from "react"
+import './menu.css'
 
 const MenuBar = ({ editor }) => {
   if (!editor) {

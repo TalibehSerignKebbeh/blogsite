@@ -32,14 +32,20 @@ export const BlogContainer = styled.div`
   align-self:baseline;
   border-radius:6px;
   padding: 0 1rem;
-  background: #fff;
+  magin-top:1.5rem;
+  ${'' /* background: var(--blog-view-bg); */}
+  color:var(--text-color);
   text-align:start;
   height:auto;
+    ${'' /* background-color: #333131; */}
   ${'' /* box-shadow:2px 1px 5px 0px rgba(0,0,0,0.09), 0px 1px 5px 2px rgba(0,0,0,0.09); */}
   box-shadow: 0px 22px 56px -44px rgba(0,0,0,0.1);
   .title{
     padding-top:4px;
     font-weigth: 400;
+    magin-bottom:10px;
+  color:var(--text-color);
+
   }
    img {
      display: block;
@@ -58,6 +64,8 @@ export const BlogContainer = styled.div`
   }
   .tags{
      margin:10px 0px;
+  color:var(--text-color);
+
   }
   .info {
     display: flex;
@@ -108,6 +116,8 @@ export const BlogContainer = styled.div`
     h6 {
       line-height: 1.1;
       margin-top:10px;
+  color:var(--text-color);
+
     }
       h1,
     h2,
@@ -120,12 +130,14 @@ export const BlogContainer = styled.div`
     }
     p,code,pre,code{
       text-align:start;
+      margin-bottom:15px;
     }
  
     p{
       font-size:15px ;
-      padding:6px 0px;
-      color:'red'
+      padding:10px 0px;
+  color:var(--text-color);
+
       ${'' /* text-align: ; */}
     }
     code {
@@ -203,6 +215,23 @@ export const BlogContainer = styled.div`
    h6{
     font-size:15px;
   }
+
+p,li,span, strong, h1, h2,h3,h4,h5,h6
+ {
+  color:var(--text-color)
+}
+p>code{
+  color:var(--text-color);  
+  ${'' /* background-color:var(--code-color); */}
+}
+blockquote{
+ color:var(--code-color);
+ background-color: var(--code-bg-color);
+}
+pre{
+  background-color:var(--elements-bg);
+  color:var(--text-color);
+}
 }
 `;
 

@@ -1,0 +1,37 @@
+:root {
+  --primary-color: #007bff;
+  --secondary-color: #6c757d;
+  /* --white-text-color:#ffff; */
+  --dark-text-color:#333;
+  --text-color:#1b1a1a;
+  --bg-color:#fff;
+  --blog-view-bg:#ffffff;
+  --code-color:#403e3e;
+  --code-bg-color:#ffff;
+  --container-bg:#f5f2f2;
+  --card-bg:#fff;
+  --tag-color:#333;
+  --form-bg:#eeeded;
+  --label-color:#636363;
+  --pre-text-color:#fff;
+  --elements-bg:rgb(182, 191, 193);
+  /* Add more variables here */
+}
+
+:root.dark{
+  --text-color:#fff;
+  --bg-color:#1b1a1a;
+  --code-color:#f4f3f3;
+  --code-bg-color:#524f4f;
+  --container-bg:#131313;
+  --blog-view-bg:rgba(60, 60, 60, 0.4);
+  --card-bg:#343030;
+  --tag-color:#fff;
+  --form-bg:#5b5757;
+  --label-color:#f7f4f4;
+  --pre-text-color:#3a3d3f;
+  --elements-bg:rgb(159, 159, 159);
+
+
+
+}

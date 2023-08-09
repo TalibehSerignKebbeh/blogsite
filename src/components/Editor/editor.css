@@ -18,7 +18,8 @@
 
 .text-hilighted{
     font-size: inherit;
-    background-color: rgb(156, 238, 238);
+    color: #fff;
+    background-color: var(--primary-color);
 }
 
 .highlight{

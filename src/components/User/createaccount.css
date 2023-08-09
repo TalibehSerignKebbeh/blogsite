@@ -9,6 +9,7 @@
     justify-content: center;
     font-family: serif;
     margin: auto;
+    padding: auto;
     flex: 1;
     margin-top: 10px;
     margin-bottom: 10px;
@@ -22,7 +23,7 @@
     padding: 40px 45px;
     /* width: -moz-fit-content; */
     width: max-content;
-    background-color: #eeeded;
+    background-color: var(--form-bg);
     box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.08);
     text-align: center;
     /* display: flex;
@@ -43,11 +44,7 @@
     align-items: start;
     margin-bottom: 40px;
 }
-@media (max-width: 600px) {
-    .grid_wrapper{
-        grid-template-columns: 260px;
-    }
-}
+
 
 .signup-title {
     position: absolute;
@@ -56,8 +53,12 @@
     color: #fffefe;
     padding: 0px;
     justify-self: start;
-    padding: 15px;
-    margin-bottom: 50px;
+    align-self: baseline;
+    padding:auto;
+    height: 50px;
+    line-height: 50px;
+    margin-top: -10px;
+    /* margin-bottom: 50px; */
     background-color: #0066ff;
  border-top-left-radius: 8px;
     border-top-right-radius: 8px;
@@ -80,7 +81,7 @@
     font-size: 1.1rem;
     margin-left: 1px;
     padding: 5px auto;
-    color: #636363;
+    color: var(--label-color);
     font-weight: 600;
     margin-right: auto;
     margin-bottom: 2px;
@@ -144,20 +145,21 @@
 
 .input-wrapper.profile> label{
     order: -1;
-    width: 90px;
+    width: 110px;
     aspect-ratio: 1;
     border-radius: 30%;
-    background-color: #aca7a7;
+    background-color: var(--label-color);
     cursor: pointer;
     display: grid;
     align-items: center;
     justify-items: center;
-    color: white;
+    color: var(--bg-color);
     font-weight: normal;
 }
 .input-wrapper.profile> .img_div{
     order: 0;
     border: 2px dashed #3336;
+    background-color: var(--label-color);
     min-width: 70px;
     aspect-ratio: 1;
     border-radius: 10px;
@@ -207,6 +209,11 @@
     width: 0;
     height: 0;
 }
+
+.message_wrapper{
+    color: var(--text-color);
+}
+
 @media (max-width: 700px) {
     .grid_wrapper{
         margin-top: 70px;

@@ -23,11 +23,12 @@
     padding: 10px 45px;
     width: -moz-fit-content;
     width: fit-content;
-    background-color: #eeeded;
+    background-color: var(--form-bg);
     box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.08);
     text-align: center;
     display: flex;
     flex-direction: column;
+    align-items: center;
     gap: 14px;
     margin: 10px auto 0px auto;
     position: relative;
@@ -40,23 +41,37 @@
     position: absolute;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
-    height: 50px;
-    /* margin-inline: ; */
+    /* height: 50px;
+    line-height: 50px; */
+    
     top: 0;
     left: 0;
     right: 0;
-    /* margin-bottom: 200px; */
-    padding: 15px auto;
-    /* bottom: 10px; */
+    /* padding: 20px auto 20px auto; */
+    /* padding-bottom: 50px; */
     background-color: #0066ff;
-    text-align: center;
     display: flex;
-    align-items: center;
+    flex-direction: row;
     justify-content: center;
-    
+    align-items: center;
 }
-.title-wrapper h3{
+.title-wrapper>h3{
     color: white;
+    margin-top: 20px;
+    margin-bottom: 20px;
+
+}
+
+
+.login_form>p{
+    font-size: .8rem;
+    margin-bottom: 10px;
+    color: var(--text-color);
+    font-size: 1rem;
+}
+.login_form>p>a{
+    color: var(--primary-color);
+    margin-left: 3px;
 }
 
 .login_form:last-child{
@@ -64,14 +79,16 @@
 }
 
 .login_form .input_wrapper{
-    width: 230px;
+    min-width: 200px;
+    /* width: 230px; */
+    max-width: 300px;
     display: grid;
     grid-template-rows: auto auto;
 }
 
 .input_wrapper label {
     font-size: 1rem;
-    color: #636363;
+    color: var(--label-color);
     font-weight: 600;
     margin-left: 1px;
     margin-right: auto;

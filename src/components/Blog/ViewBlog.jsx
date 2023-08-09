@@ -117,9 +117,15 @@ const ViewBlog = () => {
                      
                 <ABlog blog={blog} />
                 <div className='comment-wrapper'>
-                    {!authToken &&
-                        <p className='comment_alert'>You need to login to comment</p>}
-                    <CommentEditor comment={comment} setcomment={setcomment} />
+                    {!authToken?
+                        <p className='comment_alert'>
+                            You need to login to comment
+                        </p>
+                        : <>
+                            <CommentEditor comment={comment}
+                                setcomment={setcomment} 
+                                
+                                />
                     {commentingStatus?.msg?.length? <p
                         style={{
                             color: commentingStatus?.status === 'error' ?
@@ -143,6 +149,8 @@ const ViewBlog = () => {
                         className='blog-submit'>
                         {postingComment? 'Posting': "Submit Comment"}
                     </button>
+                            </>
+                    }
                 </div>
                 {/* <div className='comments_section'>
                     {comments?.map((a_comment, index) => (

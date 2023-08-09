@@ -85,7 +85,7 @@ const Dashboard = () => {
   if (isLoadSuccess) {
 
     return (
-      <div>
+      <div style={{backgroundColor: `var(--bg-color)`}}>
 
         <div className="card-stats">
 

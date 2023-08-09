@@ -4,7 +4,7 @@ import './Topbar.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHamburger, } from '@fortawesome/free-solid-svg-icons'
 import { faBars } from '@fortawesome/free-solid-svg-icons';
-
+import ToggleDark from '../ToggleDark';
 
 const TopBar = ({isNavOpen, setisNavOpen}) => {
     return (
@@ -15,6 +15,9 @@ const TopBar = ({isNavOpen, setisNavOpen}) => {
 
                 />}
             />
+            <div>
+                <ToggleDark />
+            </div>
         </div>
     );
 }

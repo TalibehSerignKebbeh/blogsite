@@ -199,7 +199,7 @@ const CreateAccount = () => {
                                     cursor: 'pointer'
                                 }}
                             />
-                            Upload Profile
+                            Avatar
                         </label>
 
                         <div
@@ -229,7 +229,7 @@ const CreateAccount = () => {
                     <button
                         type='submit' >{uploading ? "uploading" : `Submit`}</button>
                 </div>
-                <div className='last_grid'>
+                <div className='message_wrapper'>
                     <span>Don't have an account? </span>
                     <Link to={`/login`} >login now</Link>
                 </div>

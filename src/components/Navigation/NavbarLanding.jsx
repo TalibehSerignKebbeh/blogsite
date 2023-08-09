@@ -7,33 +7,20 @@ import UseAuth from '../../hooks/useAuth';
 import AdminNav from './AdminNav';
 import LogoutButton from './LogoutButton';
 
+import ToggleDark from '../ToggleDark';
+
 function NavbarLanding() {
   const { role, username } = UseAuth()
   const navigate = useNavigate()
-  const { authToken, clearAuthToken } = useContextHook()
-
-  
-
+  const { authToken, clearAuthToken, dark,toggleDark, } = useContextHook()
   const [showMenu, setShowMenu] = useState(false);
   const menuRef = useRef(null)
 
   const handleClick = () => {
     setShowMenu(prev => !prev);
   };
-  useEffect(() => {
-
-    // window.addEventListener('click', (e) => {
-    //   if (showMenu) {
-    //     console.log(menuRef?.current?.contains(e.target));
-    //     console.log(`window click from navbarlanding page`)
-    //     if (menuRef?.current?.contains(e.target)) {
-    //       setShowMenu(false)
-    //     }
-    //   }
-    //   })
-    
-  }, [showMenu]);
  
+  
   return (
     <nav>
       <div className="logo">
@@ -41,11 +28,13 @@ function NavbarLanding() {
         <h4>{username}</h4>
       </div>
       <div>
-
-        <ul ref={menuRef} className={showMenu ? 'nav-links active' : 'nav-links'}>
-          <li>
+        
+        <ul ref={menuRef} className={showMenu ? 'nav-links active' : 'nav-links'}
+          // style={{ backgroundColor: dark ? '#3334' : '#fff' }}
+        >
+          {/* <li>
             <Link className='nav_link' to="/">Home</Link>
-          </li>
+          </li> */}
           {/* <DropdownUl childlinks={<>
              <li className=''>
         <NavLink className={ ({isActive})=>(isActive? 'nav-link active': 'nav-link' )}
@@ -65,6 +54,7 @@ function NavbarLanding() {
               <li>
                 <Link className='nav_link' to="/login">login</Link>
               </li>
+             <ToggleDark />
               {/* <li>
                 <Link className='nav_link' to="/contact">Contact</Link>
               </li> */}
@@ -72,6 +62,7 @@ function NavbarLanding() {
             :
             <>
               <LogoutButton />
+             
             </>
           }
 

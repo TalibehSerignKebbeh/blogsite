@@ -56,7 +56,8 @@ const CommentList = ({blogId}) => {
     };
   }, []);
   useEffect(() => {
-    const elementToObserve = document.querySelector('.comment-card:last-child') || null
+    const elementToObserve = document.querySelector('.comment-card:last-child')
+      || null
     const options = {
       root: null, // null means it uses the viewport as the container
       rootMargin: '-00px',

@@ -21,7 +21,7 @@ const BlogCard = ({ blog }) => {
     const createdDate = new Date(blog?.created_at)
     const authorName = `${blog?.author?.firstName} ${blog?.author?.lastName}` 
     const profileLink = blog?.profile? `${ImageUrl}/${blog?.author?.profile}` : profile
-    let blogLink = `blogs/${formattedTitle}`;
+    let blogLink = `/blogs/${formattedTitle}`;
     if (['admin', 'editor'].includes(role)) {
         blogLink=`/dash/blogs/view/${formattedTitle}`
     }
@@ -40,7 +40,7 @@ const BlogCard = ({ blog }) => {
                     {blog?.tags?.map((tag, id) =>
                         tag?.length ?
                             <Link
-                                to={`blogs/tags/${tag}`}
+                                to={`/blogs/tags/${tag}`}
                                 className='tag' key={id}>{tag}
                             </Link> : null)}
                 </p> :

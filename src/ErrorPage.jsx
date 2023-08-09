@@ -12,14 +12,17 @@ const ErrorPage = () => {
   console.log('my custom error page');
   return (
     <div id="error-page">
+      <div className='error_wrapper'>
+
       <h1>Oops!</h1>
       <p>Sorry, an unexpected error has occurred.</p>
       {errorMessageFromRequest?.length ?
-        <p>{errorMessageFromRequest}</p> : null}
+        <p className='specific_messaga'>{errorMessageFromRequest}</p> : null}
       
         <p>{error.statusText || error.message}</p>
-        <br />
-        <p>{error.data}</p>
+
+      <p >{error.data}</p>
+      </div>
 
     </div>
   );

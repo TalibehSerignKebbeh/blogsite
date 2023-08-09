@@ -5,9 +5,14 @@ import { AxiosInstance, ImageUrl } from '../../../api';
 import avatar from '../../../assets/mydefaultprofile.png'
 import { Link } from 'react-router-dom';
 import UseAuth from '../../../hooks/useAuth';
+import CloudDoneOutlined from '@mui/icons-material/CloudDoneOutlined';
+import  PendingOutlined  from '@mui/icons-material/PendingOutlined';
+import { useContextHook } from '../../../context/AuthContext';
 
 const RecentBlogTable = ({ blogs, setblogs }) => {
-    const {token} = UseAuth()
+    const { token } = UseAuth()
+    const {authToken} = useContextHook()
+
     const [publishingToggle, setpublishingToggle] = useState(false);
     const [publishToggleDone, setpublishToggleDone] = useState(false);
 
@@ -20,16 +25,17 @@ const RecentBlogTable = ({ blogs, setblogs }) => {
         setpublishToggleDone(false)
 
         await AxiosInstance.patch(`/blogs/${row?._id}`,
-        {headers:{Authorization:`Bearer ${token}`}})
+            {  },
+        {headers: { Authorization: `Bearer ${authToken}` }})
             .then((res) => {
-                console.log(res)    ;
+                // console.log(res)    ;
                 setpublishToggleDone(true)
                 setpublishingToggle(false)
 
             }).then(async () => {
                 console.log('refreshing ');
                 await AxiosInstance.get(`/blogs/stats/recent`,
-                    { headers: { Authorization: `Bearer ${token}` }, })
+                    { headers: { Authorization: `Bearer ${authToken}` }, })
                     .then((res) => {
                         // console.log(res?.data);
                         setblogs(res?.data?.recentBlogs);
@@ -48,12 +54,17 @@ const RecentBlogTable = ({ blogs, setblogs }) => {
     return (
         <Box
             sx={{
+                width:'auto',
+                maxWidth: '100%',
+                overflowX: 'auto',
+                overflowY: 'hidden', py: 3,
+                pb:5,
             '& .title-cell': {
                 textAlign: 'start',
                 textOverflow: 'initial',
                 // color: 'red',
                 height: 'auto',
-                fontSize: '1rem'
+                fontSize: '1rem',
             },
             "& .table-head": {
                 fontSize: '1.1rem',
@@ -73,12 +84,32 @@ const RecentBlogTable = ({ blogs, setblogs }) => {
             }
         }}>
             <DataGrid
+                
                 columns={[
                     {
                         field: 'title', headerName: 'Title',
                         cellClassName: 'title-cell',
                         headerClassName: 'table-head',
                         minWidth: 400, align: 'left'
+                    },
+                    {
+                        field: 'publish', headerName: 'Pusblish',
+                        cellClassName: 'title-cell',
+                        headerClassName: 'table-head',
+                        type: "boolean", editable: false,
+                        width:90,
+                        filterable:false,
+                        renderCell: ({value }) => {
+                            if (value) {
+                                return <CloudDoneOutlined 
+                                    sx={{fontSize:'1.6rem'}}
+                                />
+                            }
+                                return <PendingOutlined 
+                                    sx={{fontSize:'1.6rem'}}
+                                />
+
+                        }
                     },
                     {
                         field: 'Author', headerName: 'Author',
@@ -88,7 +119,8 @@ const RecentBlogTable = ({ blogs, setblogs }) => {
                         renderCell: ({ row: { author } }) => (
                             <Stack direction={'row'}
                                 spacing={1} alignItems={'center'}>
-                                <Typography size="small">
+                                <Typography size="small"
+                                sx={{color:`var(--text-color)`}}>
                                     {getFullName(author)}
                                 </Typography>
                                 <Box>
@@ -110,7 +142,7 @@ const RecentBlogTable = ({ blogs, setblogs }) => {
                                     onClick={e => TogglePublished(row)}
                                     sx={{ 
                                          color: '#fff',
-                                                    bgcolor: row?.publish ? '#00cc00' : '#0047b3',
+                                        bgcolor: row?.publish ? '#00cc00' : '#0047b3',
                                         ':hover': {
                                             bgcolor: row?.publish ? '#00cc00' : '#0047b3',
                                         }
@@ -118,7 +150,7 @@ const RecentBlogTable = ({ blogs, setblogs }) => {
                                     {row?.publish ? 'published' : 'publish'}
                                 </Button>
                                 <Link to={`/dash/blogs/${row?._id}/edit`}>
-                                    <Button sx={{ color: '#333' }} size='small'>
+                                    <Button sx={{ color: `var(--primary-color)` }} size='small'>
                                         View</Button>
                                 </Link>
                                         </Stack>
@@ -145,6 +177,9 @@ const RecentBlogTable = ({ blogs, setblogs }) => {
                     '& .MuiDataGrid-cell:hover': {
                         color: 'primary.main',
                     },
+                    bgcolor: `var(--form-bg)`,
+                    color:`var(--text-color)`,
+                    overflowX:'auto',
                     // width:{ xl: '700px', lg: '700px', md: '600px', sm: '90%', xs: '99%', }
                 }}
             />

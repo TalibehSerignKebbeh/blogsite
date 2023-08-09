@@ -1,25 +1,35 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 // import UseInput from '../input/UseInput'
 import './Login.css'
 import { AxiosInstance } from '../../api';
 import { useContextHook } from '../../context/AuthContext'
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { GetError } from '../Config';
 import jwtDecode from 'jwt-decode';
+import useAuth from '../../hooks/useAuth'
 const Login = () => {
-
+    
     const [uploading, setuploading] = useState(false);
     const [user, setuser] = useState({ username: '', password: '' });
     const [errorMessage, seterrorMessage] = useState('');
     const navigate = useNavigate()
-    const { clearAuthToken, storeAuthToken, } = useContextHook()
-
+    const { clearAuthToken, storeAuthToken, authToken } = useContextHook()
+   const {token, role} = useAuth()
+    useEffect(() => {
+        if (token && role==='admin') {
+            navigate('/dash')
+        }
+    },[])
     const handleChange = (e) => {
         setuser({ ...user, [e.target.name]: e.target.value })
     }
     const submitForm = async (e) => {
         e.preventDefault()
         seterrorMessage('')
+        if (!user.username.length || !user.password.length) {
+            seterrorMessage('all fields are required')
+            return
+        }
         setuploading(true)
         await AxiosInstance.post(`/auth`, user,)
             .then((res) => {
@@ -50,7 +60,6 @@ const Login = () => {
         <div className='login_wrapper'>
             <form onSubmit={submitForm} className='login_form'>
                 <div className='title-wrapper'>
-
                 <h3>Login</h3>
                 </div>
                 
@@ -72,8 +81,10 @@ const Login = () => {
                     <button type='submit' >{uploading ? "uploading" : `Submit`}</button>
 
                 </div>
+                <p>If you don't have an account create one
+               <Link to={`/register`}>here</Link>  </p>
             </form>
-
+            
         </div>
     );
 }

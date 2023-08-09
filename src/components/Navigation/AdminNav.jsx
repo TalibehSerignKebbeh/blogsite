@@ -4,6 +4,7 @@ import NavLi from './NavLi';
 import LogoutButton from './LogoutButton';
 import { NavLink } from 'react-router-dom';
 import UseAuth from '../../hooks/useAuth';
+
 const blogLinks = [<>
     <li className=''>
         <NavLink className={ ({isActive})=>(isActive? 'nav-link active': 'nav-link' )}
