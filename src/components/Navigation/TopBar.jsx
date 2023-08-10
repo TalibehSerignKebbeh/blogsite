@@ -2,7 +2,6 @@ import React from 'react';
 import CustomBtn from '../Button/CustomBtn';
 import './Topbar.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faHamburger, } from '@fortawesome/free-solid-svg-icons'
 import { faBars } from '@fortawesome/free-solid-svg-icons';
 import ToggleDark from '../ToggleDark';
 
@@ -11,11 +10,11 @@ const TopBar = ({isNavOpen, setisNavOpen}) => {
         <div className='topbar-wrapper' >
             <CustomBtn handleClick={()=> setisNavOpen(prev=>!prev)} 
                 buttonclas={'nav-toggle'}
-                text={<FontAwesomeIcon icon={faBars} size='3x'
+                text={<FontAwesomeIcon icon={faBars} size='2x'
 
                 />}
             />
-            <div>
+            <div style={{marginRight:'10px'}}>
                 <ToggleDark />
             </div>
         </div>

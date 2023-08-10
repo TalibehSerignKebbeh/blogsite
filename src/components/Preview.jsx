@@ -42,7 +42,7 @@ export const BlogContainer = styled.div`
   box-shadow: 0px 22px 56px -44px rgba(0,0,0,0.1);
   .title{
     padding-top:4px;
-    font-weigth: 400;
+    font-weight: 400;
     magin-bottom:10px;
   color:var(--text-color);
 
@@ -99,7 +99,7 @@ export const BlogContainer = styled.div`
   .content {
     > * + * {
       margin: 0.75em 0px;
-      font-weigth:400;
+      font-weight:400;
     }
     outline: none;
     ${'' /* margin: 0 1rem; */}

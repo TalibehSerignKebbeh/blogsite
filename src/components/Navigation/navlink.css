@@ -23,7 +23,8 @@
     text-align: start;
     font-size: 17px;
     text-transform: capitalize;
-    color: #172b4d;
+    /* color: #172b4d; */
+    color: var(--text-color);
     font-weight: 500;
     line-height: 1.7rem;
 }
@@ -37,18 +38,19 @@
     border: none;
     outline: none;
     background-color: inherit;
-    color: rgb(23, 23, 23);
+    /* color: rgb(23, 23, 23); */
+    color: var(--text-color);
     width: 100%;
     cursor: pointer;
 }
 
 .expand-title{
     text-align: start;
-    font-size: 16px;
+    font-size: 20px;
     position: relative;
     margin: auto 0px;
     text-transform: capitalize;
-    color: rgb(38, 36, 36);
+    color: var(--text-color);
     font-weight: 400;
 }
 .icon{

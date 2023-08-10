@@ -19,11 +19,9 @@ import ViewBlog from './components/Blog/ViewBlog';
 import UnAuthorized from './components/Auth/UnAuthorized';
 import AuthErrorPage from './components/Error/AuthErrorPage';
 import Dashboard from './components/Dashboard/Dashboard';
-import UploadImage from './components/ImageUpload/UploadImage';
 import EditBlog from './components/Blog/Edit/EditBlog';
 import UserPage from './Pages/UserPage'
 import AdminBlogs from './Pages/AdminBlogs';
-import UseAuth from './hooks/useAuth';
 import { jwttoken } from './hooks/useAuth';
 import TagsBlogs from './Pages/TagsBlogs';
 import './utils/global.styles.css'

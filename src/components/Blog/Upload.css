@@ -2,28 +2,68 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    margin: 20px auto;
+    margin: 20px 0px;
     align-self: stretch;
     /* align-self: flex-start; */
     height: auto;
     width: auto;
     overflow-y: auto;
+     background: linear-gradient(60deg, var(--form-bg), var(--bg-color), var(--elements-bg));
+     padding: 30px auto;
+     padding-bottom: 30px;
+    background-size: 100% 100%;
+    border-radius: 10px;
 }
+
+
+.btns_wrapper{
+    display: flex;
+    flex-direction: row;
+    row-gap: 40px;
+    column-gap: 30px;
+    justify-content: center;
+    align-items: center;
+}
+
 .blog-submit{
     position: relative;
     margin: auto;
-    padding: 15px 13px;
+    padding: 15px 30px;
    background-image: linear-gradient(to right, rgb(124, 83, 164) , rgb(102, 45, 159));
     /* background-image: linear-gradient( to right, rgba(109, 2, 30, 0.912), rgba(221, 87, 123, 0.912)); */
     border-radius: 6px;
     border: none;
     cursor: pointer;
-    color: white;
-    font-size: 1rem;
+    color: var(--text-color);
+    font-size: 1.4rem;
+   margin-top: 30px;
+   transform: scale(1);
 }
 .blog-submit:hover{
    background-image: linear-gradient(to right, rgb(42, 3, 81) , rgb(114, 7, 222));
-    /* background-image: linear-gradient( to right, rgba(245, 4, 68, 0.777), rgba(45, 31, 197, 0.862)); */
+   transform: scale(1.1);
+}
+.reset-btn{
+    position: relative;
+    margin: auto;
+    padding: 15px 30px;
+   background-image: linear-gradient(to right, rgb(161, 137, 186) , rgb(153, 228, 103));
+    /* background-image: linear-gradient( to right, rgba(109, 2, 30, 0.912), rgba(221, 87, 123, 0.912)); */
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    color: var(--text-color);
+    font-size: 1.4rem;
+   margin-top: 30px;
+   transform: scale(1);
+
+}
+.reset-btn:hover{
+   /* background-image: linear-gradient(to right, rgb(42, 3, 81) , rgb(114, 7, 222)); */
+   background-image: linear-gradient(to right, rgb(210, 207, 214) , rgb(113, 119, 109));
+   transform: scale(1.1);
+
+
 
 }
 

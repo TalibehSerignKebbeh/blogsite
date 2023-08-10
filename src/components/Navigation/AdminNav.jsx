@@ -23,7 +23,9 @@ const AdminNav = ({ isNavOpen, setisNavOpen }) => {
         <aside className={`sidebar-wrapper ${isNavOpen ? 'active' : ''}`}>
             <div className='infor-wrapper'>
 
-            <h2 className='dashbordtitle'>Tech Blogs</h2>
+                <h2 className='dashbordtitle'>
+                Blogs Dashboard</h2>
+                <hr />
             </div>
             {/* <div></div> */}
             <div className='links-ul-wrapper'>

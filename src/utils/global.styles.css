@@ -5,6 +5,7 @@
   --dark-text-color:#333;
   --text-color:#1b1a1a;
   --bg-color:#fff;
+  --main-title-color:#fff;
   --blog-view-bg:#ffffff;
   --code-color:#403e3e;
   --code-bg-color:#ffff;
@@ -14,24 +15,27 @@
   --form-bg:#eeeded;
   --label-color:#636363;
   --pre-text-color:#fff;
-  --elements-bg:rgb(182, 191, 193);
+  --elements-bg:rgb(238, 238, 238);
+  --editor-bg:#ffffff;
+
   /* Add more variables here */
 }
 
 :root.dark{
   --text-color:#fff;
   --bg-color:#1b1a1a;
+  --editor-bg:#2e2e2e;
   --code-color:#f4f3f3;
   --code-bg-color:#524f4f;
-  --container-bg:#131313;
+  --container-bg:#141212;
   --blog-view-bg:rgba(60, 60, 60, 0.4);
   --card-bg:#343030;
   --tag-color:#fff;
   --form-bg:#5b5757;
   --label-color:#f7f4f4;
   --pre-text-color:#3a3d3f;
-  --elements-bg:rgb(159, 159, 159);
-
+  --elements-bg:rgb(54, 53, 53);
+ --main-title-color:#a6b5a7;
 
 
 }

@@ -2,7 +2,10 @@ nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
-   background-image: linear-gradient(to right, rgb(42, 3, 81) , rgb(114, 7, 222));
+   /* background-image: linear-gradient(to right, rgb(168, 161, 174) ,
+    rgb(199, 161, 237)); */
+    background-color: var(--elements-bg);
+
   color: #fff;
   /* height: auto; */
   height: 100px;
@@ -13,6 +16,13 @@ nav {
   flex-shrink: 0;
   /* z-index: 100; */
 }
+
+/* :root.dark nav{
+   background-image: linear-gradient(to right,
+    rgb(30, 3, 57) ,
+     rgb(78, 1, 156));
+
+} */
 
 button{
   outline: none;

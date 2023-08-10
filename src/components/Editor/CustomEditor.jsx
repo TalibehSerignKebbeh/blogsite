@@ -13,7 +13,7 @@ import './editor.css'
 import Link from '@tiptap/extension-link';
 import UploadImage from '../Blog/Upload/UploadImage';
 import MenuBar from './Menu/MenuBar';
-
+import { Container } from './Container';
 
 export default ({ blog, setblog, setPreview, preview }) => {
 
@@ -107,23 +107,31 @@ export default ({ blog, setblog, setPreview, preview }) => {
       <div>
         <UploadImage />
         <div>
-          <input autoComplete='on' type="text" name="title" onChange={handleData}
+          <input autoComplete='on' type="text"
+            name="title" onChange={handleData}
             value={blog?.title}
-            placeholder="blog title here..." className="title-inp" />
+            placeholder="blog title here..."
+            className="title-input"
+          />
         </div>
         <div>
-          <input autoComplete='on' type="text" name="image" onChange={handleData}
+          <input autoComplete='on' type="text"
+            name="image" onChange={handleData}
             value={blog?.image}
-            placeholder="blog banner image url..." className="title-inp" />
+            placeholder="blog banner image url..."
+            className="url-input"
+          />
         </div>
         <MenuBar editor={editor} />
         <EditorContent editor={editor} className="content-editor"
         style={{color:`var(--text-color)`}}/>
         {/* <Editor /> */}
         <div>
-          <input autoComplete='on' type="text" name="tags" onChange={handleData}
+          <input autoComplete='on' type="text" name="tags"
+            onChange={handleData}
             value={blog?.tags?.join(' ')}
-            placeholder="tags nature technology" className="tags" />
+            placeholder="tags nature technology"
+            className="tags" />
         </div>
         
       </div>
@@ -134,211 +142,3 @@ export default ({ blog, setblog, setPreview, preview }) => {
     </Container>
   )
 }
-
-const Container = styled.div`
-
-  display: flex;
-  justify-content: center;
-  flex-direction:column;
-  align-items: flex-start;
-  margin: 2rem auto;
-  width: 80%;
-  height:auto;
-  .title-inp{
-      width: 100%;
-      height: 1.5rem;
-      margin: 1rem 0;
-      padding: 0.2rem;
-      border: none;
-      border-bottom: 1px solid var(--text-color);
-      outline: none;
-      ${'' /* font-weight: 400; */}
-      font-size: 1.2rem;
-      transition: all 0.3s ease-in-out;
-      &:focus{
-          border-bottom: 1px solid #11ff09;
-      }      
-}
-  .menu-bar{
-    width: 100%;
-    border: 1px solid var(--text-color);
-    padding: 0.2rem;
-
-    button {
-    color: var(--text-color);
-    outline: none;
-    padding: 0.2rem;
-    border: 1px solid var(--text-color);
-    background: none;
-    margin: 0.2rem 0.2rem;
-    cursor: pointer;
-    font-family: "JetBrainsMono", monospace;
-    font-size: 1rem;
-    
-    &:hover {
-      ${'' /* transform: translateY(-2px); */}
-      background-color:#F5F5F5;
-    }
-    }
-    button.is-active{
-       background-color:#F5F5F5;
-    }
-  }
-  .content-editor{
-      width: 100%;
-      border:none;
-      border-right: 1px solid var(--text-color);
-      border-bottom: 1px solid var(--text-color);
-      border-left: 1px solid var(--text-color);
-      padding: 0.2rem;
-  }
-  .tags{
-      width: 100%;
-      height: 1.5rem;
-      margin: 1rem 0;
-      padding: 0.2rem;
-      border: none;
-      border-bottom: 1px solid var(--text-color);
-      outline: none;
-      ${'' /* font-weight: 600; */}
-      font-size: 1.2rem;
-      transition: all 0.3s ease-in-out;
-      &:focus{
-          border-bottom: 1px solid #00fbff;
-      }
-  }
- 
-
-  /* Basic editor styles */
-.ProseMirror {
-  > * + * {
-    margin-top: 0.75em;
-  }
-
-  outline: none;
-
-  ul,
-  ol {
-    padding: 0 1rem;
-  }
-
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    line-height: 1.1;
-  }
-  h1{
-    font-size:30px;
-  }
-  h2{
-    font-size:27px;
-  }
-  h3{
-    font-size:24px;
-  }
-  h4{
-    font-size:23px;
-  }
-   h5{
-    font-size:21px;
-  }
-   h6{
-    font-size:19px;
-  }
-  p{
-    font-size:18px;
-  }
-  code {
-    background-color: rgba(#616161, 0.1);
-    color: #616161;
-  }
-
-  pre {
-    background: #0D0D0D;
-    color: #FFF;
-    font-family: 'JetBrainsMono', monospace;
-    padding: 0.75rem 1rem;
-    border-radius: 0.5rem;
-
-    code {
-      color: inherit;
-      padding: 0;
-      background: none;
-      font-size: 0.8rem;
-    }
-  }
-
-  img {
-      display: block;
-      width: 85%;
-      max-height:400px;
-      margin-left: auto;
-      margin-right: auto;
-      border-radius: 0.5rem;
-      object-fit: cover;
-    }
-
-  blockquote {
-    padding-left: 1rem;
-    border-left: 2px solid var(--text-color);
-  }
-
-  hr {
-    border: none;
-    border-top: 2px solid rgba(#0D0D0D, 0.1);
-    margin: 2rem 0;
-  }
-}
- 
-@media (max-width: 760px){
-  p{
-    font-size:15px;
-  }
-  }
-  h1{
-    font-size:28px;
-  }
-  h2{
-    font-size:25px;
-  }
-  h3{
-    font-size:23px;
-  }
-  h4{
-    font-size:21px;
-  }
-   h5{
-    font-size:19px;
-  }
-   h6{
-    font-size:17px;
-  }
-}
-@media (max-width: 480px){
-  p{
-    font-size:14px;
-  }
-  }
-  h1{
-    font-size:26px;
-  }
-  h2{
-    font-size:24px;
-  }
-  h3{
-    font-size:22px;
-  }
-  h4{
-    font-size:19px;
-  }
-   h5{
-    font-size:17px;
-  }
-   h6{
-    font-size:15px;
-  }
-}
-`;

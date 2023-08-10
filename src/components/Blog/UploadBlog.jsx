@@ -19,15 +19,24 @@ const UploadBlog = () => {
      title: "",
        tags: [],
        image:``,
-      //  image:{file:null, preview:null},
     content: "",
   });
 
+  const handleReset = () => {
+    setblog({...blog,
+      title: '', tags: [],
+      image: '', content: ''
+    })
+    setuploadMessage({err:"", success:''})
+  }
 
   const handleBlogSubmit = async (e) => {
     setuploadMessage({error:``, success:``})
     
-        setuploading(true)
+    setuploading(true)
+    if (!blog?.content?.length || !blog?.title?.length) {
+      return;
+    }
     axios.post(`${apiUrl}/blogs`,
       {
          ...blog, created_at: Date.now(),
@@ -58,11 +67,29 @@ created_timezoneOffset: new Date().getTimezoneOffset()
         <CustomEditor blog={blog} setblog={setblog}
           setPreview={setPreview} preview={preview} 
         />
-        {uploadMessage?.success?.length ? <p className='message success'>{ uploadMessage?.success}</p> : null}
-        {uploadMessage?.error?.length ? <p className='message error'>{ uploadMessage?.error}</p> : null}
+        {uploadMessage?.success?.length ? 
+        <p className='message success'>{ uploadMessage?.success}</p> 
+        : 
+        null}
+        {uploadMessage?.error?.length ? 
+        <p className='message error'>{uploadMessage?.error}</p> 
+        : 
+        null}
+        
+        <div className='btns_wrapper'>
+
         <CustomBtn handleClick={handleBlogSubmit} 
           buttonclas={'blog-submit'} text={uploading? `uploading`: `Submit Blog`}
         />
+
+        <CustomBtn 
+          handleClick={handleReset}
+          buttonclas={'reset-btn'}
+
+          text={'Reset'}
+          />
+        </div>
+          
         </div>
     );
 }
