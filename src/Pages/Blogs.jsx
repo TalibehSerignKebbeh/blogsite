@@ -4,6 +4,7 @@ import "./blogs.css";
 import { useLoaderData } from "react-router-dom";
 import { AxiosInstance } from "../api";
 import { Pagination } from "antd";
+import { CircularProgress } from "@mui/material";
 // import OtherSamples from "../components/Blog/Cards/OtherSamples";
 
 
@@ -20,43 +21,52 @@ const Blogs = () => {
   const [totalBlogs, setTotalBlogs ] = useState(+total)
   const [pageNum, setPageNum] = useState(+page || 1);
   const [blogsToDisplay, setblogsToDisplay] = useState([...blogs]);
-  const [offset, setoffset] = useState( size);
+  const [offset, setoffset] = useState(+size);
+  const [loadedBlogsIds, setloadedBlogsIds] = useState(blogs?.map(blog=>blog?._id));
 
   // useEffect(() => {
   //   const fetchAgain = async () => {
   //     setloading(true);
-  //     await AxiosInstance.get(
-  //       `/blogs?page=${Number(pageNum) - 1}&size=${Number(pageSize)}`
-  //     )
+  //     await AxiosInstance.get(`/blogs/infinite?page=${Number(pageNum)}&size=${Number(pageSize)}&offset=${Number(offset)}`)
   //       .then((res) => {
-  //         // console.log(res?.data);
-  //         setblogsToDisplay(res?.data?.blogs);
-  //         setPageSize(res?.data?.size);
-  //         setPageNum(res?.data?.page);
+
+  //         // setblogsToDisplay(previousBlogs=>[...previousBlogs, ...res?.data?.blogs]);
+  //         setblogsToDisplay(res?.data?.blogs)
+  //         setPageSize(prev=>Number(res?.data?.size));
+  //         setPageNum(prev=>+Number(res?.data?.page));
+  //         // setoffset(prev=>+Number(res?.data?.offset))
+  //         setPageSize(prev=> +Number(res?.data?.size));
+  //          setPageNum(Number(res?.data?.page));
+  //         setTotalBlogs(prev=> +Number(res?.data?.total))
+          
   //       })
-  //       .catch(() => { })
   //       .finally(() => {
   //         setloading(false);
   //       });
   //   };
+    
   //   if (blogs?.length) {
   //     fetchAgain();
   //   }
-  //   return () => { };
+
   // }, [pageNum, pageSize]);
+
+
+
 const fetchMoreBlogs = async () => {
       setfetchtingMore(true);
-      await AxiosInstance.get(
-        `/blogs/infinite?page=${Number(pageNum)}&size=${Number(pageSize)}&offset=${offset}`
-      )
+      await AxiosInstance.get(`/blogs/infinite?page=${Number(pageNum)}&size=${Number(pageSize)}&offset=${offset}`)
         .then((res) => {
           const newBlogs = res?.data?.blogs;
           setoffset(prev=>res?.data?.offset)
-          console.log(res?.data?.blogs);
-          setblogsToDisplay(previousBlogs=>[...previousBlogs, ...newBlogs]);
+          // console.log(res?.data?.blogs);
+          const newBlogsConfirm = newBlogs?.filter(blog => !loadedBlogsIds?.includes(blog?._id))
+          const newLoadedIds = newBlogsConfirm?.map((blog) => blog?._id)
+          setloadedBlogsIds(prev=> [...prev, ...newLoadedIds])
+          setblogsToDisplay(previousBlogs=>[...previousBlogs, ...newBlogsConfirm]);
           setPageSize(prev=> +res?.data?.size);
-          setPageNum(prev=> page+1);
-          setTotalBlogs(prev=> res?.data?.total)
+          setPageNum(Number(res?.data?.page) +1);
+          setTotalBlogs(prev=> prev + newBlogsConfirm?.length)
           
         })
         .catch(() => { })
@@ -69,7 +79,7 @@ const fetchMoreBlogs = async () => {
      
    
     const options = {
-      root: null, // null means it uses the viewport as the container
+      root: blogWrapperRef.current, // null means it uses the viewport as the container
       rootMargin: '0px',
       threshold: 0, // The sentinel is considered visible when 100% visible
     };
@@ -109,20 +119,28 @@ const fetchMoreBlogs = async () => {
       ref={blogWrapperRef}>
         {!blogsToDisplay?.length && loading ? (
           <div>
-            <h3>Loading...</h3>
+           <CircularProgress 
+                  sx={{fontSize:'2rem', color:"green"}}
+                />
           </div>
         ) : (
           <div>
             <div className="blogs-wrapper">
-              {/* {!blogsToDisplay?.length && loading
-                &&
-                <div> <h3>Loading more ...</h3> </div>
-              } */}
+             
               {blogsToDisplay?.map((blog, index) => (
                 <BlogCard blog={blog} key={index} />
               ))}
                 <div id="fetchMoreElement" ref={fetchMoreRef}></div>
-                {fetchtingMore && <span>Loading ...</span>}
+                {fetchtingMore &&
+                  <div>
+                    <CircularProgress 
+                  sx={{fontSize:'2rem', color:"green"}}
+                />
+                 </div>}
+                {/* {loading &&
+                  <CircularProgress 
+                  sx={{fontSize:'2rem', color:"green"}}
+                />} */}
             </div>
             {/* <div className="pagination-wrapper">
               <Pagination
@@ -139,8 +157,8 @@ const fetchMoreBlogs = async () => {
                 onChange={(page, size) => {
                   setPageNum(page);
                 }}
-                showTotal={(total) => `Total blogs ${total}`}
-                total={total}
+                showTotal={(total) => `Total blogs ${totalBlogs}`}
+                total={totalBlogs}
               />
             </div> */}
           </div>
