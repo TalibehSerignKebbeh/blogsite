@@ -9,6 +9,7 @@ import UseAuth from '../../hooks/useAuth';
 import format from 'date-fns/format';
 import parseISO from 'date-fns/parseISO';
 import isValid from 'date-fns/isValid';
+import BlogUserProfile from './BlogUserProfile';
 
 const BlogCard = ({ blog }) => {
     const {role, username} = UseAuth()
@@ -29,12 +30,20 @@ const BlogCard = ({ blog }) => {
         <div className='blog-card-wrapper'>
                 
             <img src={blogImageurl} alt='banner' />
+            <section style={{paddingLeft:'6px'}}>
+
+            <BlogUserProfile blog={blog}
+                msg={''}
+                name={'author'}
+                />
+            </section>
+                
             <div className='content'>
-            <span
+            {/* <span
                 className='blog_posted_date'>
                 {isValid(parseISO(blog?.created_at)) ?
                     format(parseISO(blog?.created_at), 'MMM, do yyyy') :''}
-            </span>
+            </span> */}
             {blog?.tags?.length ?
                  <p className='tags'>
                     {blog?.tags?.map((tag, id) =>

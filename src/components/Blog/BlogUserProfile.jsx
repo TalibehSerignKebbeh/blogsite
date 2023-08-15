@@ -19,7 +19,7 @@ const BlogUserProfile = ({msg,blog, name}) => {
                             || blog[name]?.firstName + ' ' + blog[name]?.lastName}
                     </h3>
                     <p id='created_date'>
-                        {format(parseISO(blog?.created_at), 'do MMM, yyyy')}
+                        {format(parseISO(blog?.created_at), 'do MMM, yyyy HH:mm aa')}
                     </p>
                 </section>
             </section>

@@ -14,7 +14,7 @@ import parseISO from 'date-fns/parseISO';
 import BlogUserProfile from './BlogUserProfile';
 
 const ABlog = ({ blog, setblog }) => {
-
+    // console.log(blog?.author);
     const { authToken } = useContextHook()
     const { id } = UseAuth()
     const [likeLoading, setlikeLoading] = useState(false);

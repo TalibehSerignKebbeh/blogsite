@@ -1,12 +1,8 @@
 import React from 'react';
 import { DataGrid, GridActionsCellItem } from "@mui/x-data-grid";
-import {
-    CloudDoneOutlined, PendingOutlined,
-    DoneSharp, DoneRounded, NotStartedSharp,
-    
-} from '@mui/icons-material';
+import DoneRounded from '@mui/icons-material/DoneRounded';
 import { Link } from 'react-router-dom';
-import { Button } from '@mui/material';
+import  Button  from '@mui/material/Button';
 
 
 const UsersBlogTable = ({ blogs, title, isMine=false }) => {
@@ -14,6 +10,11 @@ const UsersBlogTable = ({ blogs, title, isMine=false }) => {
 
     return (
         <div className='blog_table'
+            style={{
+                minWidth: 'max-content',
+                backgroundColor: 'var(--elements-bg)',
+                overflowX:'auto',
+            }}
             >
             <h2
                 style={{

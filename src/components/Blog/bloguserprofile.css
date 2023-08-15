@@ -9,7 +9,7 @@
     justify-self: start;
     width: max-content;
     column-gap:9px;
-    margin-bottom: 20px;
+    /* margin-bottom: 20px; */
 }
 
 .author_profile> #written{
@@ -25,11 +25,13 @@
 }
 #author_name{
     color: var(--text-color);
-    font-weight: 700;
+    font-weight: 600;
     font-weight: 1rem;
+    margin-bottom: 4px;
 }
 
 #created_date{
-    font-size: .9rem;
+    font-size: .98rem;
     font-weight: 100;
+    color: var(--text-color);
 }

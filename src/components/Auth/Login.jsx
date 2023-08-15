@@ -37,7 +37,7 @@ const Login = () => {
                 const decoded = jwtDecode(token)
                 const role = decoded?.AuthData?.role
                 storeAuthToken(token)
-                navigate('/')
+                // navigate('/')
                 // console.log(role);
                 if (role === 'admin') {
                     navigate(`/dash`)
