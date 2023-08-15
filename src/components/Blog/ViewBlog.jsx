@@ -3,16 +3,15 @@ import { AxiosInstance, ImageUrl } from '../../api';
 import './viewblog.css'
 import { useLoaderData, useNavigate } from 'react-router-dom';
 import { useContextHook } from '../../context/AuthContext';
-import banner from '../../assets/flat-mountains.png'
 import ABlog from './ABlog';
 import CommentEditor from '../Editor/CommentEditor/CommentEditor';
-import CommentCard from '../Comments/CommentCard';
 import UseAuth from '../../hooks/useAuth';
 import CommentList from './CommentList';
 
 
 const ViewBlog = () => {
-    let blog = useLoaderData()
+    let loadedData = useLoaderData()
+    const [blog, setblog] = useState({...loadedData});
     const { token } = UseAuth()
   const { authToken } = useContextHook()
 
@@ -27,11 +26,17 @@ const ViewBlog = () => {
         {status:'', msg:''}
     );
     // const imageLink = blog?.image ? `${ImageUrl}/${blog?.image}` : banner;
-    let imageLink =
+ useEffect(() => {
+       let imageLink =
         blog?.image?.startsWith('http') ? blog?.image :
-           blog?.image? `${ImageUrl}/${blog?.image}` : banner;
+           blog?.image? `${ImageUrl}/${blog?.image}` : '';
 
-    blog = { ...blog, image: imageLink }
+    setblog({ ...blog, image: imageLink })
+    return () => {
+        
+    };
+ }, []);
+    
     // useEffect(() => {
     //     const FetchComments = async () => {
     //         setCommentLoading(true)
@@ -115,7 +120,8 @@ const ViewBlog = () => {
             <div className='view-container'>
                 
                      
-                <ABlog blog={blog} />
+                <ABlog blog={blog}
+                    setblog={ setblog} />
                 <div className='comment-wrapper'>
                     {!authToken?
                         <p className='comment_alert'>
@@ -152,17 +158,7 @@ const ViewBlog = () => {
                             </>
                     }
                 </div>
-                {/* <div className='comments_section'>
-                    {comments?.map((a_comment, index) => (
-                        
-                        <CommentCard
-                            comment={a_comment}
-                            key={a_comment?._id} 
-                        />
-                
-                    ))}
-                    
-                </div> */}
+        
                 <CommentList blogId={blog?._id}/>
                 <div>
 

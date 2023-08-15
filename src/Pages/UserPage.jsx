@@ -17,12 +17,14 @@ import  TableCell  from '@mui/material/TableCell';
 import  TableBody  from '@mui/material/TableBody';
 import  Paper  from '@mui/material/Paper';
 import UserTableRow from "../components/User/UserTableRow";
+import { useContextHook } from "../context/AuthContext";
 // import { Paper } from "@mui/material";
 
 
 
 function UserPage() {
 
+  const {authToken, dark} = useContextHook()
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(false);
   const [reseting, setreseting] = useState(false);
@@ -30,7 +32,7 @@ function UserPage() {
   const [resetMessage, setresetMessage] = useState('');
   const [resetSuccessMessage, setresetSuccessMessage] = useState('');
   const [resetErrorMessage, setresetErrorMessage] = useState('');
-  const [error, setError] = useState(null);
+  const [error, setError] = useState('');
   const [page, setPage] = useState(1);
   const [pageSizeNumber, setpageSizeNumber] = useState(5);
   const [pageNumber, setpageNumber] = useState(0);
@@ -114,11 +116,13 @@ function UserPage() {
    const fetchUsersData = useCallback(async () => {
     try {
       setLoading(true);
-      let url = `/users?page=${pageNumber}&pageSizeNumber=${pageSizeNumber}`;
+      let url = `/users?page=${pageNumber}&pageSize=${pageSizeNumber}`;
       if (keyword) {
         url += `&keyword=${keyword}`;
       }
-      const response = await AxiosInstance.get(url);
+      const response = await AxiosInstance.get(url, {
+        headers:{Authorization:`Bearer ${authToken}`}
+      });
       console.log(response);
       setUsers(response.data.users);
       setPage(response.data.page);
@@ -153,33 +157,72 @@ function UserPage() {
   };
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <div
+      style={{ color: 'white', backgroundColor: '#333' }}>
+      Loading...
+    </div>;
   }
 
-  if (error) {
-    return <div>Error: {error}</div>;
+  if (error?.length) {
+    return <div>
+      <p style={{ fontSize: '1.3rem', color: 'var(--text-color)' }}>
+        Error: {error}
+      </p>
+    </div>;
   }
 
   return (
-    <div>
-      {/* <Profile avatar={ `http://localhost:6002/file-1682446488934-628926040.jpg`} email={"modoumbbye97@gmail.com"} 
-        name={"Modou Mbye"} type={"Admin"}
-        properties={[]}
-      /> */}
+    
       <Box sx={{
-        width:
-          { xl: '70%', lg: '90%', md: '90%', sm: '100%', xs: '100%' }
-      }}>
-        <h3>Users page</h3>
+      //   width:
+      // {
+      //   xl: '70%', lg: '90%', md: '90%',
+      //   sm: '100%', xs: '100%'
+      // },
+      //   bgcolor:'var( --elements-bg)',
+        width:'fit',
+    }}
+    >
+        <h3
+          style={{
+            padding: '15px 20px',
+            color: 'var(--text-color)',
+          textTransform: 'capitalize',
+            textAlign:'start'
+          }}>Users page</h3>
         <TableContainer
-        component={Paper}>
+          component={Paper}
+          sx={{margin:'10px 10px 20px 10px',
+            bgcolor: 'var( --elements-bg)',
+          color:'var(--text-color)'}}>
           <Table>
             <TableHead>
-              <TableRow>
-                <TableCell>firstName</TableCell>
-                <TableCell>lastName</TableCell>
-                <TableCell>username</TableCell>
-                <TableCell colSpan={3}>Actions</TableCell>
+              <TableRow >
+                <TableCell 
+                sx={{color:'var(--text-color)',
+                fontSize:'1.1rem'}}
+                >Firstname
+                </TableCell>
+                <TableCell 
+                sx={{color:'var(--text-color)',
+                fontSize:'1.1rem'}}
+                >Lastname
+                </TableCell>
+                <TableCell 
+                sx={{color:'var(--text-color)',
+                fontSize:'1.1rem'}}
+                >Username</TableCell>
+                <TableCell 
+                sx={{color:'var(--text-color)',
+                fontSize:'1.1rem'}}
+                >Email
+                </TableCell>
+                <TableCell 
+                  sx={{ color: 'var(--text-color)',
+                  fontSize:'1.1rem' }}
+                  colSpan={3}
+                >Actions
+                </TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -191,7 +234,22 @@ function UserPage() {
               ))}
             </TableBody>
           </Table>
-        </TableContainer>
+      </TableContainer>
+      
+
+         <ConfirmDelete open={open}
+        setopen={setopen}
+        message={resetMessage}
+        errorMessage={resetErrorMessage}
+        succcessMsg={resetSuccessMessage}
+        deleteFunction={resetFunction}
+        resetFunc={() => {
+          setresetSuccessMessage('')
+          setresetErrorMessage('')
+          setresetMessage('')
+         }}
+        deleteLoading={reseting}
+/>
         {/* <div style={{ height: 400, width: '100%' }}>
           <DataGrid
             columns={columns}
@@ -222,20 +280,8 @@ function UserPage() {
         </div> */}
 
       </Box>
-      <ConfirmDelete open={open}
-        setopen={setopen}
-        message={resetMessage}
-        errorMessage={resetErrorMessage}
-        succcessMsg={resetSuccessMessage}
-        deleteFunction={resetFunction}
-        resetFunc={() => {
-          setresetSuccessMessage('')
-          setresetErrorMessage('')
-          setresetMessage('')
-         }}
-        deleteLoading={reseting}
-/>
-    </div>
+     
+   
   );
 }
 

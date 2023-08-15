@@ -5,10 +5,10 @@ import './navlink.css'
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 
 const NavLi = ({ title, path, children }) => {
-    // console.log(children[0]?.props?.children);   
+    // console.log(children);   
     let childrenHeight = 0;
     if (children?.length) {
-        childrenHeight = children[0]?.props?.children?.length * 25;
+        childrenHeight = children?.length * 26;
     }
     const [isExpanded, setisExpanded] = useState(false);
     return (<li id=''

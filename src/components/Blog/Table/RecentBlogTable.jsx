@@ -2,7 +2,6 @@ import React,{useState} from 'react';
 import { DataGrid, GridActionsCellItem } from "@mui/x-data-grid";
 import { Avatar, Box, Button, Stack, Typography } from "@mui/material";
 import { AxiosInstance, ImageUrl } from '../../../api';
-import avatar from '../../../assets/mydefaultprofile.png'
 import { Link } from 'react-router-dom';
 import UseAuth from '../../../hooks/useAuth';
 import CloudDoneOutlined from '@mui/icons-material/CloudDoneOutlined';
@@ -10,6 +9,7 @@ import  PendingOutlined  from '@mui/icons-material/PendingOutlined';
 import { useContextHook } from '../../../context/AuthContext';
 
 const RecentBlogTable = ({ blogs, setblogs }) => {
+
     const { token } = UseAuth()
     const {authToken} = useContextHook()
 
@@ -19,6 +19,9 @@ const RecentBlogTable = ({ blogs, setblogs }) => {
     function getFullName(author) {
         return `${author?.firstName || ''} ${author?.lastName || ''}`;
     }
+
+    const formattedTitle =(title)=> `${title?.toLowerCase()?.split(' ')?.join('-')}`
+
      const TogglePublished = async (row) => {
         console.log('toggle');
         setpublishingToggle(true)
@@ -54,7 +57,9 @@ const RecentBlogTable = ({ blogs, setblogs }) => {
     return (
         <Box
             sx={{
-                width:'auto',
+                width: 'max-content',
+                bgcolor: 'var(--elements-bg)',
+                mx:{xl:2,lg:1,md:'5px', sm:'4px',xs:'3px'},
                 maxWidth: '100%',
                 overflowX: 'auto',
                 overflowY: 'hidden', py: 3,
@@ -81,8 +86,13 @@ const RecentBlogTable = ({ blogs, setblogs }) => {
                 // flexDirection: 'row',
                 // alignItems: 'flex-end',
                 fontSize:'1.2rem'
+                },
+                '& .title': {
+                    color: 'var(--text-color)',
+                    mx:'auto',ml:2,
             }
-        }}>
+            }}>
+            <h2 className='title'>Recent Posted Blogs</h2>
             <DataGrid
                 
                 columns={[
@@ -124,7 +134,10 @@ const RecentBlogTable = ({ blogs, setblogs }) => {
                                     {getFullName(author)}
                                 </Typography>
                                 <Box>
-                                    <img src={`${avatar}`} className='avatar' />
+                                    {author?.profile?.length ?
+                                        <img src={`${ImageUrl}/${author?.profile}`}
+                                        className='avatar' 
+                                      /> : null}
                                    
                                 </Box>
                             </Stack>
@@ -137,21 +150,22 @@ const RecentBlogTable = ({ blogs, setblogs }) => {
                        false, editable: false,filterable:false,
                         renderCell: ({row}) => (
                              <Stack direction={'row'} spacing={1}>
-                                <Button color={`success`}
+                                <Button 
                                     disabled={publishingToggle}
                                     onClick={e => TogglePublished(row)}
                                     sx={{ 
                                          color: '#fff',
-                                        bgcolor: row?.publish ? '#00cc00' : '#0047b3',
+                                        bgcolor: row?.publish ? '#00cc00' : '#0040ff',
                                         ':hover': {
-                                            bgcolor: row?.publish ? '#00cc00' : '#0047b3',
+                                            bgcolor: row?.publish ? '#00cc00' : '#0040ff',
                                         }
                                     }} size='small'>
                                     {row?.publish ? 'published' : 'publish'}
                                 </Button>
-                                <Link to={`/dash/blogs/${row?._id}/edit`}>
+                                <Link to={`/dash/blogs/view/${formattedTitle(row?.title)}`}>
                                     <Button sx={{ color: `var(--primary-color)` }} size='small'>
-                                        View</Button>
+                                        View
+                                    </Button>
                                 </Link>
                                         </Stack>
 

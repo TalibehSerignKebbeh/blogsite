@@ -5,11 +5,11 @@ import { AxiosInstance } from '../../api';
 const CommentList = ({blogId}) => {
     const [comments, setcomments] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [isAllLoaded, setIsAllLoaded] = useState(false);
   const [isOnceLoaded, setisOnceLoaded] = useState(false)
-  const sentinelRef = useRef(null);
-  // const intersectionObserverRef = useRef(null);
-  // let currentPageRef = useRef(1);
+  const [isFetchingCommentError, setisFetchingCommentError] = useState(false);
   const [currentPage, setcurrentPage] = useState(1);
+  const [total, setTotal] = useState(0)
     const pagesize = 5;
 
   const fetchComments = async () => {
@@ -19,14 +19,22 @@ const CommentList = ({blogId}) => {
       &&limit=${pagesize}&offset=${comments?.length}`);
       const newComments = response?.data?.comments;
       console.log(response?.data);
+      setTotal(response?.data?.total)
+      const currentTotalLoaded = newComments?.length + comments?.length;
+      const loadedTotal = response?.data?.total;
+      setIsAllLoaded(currentTotalLoaded === loadedTotal)
+      console.log(loadedTotal, currentTotalLoaded);
       setcomments((prevComments) => [...prevComments, ...newComments]);
       setIsLoading(false);
       setcurrentPage(prev=> prev+1)
       setisOnceLoaded(true)
+      setisFetchingCommentError(false)
+
     } catch (error) {
       console.error('Error fetching comments:', error);
       setIsLoading(false);
-      setisOnceLoaded(true)
+      setisOnceLoaded(true);
+      setisFetchingCommentError(true);
     }
   };
 
@@ -36,16 +44,26 @@ const CommentList = ({blogId}) => {
       setIsLoading(true);
         const response = await AxiosInstance.get(`/comments/blog/${blogId}?page=${currentPage}
       &limit=${pagesize}&offset=${comments?.length}`);
-      const newComments = response?.data?.comments;
+     const newComments = response?.data?.comments;
+      console.log(response?.data);
+      setTotal(response?.data?.total)
+      const currentTotalLoaded = newComments?.length + comments?.length;
+      const loadedTotal = response?.data?.total;
+      setIsAllLoaded(loadedTotal === currentTotalLoaded)
+      console.log(loadedTotal, currentTotalLoaded);
       console.log(response?.data);
       setcomments((prevComments) => [...prevComments, ...newComments]);
       setIsLoading(false);
       setcurrentPage(prev=> prev+1)
       setisOnceLoaded(true)
+      setisFetchingCommentError(false)
+
     } catch (error) {
       console.error('Error fetching comments:', error);
       setIsLoading(false);
-      setisOnceLoaded(true)
+      setisOnceLoaded(true);
+      setisFetchingCommentError(true);
+
     }
     };
     if (!comments?.length && !isLoading && !isOnceLoaded) {
@@ -60,12 +78,12 @@ const CommentList = ({blogId}) => {
       || null
     const options = {
       root: null, // null means it uses the viewport as the container
-      rootMargin: '-00px',
+      rootMargin: '',
       threshold: 0, // The sentinel is considered visible when 100% visible
     };
 
     let intersectionObserverRef = new IntersectionObserver((entries) => {
-      if (entries[0].isIntersecting && !isLoading) {
+      if (entries[0].isIntersecting && !isLoading && !isAllLoaded && !isFetchingCommentError) {
         console.log('we are fetching');
         fetchComments();
         }

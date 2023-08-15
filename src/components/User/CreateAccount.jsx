@@ -127,10 +127,7 @@ const CreateAccount = () => {
                 .then((res) => {
                     console.log(res);
                     setSuccessMessage(res?.data?.message)
-                    setTimeout(() => {
-                        navigate('/login')
-
-                    }, 600);
+                    
                 }).catch((err) => {
                     console.log(err);
                 }).finally(() => {

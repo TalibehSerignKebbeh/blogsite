@@ -8,18 +8,18 @@ import { GetError } from '../Config';
 import jwtDecode from 'jwt-decode';
 import useAuth from '../../hooks/useAuth'
 const Login = () => {
-    
+
     const [uploading, setuploading] = useState(false);
     const [user, setuser] = useState({ username: '', password: '' });
     const [errorMessage, seterrorMessage] = useState('');
     const navigate = useNavigate()
     const { clearAuthToken, storeAuthToken, authToken } = useContextHook()
-   const {token, role} = useAuth()
+    const { token, role } = useAuth()
     useEffect(() => {
-        if (token && role==='admin') {
+        if (token && role === 'admin') {
             navigate('/dash')
         }
-    },[])
+    }, [])
     const handleChange = (e) => {
         setuser({ ...user, [e.target.name]: e.target.value })
     }
@@ -40,11 +40,11 @@ const Login = () => {
                 navigate('/')
                 // console.log(role);
                 if (role === 'admin') {
-                        navigate(`/dash`)
+                    navigate(`/dash`)
                     // setTimeout(() => {
                     // }, 10000); 
                 } else {
-                        navigate(`/`)
+                    navigate(`/`)
                     // setTimeout(() => {
                     // }, 10000); 
                 }
@@ -60,31 +60,39 @@ const Login = () => {
         <div className='login_wrapper'>
             <form onSubmit={submitForm} className='login_form'>
                 <div className='title-wrapper'>
-                <h3>Login</h3>
+                    <h3>Login</h3>
                 </div>
-                
-                <span className={`error_message ${errorMessage?.length? 'content':''}`}>
+                <div className='inputs_grids'>
+                    <span className={`error_message ${errorMessage?.length ? 'content' : ''}`}>
                         {errorMessage}</span>
-                <div className='input_wrapper first'>
-                    <label htmlFor='username'>username</label>
-                    <input autoComplete='on' type={'text'} value={user?.username}
-                        name={'username'} id={"username"} className={'textinput'}
-                        onChange={handleChange} placeholder={"username ..."} />
-                </div>
-                <div className='input_wrapper'>
-                    <label htmlFor='password'>password</label>
-                    <input autoComplete='off' type={'password'} value={user?.password}
-                        name={'password'} id={"password"} className={'textinput'}
-                        onChange={handleChange} placeholder={"password ..."} />
-                </div>
-                <div className='input_wrapper'>
-                    <button type='submit' >{uploading ? "uploading" : `Submit`}</button>
+                    <div className='input_wrapper first'>
+                        <label htmlFor='username'>username</label>
+                        <input autoComplete='on' type={'text'} value={user?.username}
+                            name={'username'} id={"username"} className={'textinput'}
+                            onChange={handleChange} placeholder={"username ..."} />
+                    </div>
+                    <div className='input_wrapper'>
+                        <label htmlFor='password'>password</label>
+                        <input autoComplete='off' type={'password'} value={user?.password}
+                            name={'password'} id={"password"} className={'textinput'}
+                            onChange={handleChange} placeholder={"password ..."} />
+                    </div>
+                    <div className='input_wrapper'>
+                        <button type='submit' >{uploading ? "uploading" : `Submit`}</button>
+
+                    </div>
+                    <p className='other_link'>
+                        Don't have an account create one
+                        <Link to={`/register`}
+                            className='anchor'
+                        >
+                            here
+                        </Link>
+                    </p>
 
                 </div>
-                <p>If you don't have an account create one
-               <Link to={`/register`}>here</Link>  </p>
             </form>
-            
+
         </div>
     );
 }

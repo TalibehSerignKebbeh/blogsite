@@ -20,9 +20,11 @@
 
 .pagination-wrapper{
     margin: 10px auto;
-    padding: 6px;
+    padding:10px 6px;
     text-align: center;
-    color: var(--text-color);
+    /* color: var(--text-color); */
+    color: #333 !important;
+    font-size: 1.2rem;
     background-color: #e4e0e0;
     margin-top: 30px;
     width: max-content;

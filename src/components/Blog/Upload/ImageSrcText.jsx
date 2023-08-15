@@ -21,7 +21,10 @@ const ImageSrcText = ({ text }) => {
             textAlign: 'center', width: 'auto',padding:'2px 4px',
         backgroundColor:'lightgray', color:'white', cursor:'pointer'}}>
             <Typography.Text ref={textRef}
-            style={{color:'white'}}>{text}</Typography.Text>
+                style={{ color: 'white' }}>
+                {/* {text} */}
+                copy
+            </Typography.Text>
         </Button>
     );
 }

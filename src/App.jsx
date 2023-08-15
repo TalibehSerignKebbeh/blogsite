@@ -9,10 +9,10 @@ import { CssBaseline, GlobalStyles } from "@mui/material";
 
 export default function App() {
   // console.log(new Date().getTimezoneOffset())
-  const { role } = UseAuth()
+  const { role,token } = UseAuth()
   const isSuperUser = role === 'admin' || role === 'editor';
 
-  const customRole = (role === 'admin' ||role === 'editor' ? role : '')
+  const customRole = (role === 'admin' ||role === 'editor' ? role : 'user')
   const [isNavOpen, setisNavOpen] = useState(true);
 
 // const minPasswordLength = 8;
@@ -38,21 +38,27 @@ export default function App() {
 
 
   return (
-    <div className={`App ${customRole}`}>
+    <div className={`App ${role}`}>
       <CssBaseline />
-            <GlobalStyles styles={{ html: { WebkitFontSmoothing: "auto" } }} />
-
-      {/* <GlobalStyles /> */}
-      {isSuperUser?
+      <GlobalStyles styles={{ html: { WebkitFontSmoothing: "auto" } }} 
+        
+      />
+      {token?
         <AdminNav isNavOpen={isNavOpen}
         setisNavOpen={setisNavOpen} />
         : <NavbarLanding />
       }
       <div className={`app-sub-wrapper ${customRole}`}
         style={{ alignSelf: 'stretch', margin: '0px',flex: '1' }}>
-        {isSuperUser? <TopBar setisNavOpen={setisNavOpen}
-          isNavOpen={isNavOpen} /> : null
+        {token ?
+          <TopBar setisNavOpen={setisNavOpen}
+          isNavOpen={isNavOpen} />
+          : null
         }
+        {/* <div>
+          <h2
+          style={{color:'var(--text-color)'}}>My second title</h2>
+        </div> */}
         <Outlet />
       </div>
     </div>

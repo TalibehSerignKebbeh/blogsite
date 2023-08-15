@@ -2,7 +2,7 @@
 .tags_blog_container{
     text-align: start;
     /* padding: 20px 40px; */
-    background-color: var(--container-bg);
+    /* background-color: var(--elements-bg); */
     padding-top: 20px;
     padding-bottom: 30px;
 }

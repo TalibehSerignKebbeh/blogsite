@@ -59,8 +59,8 @@ export const BlogContainer = styled.div`
   .blog-banner{
     width:100%;
     height:400px;
-    ${'' /* margin:10px 0px; */}
     margin-bottom:20px; 
+    margin-top:20px; 
   }
   .tags{
      margin:10px 0px;

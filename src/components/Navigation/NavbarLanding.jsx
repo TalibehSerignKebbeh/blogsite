@@ -4,10 +4,12 @@ import { Link, NavLink } from 'react-router-dom';
 import { useContextHook } from '../../context/AuthContext'
 import { useNavigate } from 'react-router-dom';
 import UseAuth from '../../hooks/useAuth';
-import AdminNav from './AdminNav';
+// import AdminNav from './AdminNav';
 import LogoutButton from './LogoutButton';
 
 import ToggleDark from '../ToggleDark';
+import { ToggleButton } from '@mui/material';
+import {MenuSharp} from '@mui/icons-material'
 
 function NavbarLanding() {
   const { role, username } = UseAuth()
@@ -55,13 +57,16 @@ function NavbarLanding() {
                 <Link className='nav_link' to="/login">login</Link>
               </li>
              <ToggleDark />
-              {/* <li>
-                <Link className='nav_link' to="/contact">Contact</Link>
-              </li> */}
+             
             </>
             :
             <>
+              <li>
+                <Link className='nav_link' to="/profile">Profile</Link>
+              </li>
               <LogoutButton />
+             <ToggleDark />
+
              
             </>
           }
@@ -72,7 +77,9 @@ function NavbarLanding() {
 
       <div className="menu-icon" >
         <i className={showMenu ? 'fas fa-times' : 'fas fa-bars'}></i>
-        <button className='nav-btn show-btn' onClick={handleClick}>Show</button>
+        <button className='nav-btn show-btn' onClick={handleClick}>
+          <MenuSharp />
+        </button>
       </div>
     </nav>
   );

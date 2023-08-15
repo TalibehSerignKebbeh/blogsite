@@ -5,7 +5,9 @@ import { AxiosInstance, ImageUrl } from '../../../api';
 import ImageSrcText from './ImageSrcText';
 import { GetError } from '../../Config';
 import './index.css'
-import  ArrowUpward  from '@mui/icons-material/ArrowUpward';
+import ArrowUpward from '@mui/icons-material/ArrowUpward';
+import  RemoveIcon  from '@mui/icons-material/RemoveDoneRounded';
+
 const UploadImage = () => {
     const [files, setfiles] = useState({});
     const [imgFile, setImgfile] = useState({ progress: 0, imgSrc: ``, name: `` });
@@ -83,12 +85,19 @@ const UploadImage = () => {
         <Space direction='vertical' style={{ width: '100%',overflowX:'hidden', padding: '5px 10px' }}>
 
             <Upload showUploadList={false}
-                disabled={uploading} customRequest={handleUpload}
+                disabled={uploading}
+                customRequest={handleUpload}
                 beforeUpload={beforeUpload}
-                style={{}}
+                style={{
+                        padding: '10px 16px 10px 16px',
+                        paddingBottom:'20px'
+                    }}
             >
-                {/* <ArrowUpward /> */}
-                <Button >Upload Image</Button>
+                <Button
+                    >
+                    <span
+                    style={{color: '#333',}}>Upload Image</span> 
+                </Button>
             </Upload>
             <Space direction='vertical' style={{ width: '100%' }}>
                 {uploading &&
@@ -116,7 +125,8 @@ const UploadImage = () => {
                         <img id='uploaded-image' src={file?.imgSrc} />
                         <Button className='remove_btn' size='small' 
                            onClick={e => handleRemoveImage(file)}
-                        >Remove
+                    >
+                        <RemoveIcon />
                         </Button>
                     </div>
             ))}

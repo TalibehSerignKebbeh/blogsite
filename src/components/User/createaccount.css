@@ -35,6 +35,25 @@
      border-top-left-radius: 8px;
     border-top-right-radius: 8px;
 }
+
+
+
+.signup-title {
+    position: absolute;
+    width: 100%;
+    font-size: 1.3rem;
+    color: #fffefe;
+    padding: 0px;
+    padding:auto;
+    text-align: center;
+    height: 50px;
+    line-height: 50px;
+    margin-top: -10px;
+    background-color: #0066ff;
+ border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+}
+
 .grid_wrapper{
     margin-top: 40px;
     display: grid;
@@ -44,26 +63,6 @@
     align-items: start;
     margin-bottom: 40px;
 }
-
-
-.signup-title {
-    position: absolute;
-    width: 100%;
-    font-size: 1.3rem;
-    color: #fffefe;
-    padding: 0px;
-    justify-self: start;
-    align-self: baseline;
-    padding:auto;
-    height: 50px;
-    line-height: 50px;
-    margin-top: -10px;
-    /* margin-bottom: 50px; */
-    background-color: #0066ff;
- border-top-left-radius: 8px;
-    border-top-right-radius: 8px;
-}
-
 .input-wrapper {
     width: 300px;
     height: auto;
@@ -148,18 +147,18 @@
     width: 110px;
     aspect-ratio: 1;
     border-radius: 30%;
-    background-color: var(--label-color);
+     background-color:#fffefe;
     cursor: pointer;
     display: grid;
     align-items: center;
     justify-items: center;
-    color: var(--bg-color);
+    color: #333;
     font-weight: normal;
 }
 .input-wrapper.profile> .img_div{
     order: 0;
     border: 2px dashed #3336;
-    background-color: var(--label-color);
+    background-color:#fffefe;
     min-width: 70px;
     aspect-ratio: 1;
     border-radius: 10px;

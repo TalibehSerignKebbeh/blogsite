@@ -2,6 +2,7 @@ import React,{useState} from 'react';
 import { AxiosInstance } from '../../api';
 import { useContextHook } from '../../context/AuthContext'
 import { useNavigate } from 'react-router-dom';
+import  LogoutTwoTone  from '@mui/icons-material/LogoutTwoTone';
 
 const LogoutButton = () => {
   const navigate = useNavigate()
@@ -22,7 +23,11 @@ const LogoutButton = () => {
     return (
         <li>
                 <button className='nav-btn logout-btn' onClick={handleLogout}>
-                  {logingOut ? "loading..." : `Logout `}
+          {logingOut ? "loading..." :
+            <LogoutTwoTone sx={{
+              transform:'scaleX(4)',
+              transform:'scaleY(2)',
+            }} />}
                 </button>
               </li>
     );

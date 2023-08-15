@@ -40,8 +40,6 @@ a{
  height: 100vh;
     min-height: 100vh;
     width: 100%;
-    /* max-width: 100vw;
-    width: 100vw; */
     background-color:var(--container-bg);
 }
 
@@ -52,40 +50,23 @@ a{
       justify-content: baseline;
     overflow-x: hidden;
     overflow-y: auto;
-    /* place-content: stretch baseline;
-    justify-items: auto;
-    align-items: flex-start;
-    grid-auto-rows: auto; */
-    
-    /* overflow-y: scroll; */
-    
+    /* background-color: #b61010; */
 }
 
-.App.admin, .App.editor{
-  /* display: grid;
-   grid-template-columns: 260px auto;
-    grid-template-rows: auto ; */
+.App.admin, .App.editor, .App.user{
     display: flex;
     flex-direction: row;
     height: 100vh;
     gap: 0px;
-    /* width: 100vw; */
     justify-content: stretch;
     align-self: stretch;
     overflow: hidden;
     overflow-y: scroll;
-    /* gap: 90px; */
-    /* display: flex;
-  height: 100vh !important;
-  align-items: stretch; */
+   
 }
 
-.App.user{
-  display: grid;
-  grid-template-columns: auto auto;
-  /* grid-template-rows: auto; */
-}
-.admin, .editor{
+
+.admin, .editor, .user{
   overflow-y: scroll; 
   height: 100%; 
   /* width: 100vw; */
@@ -93,15 +74,41 @@ a{
 }
 
 
+
+
+/* some shared styles here */
+
+.blog-submit{
+    position: relative;
+    margin: auto;
+    padding: 15px 30px;
+   /* background-image: linear-gradient(to right, rgb(124, 83, 164) , rgb(102, 45, 159)); */
+   background-color: #1261e0;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    color: white !important;
+   
+    font-size: 1.4rem;
+   margin-top: 30px;
+   transform: scale(1);
+}
+.blog-submit:hover{
+   /* background-image: linear-gradient(to right, rgb(42, 3, 81) , rgb(114, 7, 222)); */
+   transform: scale(1.1);
+   background-color: #1261e0;
+
+}
+
+
 /* .app-sub-wrapper{
 overflow-x: auto;
 overflow-y: auto;
-max-width: 100vw;
+width: 100%;
 display: flex;
 flex-direction: column;
 justify-content: stretch;
-
-
+background-color: #fff;
 } */
 
 

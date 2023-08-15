@@ -1,0 +1,13 @@
+.loader_wrapper{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    /* padding: 40px auto; */
+    width: max-content;
+    min-width: 100%;
+    height: 400px;
+    margin: auto;
+    text-align: center;
+    background-color: #464242;
+}

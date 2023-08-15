@@ -6,7 +6,6 @@ import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
-// import './index.css'
 import ErrorPage from './ErrorPage';
 import UploadBlog from './components/Blog/UploadBlog';
 import { apiUrl, AxiosInstance } from './api';
@@ -25,97 +24,135 @@ import AdminBlogs from './Pages/AdminBlogs';
 import { jwttoken } from './hooks/useAuth';
 import TagsBlogs from './Pages/TagsBlogs';
 import './utils/global.styles.css'
+import { QueryClientProvider, QueryClient } from '@tanstack/react-query'
+import ProfilePage from './components/User/Profile/ProfilePage';
+import MyBlogs from './Pages/MyBlogs';
+import InfiniteLoadBlogs from './InfiniteLoadBlogs';
 
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <App />,
-
+    element:<AuthProvider>
+        <App />
+    </AuthProvider>
+        ,
     children: [
       {
-        index:true,
+        index: true,
         loader: async () => {
           const res = await AxiosInstance.get(`/blogs/infinite?page=${Number(1)}&size=${Number(3)}&offset=${Number(0)}`)
           const responseData = res?.data
           return responseData;
         },
-        element: <Blogs  />,
+        element: <Blogs />,
         errorElement: <ErrorPage />
+      }, {
+        path: 'infinite',
+        element: <InfiniteLoadBlogs />,
+        
       },
       {
-        path:`/dash`,
-        element: <RequiredAuth roles={['editor', 'admin']} />,
+        path: `/dash`,
+        element: <RequiredAuth roles={['user', 'admin']} />,
         children: [
           {
             index: true,
-            // loader: async () => {
-            //   const res = await AxiosInstance.get(`/blogs/stats`, config)
-            //   const responseData = res?.data
-            //   return responseData;
-            // },
+
             element: <Dashboard />,
-        errorElement: <ErrorPage />
+            errorElement: <ErrorPage />
 
           },
            {
-             path: "/dash/blogs",
-              loader: async () => {
-          const res = await AxiosInstance.get(`/blogs?page=${Number(0)}&size=${Number(5)}`)
-          const responseData = res?.data
-          return responseData;
-        },
-             element: <AdminBlogs />,
-        errorElement: <ErrorPage />
-            
-          },
-          {
             path: "/dash/blogs/newblog",
             element: <UploadBlog />,
-        errorElement: <ErrorPage />
+            errorElement: <ErrorPage />
 
           },
-          {
-            path: "/dash/users",
-            element: <UserPage />,
-        errorElement: <ErrorPage />
-
-          },
-          {
+            {
             path: "/dash/blogs/:blogId/edit",
             element: <EditBlog />,
             loader: async ({ params }) => {
-          const res = await AxiosInstance.get(`/blogs/${params?.blogId}`)
-          // console.log(res);
-         return res?.data;
-        },
+              const res = await AxiosInstance.get(`/blogs/${params?.blogId}`)
+              return res?.data;
+            },
           },
-           {
+          {
             path: "/dash/blogs/view/:title",
             element: <ViewBlog />,
-        loader: async ({ params }) => {
-          const res = await AxiosInstance.get(`${apiUrl}/blogs/single?title=${params?.title}`)
-          // console.log(res);
-          const blog = res?.data?.blog;
-          return blog;
-        },
+            loader: async ({ params }) => {
+              const res = await AxiosInstance.get(`${apiUrl}/blogs/single?title=${params?.title}`)
+
+              const blog = res?.data?.blog;
+              return blog;
+            },
           },
+          
+          {
+            element: <RequiredAuth roles={['admin']} />,
+            children: [
+              {
+                path: "/dash/blogs",
+                loader: async () => {
+                  const res = await AxiosInstance.get(`/blogs?page=${Number(0)}&size=${Number(5)}`)
+                  const responseData = res?.data
+                  return responseData;
+                },
+                element: <AdminBlogs />,
+                errorElement: <ErrorPage />
+
+              },
+              {
+            path: "/dash/users",
+            element: <UserPage />,
+            errorElement: <ErrorPage />
+
+          },
+
+            ],
+          },
+           {
+        element: <RequiredAuth roles={['user']} />,
+        children: [
+          {
+            path: "/dash/blogs/myblogs",
+            element: <MyBlogs />,
+            errorElement: <ErrorPage />
+
+          },
+        ]
+
+      },
+
+         
         ],
         errorElement: <AuthErrorPage />,
       },
 
       {
+        element: <RequiredAuth roles={['user', 'admin']} />,
+
+        children: [
+         {
+
+            path: '/profile',
+            element: <ProfilePage />,
+errorElement: <ErrorPage />,
+          },
+       ]
+     },
+      {
         path: '/blogs/:title',
         element: <ViewBlog />,
         loader: async ({ params }) => {
           const res = await AxiosInstance.get(`${apiUrl}/blogs/single?title=${params?.title}`,
-          {headers:{Authorization: `Bearer ${jwttoken}`}})
+            { headers: { Authorization: `Bearer ${jwttoken}` } })
           // console.log(res);
           const blog = res?.data?.blog;
           return blog;
         },
         errorElement: <ErrorPage />
-        
+
       },
       {
         path: "/register",
@@ -144,7 +181,7 @@ const router = createBrowserRouter([
     ],
     errorElement: <ErrorPage />,
   },
- 
+
 ]);
 
 // const rootRouter = createBrowserRouter(
@@ -153,10 +190,16 @@ const router = createBrowserRouter([
 //   )
 // )
 
+const client = new QueryClient()
+
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <AuthProvider>
-      <RouterProvider router={router} />
+      <QueryClientProvider
+        client={client}>
+
+        <RouterProvider router={router} />
+      </QueryClientProvider>
     </AuthProvider>
   </React.StrictMode>,
 )

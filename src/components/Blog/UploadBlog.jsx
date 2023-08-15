@@ -44,7 +44,6 @@ created_timezoneOffset: new Date().getTimezoneOffset()
       }, {
         headers: {
           Authorization: `Bearer ${authToken}`,
-          // 'Content-Type': 'multipart/form-data'
         },
         onUploadProgress: (e) => {
           
@@ -59,27 +58,49 @@ created_timezoneOffset: new Date().getTimezoneOffset()
               console.log(err);
               setuploadMessage({...uploadMessage, error: GetError(err)})
         }).finally(()=>{setuploading(false)})
-        // const confirm = window.confirm("Are you sure to submit this blog")
-        // console.log(confirm);
+       
     }
     return (
-        <div className='upload-container'>
+      <div className='upload-container'>
+         <section className='notice'>
+          <p><strong>Note!</strong> blogs posted here
+            will be review and publish by our team
+          before anyone can read them</p>
+        </section>
         <CustomEditor blog={blog} setblog={setblog}
           setPreview={setPreview} preview={preview} 
         />
+       
         {uploadMessage?.success?.length ? 
-        <p className='message success'>{ uploadMessage?.success}</p> 
+          <p className='message success'>
+            <span>
+            {uploadMessage?.success}
+            </span>
+            <span>
+              x
+            </span>
+
+          </p> 
         : 
         null}
         {uploadMessage?.error?.length ? 
-        <p className='message error'>{uploadMessage?.error}</p> 
+          <p className='message error'>
+            <span>
+              {uploadMessage?.error}
+            </span>
+            
+            <span>
+              x
+            </span>
+          </p> 
         : 
         null}
         
         <div className='btns_wrapper'>
 
         <CustomBtn handleClick={handleBlogSubmit} 
-          buttonclas={'blog-submit'} text={uploading? `uploading`: `Submit Blog`}
+            buttonclas={'blog-submit'}
+            text={uploading ? `uploading` : `Submit Blog`}
         />
 
         <CustomBtn 
