@@ -33,7 +33,7 @@ import InfiniteLoadBlogs from './InfiniteLoadBlogs';
 const router = createBrowserRouter([
   {
     path: "/",
-    element:<AuthProvider>
+    element:<AuthProvider children={<App />}>
         <App />
     </AuthProvider>
         ,

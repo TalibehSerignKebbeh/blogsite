@@ -49,7 +49,10 @@ export default function App() {
         : <NavbarLanding />
       }
       <div className={`app-sub-wrapper ${customRole}`}
-        style={{ alignSelf: 'stretch', margin: '0px',flex: '1' }}>
+        style={{
+          alignSelf: 'stretch', margin: '0px',
+          flex: '1'
+        }}>
         {token ?
           <TopBar setisNavOpen={setisNavOpen}
           isNavOpen={isNavOpen} />
