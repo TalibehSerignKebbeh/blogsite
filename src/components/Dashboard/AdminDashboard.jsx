@@ -30,7 +30,7 @@ const AdminDashboard = () => {
   useEffect(() => {
     const fetchStatistics = async () => {
       setisLoadSuccess(false)
-      setisLoading(false)
+      setisLoading(true)
       await AxiosInstance.get(`/blogs/stats`,
         { headers: { Authorization: `Bearer ${token}` } })
         .then((res) => {
