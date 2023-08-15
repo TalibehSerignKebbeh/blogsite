@@ -96,8 +96,9 @@ cursor: pointer;
  }
 
  .logout-btn{
+  width: max-content !important;
+    height: max-content !important;
   margin: auto;
-  /* height: 35px; */
   display: flex;
   justify-content: center;
   align-items: center;

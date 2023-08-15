@@ -31,6 +31,16 @@ const UserTableRow = ({user}) => {
              <TableCell
             sx={{color:'var(--text-color)',
             fontSize:'1.1rem'}}
+            >{user?.public_name}
+            </TableCell>
+            <TableCell
+            sx={{color:'var(--text-color)',
+            fontSize:'1.1rem'}}
+            >{user?.role}
+            </TableCell>
+             <TableCell
+            sx={{color:'var(--text-color)',
+            fontSize:'1.1rem'}}
             >
                 <Stack direction={'row'}>
                     <Button>Activate</Button>

@@ -29,7 +29,7 @@ const UserDashboard = () => {
     useEffect(() => {
         const fetchStatistics = async () => {
             setisLoadSuccess(false)
-            setisLoading(false)
+            setisLoading(true)
             await AxiosInstance.get(`/blogs/stats/user`,
                 {
                     headers: { Authorization: `Bearer ${token}` },

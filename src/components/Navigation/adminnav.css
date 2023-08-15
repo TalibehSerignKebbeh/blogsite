@@ -83,6 +83,10 @@ li,a,button{
     color: var(--text-color) !important;
 }
  .logout-btn{
+    min-width: 65px !important;
+    min-height: 10px !important;
+    height: auto;
+    width: auto;
   margin: auto;
   display: flex;
   justify-content: center;
@@ -90,7 +94,6 @@ li,a,button{
   padding: 10px 8px;
   border-radius: 5px;
   border: none;
-  font-size: 17px;
   font-family: serif;
   align-self: flex-start;
   background-color: lightgray;

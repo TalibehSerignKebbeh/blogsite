@@ -22,11 +22,10 @@ const LogoutButton = () => {
   }
     return (
         <li>
-                <button className='nav-btn logout-btn' onClick={handleLogout}>
+                <button className='logout-btn' onClick={handleLogout}>
           {logingOut ? "loading..." :
             <LogoutTwoTone sx={{
-              transform:'scaleX(4)',
-              transform:'scaleY(2)',
+              transform:'scale(3,1.3)',
             }} />}
                 </button>
               </li>

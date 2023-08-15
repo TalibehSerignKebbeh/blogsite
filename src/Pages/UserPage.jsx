@@ -18,6 +18,7 @@ import  TableBody  from '@mui/material/TableBody';
 import  Paper  from '@mui/material/Paper';
 import UserTableRow from "../components/User/UserTableRow";
 import { useContextHook } from "../context/AuthContext";
+import RotatingLineLoader from "../components/Loader/RotatingLineLoader";
 // import { Paper } from "@mui/material";
 
 
@@ -146,21 +147,8 @@ function UserPage() {
   }, []);
 
 
- 
-  const handleKeywordChange = (event) => {
-    setKeyword(event.target.value);
-  };
-
-  const handleSearch = () => {
-    setPage(1);
-    // fetchUsers(1, keyword);
-  };
-
   if (loading) {
-    return <div
-      style={{ color: 'white', backgroundColor: '#333' }}>
-      Loading...
-    </div>;
+    return <RotatingLineLoader />
   }
 
   if (error?.length) {
@@ -174,27 +162,33 @@ function UserPage() {
   return (
     
       <Box sx={{
-      //   width:
-      // {
-      //   xl: '70%', lg: '90%', md: '90%',
-      //   sm: '100%', xs: '100%'
-      // },
-      //   bgcolor:'var( --elements-bg)',
-        width:'fit',
+      bgcolor: 'var( --elements-bg)',
+      mt: '20px',
+      mx:{xl:2,lg:2,md:1,sm:'4px',xs:'3px'},
+      minWidth: 'max-content',
+      maxWidth:'100%',
+      width: 'auto',
+        textAlign:'start'
     }}
     >
         <h3
           style={{
-            padding: '15px 20px',
+            padding: '15px 3px',
             color: 'var(--text-color)',
           textTransform: 'capitalize',
             textAlign:'start'
           }}>Users page</h3>
         <TableContainer
           component={Paper}
-          sx={{margin:'10px 10px 20px 10px',
+          sx={{margin:'10px auto 20px auto',
             bgcolor: 'var( --elements-bg)',
-          color:'var(--text-color)'}}>
+            color: 'var(--text-color)',
+            // boxShadow: ' 0px 10px 15px -3px rgba(0,0,0,0.1)',
+            boxShadow:'inset 0px 2px 4px 8px rgba(0,0,0,0.03)',
+            border: '1px solid var(--text-color)',
+            overflowX: 'auto',
+          
+        }}>
           <Table>
             <TableHead>
               <TableRow >
@@ -216,6 +210,16 @@ function UserPage() {
                 sx={{color:'var(--text-color)',
                 fontSize:'1.1rem'}}
                 >Email
+              </TableCell>
+              <TableCell 
+                sx={{color:'var(--text-color)',
+                fontSize:'1.1rem'}}
+                >Public name
+              </TableCell>
+              <TableCell 
+                sx={{color:'var(--text-color)',
+                fontSize:'1.1rem'}}
+                >Role
                 </TableCell>
                 <TableCell 
                   sx={{ color: 'var(--text-color)',
