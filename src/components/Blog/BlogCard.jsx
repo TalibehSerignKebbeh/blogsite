@@ -25,8 +25,13 @@ const BlogCard = ({ blog }) => {
     }
     return (
         <div className='blog-card-wrapper'>
+            <div className='image_wrapper'>
+
+            <img src={blogImageurl} alt='banner' 
+                className='blog_card_img'
+                />
+            </div>    
                 
-            <img src={blogImageurl} alt='banner' />
             <section style={{paddingLeft:'6px'}}>
 
             <BlogUserProfile blog={blog}
