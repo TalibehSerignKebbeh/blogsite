@@ -56,10 +56,10 @@ a{
        display: flex;
       flex-direction: column;
       align-items: stretch;
-      justify-content: baseline;
+      justify-content: stretch;
     overflow-x: hidden;
     overflow-y: auto;
-  
+    
     /* background-color: #b61010; */
 }
 
@@ -82,15 +82,13 @@ a{
   display: block;
   width: 100vw;
   min-height: 100vh;
-  /* width: 100vw; */
-  /* max-height:100vh; */
 }
 
 .app-sub-wrapper{
   display: flex;
+  flex-grow: 0;
   width: 100%;
   height: 100%;
-  /* background-color: #fff; */
 }
 
 .app-sub-wrapper.admin, .app-sub-wrapper.user{
@@ -101,7 +99,7 @@ display: block;
   max-width: auto;
   width: auto;
   display: block;
-  /* margin-right: -20px; */
+  /* flex-grow: 1; */
 
 }
 
