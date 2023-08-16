@@ -1,0 +1,30 @@
+
+
+.active_btn{
+    padding: 10px;
+    border-radius: 10px;
+    background-color: #e4e2e2;
+    color: var(--text-color) !important;
+}
+
+.active_btn.active{
+    color: rgb(238, 25, 25) !important;
+    font-size: 1rem;
+}
+
+:root.dark .active_btn{
+    background-color: #5c5959;
+
+}
+
+.active_text{
+    color: rgb(255, 255, 255);
+    background-color: rgb(189, 6, 6);
+    padding: 5px ;
+    border-radius: 5px;
+}
+
+.active_text.active{
+    color: #fff;
+    background-color:rgb(14, 108, 14);
+}

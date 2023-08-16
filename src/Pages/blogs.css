@@ -25,10 +25,11 @@
     /* color: var(--text-color); */
     color: #333 !important;
     font-size: 1.2rem;
-    background-color: #e4e0e0;
+    background-color: var(---elements-bg);
     margin-top: 30px;
     width: max-content;
     border-radius: 10px;
+    border: 1px solid var(--text-color);
 }
 @media (max-width: 870px) {
 .blogs-landing{

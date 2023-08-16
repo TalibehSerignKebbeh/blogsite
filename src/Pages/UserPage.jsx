@@ -1,14 +1,7 @@
 import { useState, useEffect, useCallback } from "react";
 import { AxiosInstance } from "../api"
-import Profile from "../components/User/Profile/Profile";
-import { DataGrid, GridActionsCellItem } from "@mui/x-data-grid";
 import  Box from "@mui/material/Box";
-import Button  from "@mui/material/Button";
-import Stack  from "@mui/material/Stack";
-import Edit from "@mui/icons-material/Edit";
-import LockResetOutlined from '@mui/icons-material/LockResetOutlined'
 import ConfirmDelete from "../components/Modal/ConfirmDelete";
-// import { Table, TableContainer } from "@mui/material";
 import  Table  from '@mui/material/Table';
 import  TableContainer  from '@mui/material/TableContainer';
 import  TableHead  from '@mui/material/TableHead';
@@ -19,8 +12,8 @@ import  Paper  from '@mui/material/Paper';
 import UserTableRow from "../components/User/UserTableRow";
 import { useContextHook } from "../context/AuthContext";
 import RotatingLineLoader from "../components/Loader/RotatingLineLoader";
-// import { Paper } from "@mui/material";
-
+import '.././assets/css/users.css'
+import { useQuery } from "@tanstack/react-query";
 
 
 function UserPage() {
@@ -28,107 +21,71 @@ function UserPage() {
   const {authToken, dark} = useContextHook()
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [reseting, setreseting] = useState(false);
-  const [open, setopen] = useState(false);
-  const [resetMessage, setresetMessage] = useState('');
-  const [resetSuccessMessage, setresetSuccessMessage] = useState('');
-  const [resetErrorMessage, setresetErrorMessage] = useState('');
+  const [refreshing, setrefreshing] = useState(false);
   const [error, setError] = useState('');
-  const [page, setPage] = useState(1);
-  const [pageSizeNumber, setpageSizeNumber] = useState(5);
-  const [pageNumber, setpageNumber] = useState(0);
+  const [page, setPage] = useState(0);
+  const [pageSize, setPageSize] = useState(5);
   const [count, setCount] = useState(0);
   const [keyword, setKeyword] = useState("");
 
-  function getFullName(params) {
-    return `${params.row.firstName || ''} ${params.row.lastName || ''}`;
-  }
-  const columns = [
-    {
-      field: 'firstName', headerName: 'First name',
-      headerClassName: 'table-head', width: 130
-    },
-    {
-      field: 'lastName', headerName: 'Last name',
-      headerClassName: 'table-head', width: 130
-    },
-    {
-      field: 'fullName',
-      headerName: 'Full name', headerClassName: 'table-head',
-      width: 160,
-      valueGetter: getFullName,
-    },
-    {
-      field: 'username', headerName: 'Username',
-      headerClassName: 'table-head', width: 130,
-      //  colSpan: 2,
-    },
-    {
-      field: 'active', type: 'boolean',
-      headerName: 'Active', headerClassName: 'table-head',
-      width: 90,
-    },
-
-
-    {
-      field: 'actions',
-      headerName: 'actions', headerClassName: 'table-head',
-      sortable: false, editable: false,
-      width: 200,
-      getActions: (params) => [
-        <GridActionsCellItem showInMenu label='edit'
-          icon={<Edit />}
-        >
-           
-        </GridActionsCellItem>,
-        <GridActionsCellItem showInMenu label='edit'
-          icon={<LockResetOutlined />}
-        >
-           
-        </GridActionsCellItem>
-        
-      ],
-      // renderCell: (params) => (
-      //   <Stack direction={'row'} spacing={1}>
-
-      //     <Button size="small"
-      //     onClick={()=>handleStartReset(params)}>Reset</Button>
-      //     <Button size="small">Active</Button>
-      //   </Stack>
-      // )
+  const fetchData = async (page, pageSize, keyword) => {
+    let url = `/users?page=${page}&pageSize=${pageSize}`;
+    if (keyword) {
+      url += `&keyword=${keyword}`;
     }
-  ];
+    await AxiosInstance.get(url,
+    {
+        headers:{Authorization:`Bearer ${authToken}`}
+      }
+    )
+      .then((res) => {
+        return res?.data
+      }).catch((err) => {
+        return Promise.reject(err)
 
-  const handleStartReset = (params) => {
-    setopen(true)
-    setresetMessage(`reset ${params?.row?.username}'s account`)
+        // if (!err?.response) {
+        //   return {
+        //     message:"no server response",
+        //   }
+        // }
+        //  if (err?.response?.status==500) { 
+        //   return {
+        //     message: 'internal server error',
+        //   }
+        // }
+
+        // if (err?.response?.data?.message) { 
+        //   return {
+        //     message: err?.response?.data?.message,
+        //   }
+        // }
+
+      })
   }
-  const resetFunction = () => {
-    setreseting(true)
-    // setInterval(() => {
-    //   console.log("what is up");
-    // }, 3000);
-    const timeout = setTimeout(() => {
-      setresetSuccessMessage('done resetting')
-      setreseting(false)
-    }, 4000);
-    clearTimeout(timeout)
-  }
-   const fetchUsersData = useCallback(async () => {
+  
+  const fetch = useQuery({
+    queryKey: ['users', page, pageSize, keyword],
+    queryFn:()=> fetchData(page, pageSize, keyword),
+    networkMode:"offlineFirst",
+    
+  })
+   
+  useEffect(() => {
+    const fetchUsersData = async () => {
     try {
       setLoading(true);
-      let url = `/users?page=${pageNumber}&pageSize=${pageSizeNumber}`;
+      let url = `/users?page=${page}&pageSize=${pageSize}`;
       if (keyword) {
         url += `&keyword=${keyword}`;
       }
       const response = await AxiosInstance.get(url, {
         headers:{Authorization:`Bearer ${authToken}`}
       });
-      console.log(response);
+      // console.log(response);
       setUsers(response.data.users);
       setPage(response.data.page);
       setCount(response.data.count);
-      console.log(response?.data);
+      // console.log(response?.data);
       setLoading(false);
     } catch (error) {
       console.log(error);
@@ -140,14 +97,47 @@ function UserPage() {
             : 'uncatch error occured'
       setError(errorMessage);
     }
-  }, [page, pageSizeNumber, keyword])
+  }
 
-  useEffect(() => {
     fetchUsersData()
-  }, []);
-
-
-  if (loading) {
+  }, [page, pageSize, keyword]);
+  const refetchUsers = async () => {
+    if (refreshing) return;
+    try {
+      setrefreshing(true);
+      let url = `/users?page=${page}&pageSize=${pageSize}`;
+      if (keyword) {
+        url += `&keyword=${keyword}`;
+      }
+      const response = await AxiosInstance.get(url, {
+        headers:{Authorization:`Bearer ${authToken}`}
+      });
+      // console.log(response);
+      setUsers(response.data.users);
+      setPage(response.data.page);
+      setCount(response.data.count);
+      // console.log(response?.data);
+      setrefreshing(false);
+    } catch (error) {
+      console.log(error);
+      setrefreshing(false);
+      const errorMessage = !error?.response ? 'no server response'
+        : error?.response?.status === 500 ? 'internal server error'
+          : error?.response?.data?.message ?
+            error?.response?.data?.message
+            : 'uncatch error occured'
+      setError(errorMessage);
+    }
+  }
+  if (fetch?.isSuccess) {
+    console.log(fetch?.data);
+  }
+  if (fetch?.isError) {
+    console.log(fetch?.error);
+    console.log(fetch?.failureReason);
+  }
+ 
+  if (loading && !users?.length) {
     return <RotatingLineLoader />
   }
 
@@ -161,16 +151,19 @@ function UserPage() {
 
   return (
     
-      <Box sx={{
+    <Box
+      sx={{
       bgcolor: 'var( --elements-bg)',
-      mt: '20px',
-      mx:{xl:2,lg:2,md:1,sm:'4px',xs:'3px'},
-      minWidth: 'max-content',
+      mt: '20px',py:2,
+      px:{xl:2,lg:2,md:1,sm:'4px',xs:'3px'},
       maxWidth:'100%',
-      width: 'auto',
-        textAlign:'start'
+      width: '100vw',
+      textAlign: 'start',
+      overflowX: 'auto'
+        
     }}
     >
+      <div className="flex_class">
         <h3
           style={{
             padding: '15px 3px',
@@ -178,6 +171,15 @@ function UserPage() {
           textTransform: 'capitalize',
             textAlign:'start'
           }}>Users page</h3>
+        <div className="">
+          <input type="search"
+            placeholder="search user"
+            className="search_input"
+            value={keyword}
+            onChange={e=>setKeyword(e.target.value)}
+          />
+        </div>
+      </div>
         <TableContainer
           component={Paper}
           sx={{margin:'10px auto 20px auto',
@@ -190,8 +192,9 @@ function UserPage() {
           
         }}>
           <Table>
-            <TableHead>
-              <TableRow >
+            <TableHead sx={{bgcolor:'var(--elements-bg)'}}>
+            <TableRow
+            sx={{bgcolor:'#3331'}}>
                 <TableCell 
                 sx={{color:'var(--text-color)',
                 fontSize:'1.1rem'}}
@@ -220,7 +223,12 @@ function UserPage() {
                 sx={{color:'var(--text-color)',
                 fontSize:'1.1rem'}}
                 >Role
-                </TableCell>
+              </TableCell>
+              <TableCell 
+                sx={{color:'var(--text-color)',
+                fontSize:'1.1rem'}}
+                >Status
+              </TableCell>
                 <TableCell 
                   sx={{ color: 'var(--text-color)',
                   fontSize:'1.1rem' }}
@@ -233,56 +241,13 @@ function UserPage() {
               {users?.map((user, index) => (
                 <UserTableRow 
                   user={user}
-                  key={index}
+                  key={user?._id}
+                  resetFunction={refetchUsers}
                 />
               ))}
             </TableBody>
           </Table>
       </TableContainer>
-      
-
-         <ConfirmDelete open={open}
-        setopen={setopen}
-        message={resetMessage}
-        errorMessage={resetErrorMessage}
-        succcessMsg={resetSuccessMessage}
-        deleteFunction={resetFunction}
-        resetFunc={() => {
-          setresetSuccessMessage('')
-          setresetErrorMessage('')
-          setresetMessage('')
-         }}
-        deleteLoading={reseting}
-/>
-        {/* <div style={{ height: 400, width: '100%' }}>
-          <DataGrid
-            columns={columns}
-            rows={users || []}
-            loading={loading}
-            getRowId={row => row?._id}
-            rowCount={count}
-            pagination
-            pageSizeOptions={[5, 10, 15, 20,50,100]}
-            // scrollbarSize={'5px'}
-            paginationMode="server"  
-            paginationModel={{ page: page, pageSize: pageSizeNumber }}
-            onPaginationModelChange={({ page, pageSize }) => {
-              setpageSizeNumber(pageSize)
-              setPage(page)
-              // fetchUsersData()
-            }}
-            sx={{
-              m:{xl:'20px',lg:'20px',md:'15px',sm:'5px',xs:'4px',},
-              // boxShadow: 2,
-              // border: 2,
-              // borderColor: 'primary.light',
-              '& .MuiDataGrid-cell:hover': {
-                color: 'primary.main',
-              },
-            }}
-          />
-        </div> */}
-
       </Box>
      
    

@@ -93,11 +93,11 @@ const router = createBrowserRouter([
             children: [
               {
                 path: "/dash/blogs",
-                loader: async () => {
-                  const res = await AxiosInstance.get(`/blogs?page=${Number(0)}&size=${Number(5)}`)
-                  const responseData = res?.data
-                  return responseData;
-                },
+                // loader: async () => {
+                //   const res = await AxiosInstance.get(`/blogs?page=${Number(0)}&size=${Number(10)}`)
+                //   const responseData = res?.data
+                //   return responseData;
+                // },
                 element: <AdminBlogs />,
                 errorElement: <ErrorPage />
 

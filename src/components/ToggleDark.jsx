@@ -10,8 +10,9 @@ const ToggleDark = () => {
 
 
      const handleToggleDark = () => {
-    toggleDark()
+         toggleDark()
   }
+  
 useEffect(() => {
   if (dark) {
     document.documentElement.classList.add('dark')

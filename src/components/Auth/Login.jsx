@@ -82,11 +82,11 @@ const Login = () => {
 
                     </div>
                     <p className='other_link'>
-                        Don't have an account create one
+                        Need an account? 
                         <Link to={`/register`}
-                            className='anchor'
+                            id='element_anchor'
                         >
-                            here
+                            register
                         </Link>
                     </p>
 

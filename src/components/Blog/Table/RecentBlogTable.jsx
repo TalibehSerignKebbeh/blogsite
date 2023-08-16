@@ -92,7 +92,7 @@ const RecentBlogTable = ({ blogs, setblogs }) => {
                     mx:'auto',ml:2,
             }
             }}>
-            <h2 className='title'>Recent Posted Blogs</h2>
+            <h2 className='title'>Un Publish Blogs</h2>
             <DataGrid
                 
                 columns={[

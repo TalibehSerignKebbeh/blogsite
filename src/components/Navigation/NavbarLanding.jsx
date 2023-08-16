@@ -1,17 +1,15 @@
 import React, { useState, useEffect, useRef } from 'react';
 import './Navbar.css';
-import { Link, NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useContextHook } from '../../context/AuthContext'
 import { useNavigate } from 'react-router-dom';
 import UseAuth from '../../hooks/useAuth';
-// import AdminNav from './AdminNav';
 import LogoutButton from './LogoutButton';
-
 import ToggleDark from '../ToggleDark';
-import { ToggleButton } from '@mui/material';
-import {MenuSharp} from '@mui/icons-material'
+import MenuSharp from '@mui/icons-material/MenuSharp'
 
 function NavbarLanding() {
+  
   const { role, username } = UseAuth()
   const navigate = useNavigate()
   const { authToken, clearAuthToken, dark,toggleDark, } = useContextHook()

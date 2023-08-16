@@ -8,6 +8,8 @@ import FileUploadOutlined from '@mui/icons-material/FileUploadOutlined';
 
 let allowImageTypes = ['image/jpeg', 'image/jpg',
     'image/png', 'image/.gif', 'image/webp']
+
+    
 const CreateAccount = () => {
 
     const navigate = useNavigate()
@@ -227,8 +229,9 @@ const CreateAccount = () => {
                         type='submit' >{uploading ? "uploading" : `Submit`}</button>
                 </div>
                 <div className='message_wrapper'>
-                    <span>Don't have an account? </span>
-                    <Link to={`/login`} >login now</Link>
+                    <span>Already have an account? </span>
+                    <Link to={`/login`}
+                    id='element_anchor'>login now</Link>
                 </div>
             </form>
         </div>

@@ -70,23 +70,7 @@
     font-size: 1rem;
     margin-top: 10px;
 }
-.login_form .other_link .anchor{
-    /* color: var(--primary-color); */
-    color: #0066ff;
-    margin-left: 3px;
-    text-decoration: underline;
-    width: max-content;
-}
-.login_form .other_link  .anchor::after{
-    content: '';
-    width: 33px;
-    margin-left: auto;
-    margin-right: 0px;
-    margin-top: -5px;
-    height: .8px;
-    display: block;
-    background-color: #81de7f;
-}
+
 .login_form:last-child{
     margin-bottom: 14px;
 }

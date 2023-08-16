@@ -59,7 +59,7 @@ const Blogs = () => {
       .then((res) => {
         const newBlogs = res?.data?.blogs;
         // setoffset(prev=>res?.data?.offset)
-        console.log(res?.data);
+        // console.log(res?.data);
         const newBlogsConfirm = newBlogs?.filter(blog => !loadedBlogsIds?.includes(blog?._id))
         const newLoadedIds = newBlogsConfirm?.map((blog) => blog?._id)
         setloadedBlogsIds(prev => [...prev, ...newLoadedIds])
@@ -127,7 +127,7 @@ const Blogs = () => {
             <div className="blogs-wrapper">
 
               {blogsToDisplay?.map((blog, index) => (
-                <BlogCard blog={blog} key={index} />
+                <BlogCard blog={blog} key={blog?._id} />
               ))}
               <div id="fetchMoreElement" ref={fetchMoreRef}></div>
               {fetchtingMore &&

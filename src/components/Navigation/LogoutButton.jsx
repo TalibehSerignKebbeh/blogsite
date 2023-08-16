@@ -25,7 +25,8 @@ const LogoutButton = () => {
                 <button className='logout-btn' onClick={handleLogout}>
           {logingOut ? "loading..." :
             <LogoutTwoTone sx={{
-              transform:'scale(3,1.3)',
+              transform: 'scale(2.7,1.6)',
+              color:"#333"
             }} />}
                 </button>
               </li>

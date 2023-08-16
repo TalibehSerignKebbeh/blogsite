@@ -19,7 +19,7 @@ const AdminDashboard = () => {
   const [isLoadSuccess, setisLoadSuccess] = useState(false);
   const [errorMsg, seterrorMsg] = useState('');
 
-  const [blogs, setblogs] = useState([]);
+  const [unPublishBlogs, setUnPublish] = useState([]);
   const [recentUsers, setrecentUsers] = useState([]);
   const [blogCount, setblogCount] = useState(0);
   const [editorCount, seteditorCount] = useState(0);
@@ -35,13 +35,13 @@ const AdminDashboard = () => {
         { headers: { Authorization: `Bearer ${token}` } })
         .then((res) => {
           setisLoadSuccess(true)
-          const { data: { recentUsers, blogCount, recentBlogs,
+          const { data: { recentUsers, blogCount, unPublishBlogs,
             editorCount, adminCount, subscribersCount } } = res;
           setsubscribersCount(subscribersCount)
           setblogCount(blogCount)
           seteditorCount(editorCount)
           setadminCount(adminCount)
-          setblogs(recentBlogs)
+          setUnPublish(unPublishBlogs)
           setrecentUsers(recentUsers)
           console.log(res);
         }).catch(err => {
@@ -80,7 +80,7 @@ const AdminDashboard = () => {
   if (isLoadSuccess) {
 
     return (
-      <div style={{backgroundColor: `var(--bg-color)`}}>
+      <div style={{backgroundColor: `var(--bg-color)`, width:"100vw"}}>
 
         <div className="card-stats">
 
@@ -135,7 +135,7 @@ const AdminDashboard = () => {
         </div>
         <div className="recent-container">
 
-          <RecentBlogTable blogs={blogs} setblogs={setblogs} />
+          <RecentBlogTable blogs={unPublishBlogs} setblogs={setUnPublish} />
 
         </div>
       </div>

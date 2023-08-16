@@ -2,19 +2,14 @@ nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
-   /* background-image: linear-gradient(to right, rgb(168, 161, 174) ,
-    rgb(199, 161, 237)); */
     background-color: var(--elements-bg);
-
   color: #fff;
-  /* height: auto; */
   height: 100px;
-  /* align-self: flex-start; */
   width: 100%;
   overflow-x: hidden;
   overflow-y: hidden;
   flex-shrink: 0;
-  /* z-index: 100; */
+  /* flex-grow: 1; */
 }
 
 /* :root.dark nav{

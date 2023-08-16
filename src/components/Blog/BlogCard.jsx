@@ -1,27 +1,24 @@
 import React from 'react';
-import image from '../../assets/flat-mountains.png'
-import profile from '../../assets/mydefaultprofile.png'
 import { ImageUrl } from '../../api';
 import { Link } from 'react-router-dom';
 import './blogcard.css'
 import ActionBtn from './ActionBtn';
 import UseAuth from '../../hooks/useAuth';
-import format from 'date-fns/format';
-import parseISO from 'date-fns/parseISO';
-import isValid from 'date-fns/isValid';
 import BlogUserProfile from './BlogUserProfile';
+import { imageExtensions } from '../../utils/globalValues';
 
 const BlogCard = ({ blog }) => {
     const {role, username} = UseAuth()
-    // const blogImageurl = blog?.image ? `${ImageUrl}/${blog?.image}` : image
+
+    //  blog?.image?.startsWith('http') &&
+    //         imageExtensions?.some(ext => blog?.image?.endsWith(ext)) ?
+    //     blog?.image :
     let blogImageurl =
         blog?.image?.startsWith('http') ? blog?.image :
-           blog?.image? `${ImageUrl}/${blog?.image}` : image;
+           blog?.image? `${ImageUrl}/${blog?.image}` : null;
 
     const formattedTitle = `${blog?.title?.toLowerCase()?.split(' ')?.join('-')}`
-    const createdDate = new Date(blog?.created_at)
-    const authorName = `${blog?.author?.firstName} ${blog?.author?.lastName}` 
-    const profileLink = blog?.profile? `${ImageUrl}/${blog?.author?.profile}` : profile
+   
     let blogLink = `/blogs/${formattedTitle}`;
     if (['admin', 'editor'].includes(role)) {
         blogLink=`/dash/blogs/view/${formattedTitle}`
@@ -37,13 +34,7 @@ const BlogCard = ({ blog }) => {
                 name={'author'}
                 />
             </section>
-                
             <div className='content'>
-            {/* <span
-                className='blog_posted_date'>
-                {isValid(parseISO(blog?.created_at)) ?
-                    format(parseISO(blog?.created_at), 'MMM, do yyyy') :''}
-            </span> */}
             {blog?.tags?.length ?
                  <p className='tags'>
                     {blog?.tags?.map((tag, id) =>

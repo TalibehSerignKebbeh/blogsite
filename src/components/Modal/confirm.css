@@ -1,0 +1,15 @@
+.success_text, .error_text{
+width: 100%;
+padding: 10px;
+border-radius: 10px;
+text-align: start;
+    color: white;
+}
+
+.success_text{
+    background-color:green;
+}
+
+.error_text{
+    background-color: #a95959;
+}

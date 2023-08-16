@@ -5,7 +5,7 @@ import { Outlet } from 'react-router-dom';
 import UseAuth from './hooks/useAuth';
 import TopBar from './components/Navigation/TopBar';
 import AdminNav from './components/Navigation/AdminNav';
-import { CssBaseline, GlobalStyles } from "@mui/material";
+
 
 export default function App() {
   // console.log(new Date().getTimezoneOffset())
@@ -39,10 +39,6 @@ export default function App() {
 
   return (
     <div className={`App ${role}`}>
-      <CssBaseline />
-      <GlobalStyles styles={{ html: { WebkitFontSmoothing: "auto" } }} 
-        
-      />
       {token?
         <AdminNav isNavOpen={isNavOpen}
         setisNavOpen={setisNavOpen} />
@@ -51,7 +47,7 @@ export default function App() {
       <div className={`app-sub-wrapper ${customRole}`}
         style={{
           alignSelf: 'stretch', margin: '0px',
-          flex: '1'
+          width:'100vw'
         }}>
         {token ?
           <TopBar setisNavOpen={setisNavOpen}

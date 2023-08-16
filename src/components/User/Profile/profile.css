@@ -2,7 +2,9 @@
 
 .main_wrapper{
     justify-self: stretch;
-     
+     align-self: stretch;
+     width: 100vw;
+     padding: 0px 6px;
 }
 .main_error, .success_msg{
     padding: 8px 6px;
