@@ -1,16 +1,14 @@
 .view-container{
     height: auto;
-    justify-self: baseline;
+    justify-self: flex-start;
     align-self: first baseline;
     display: flex;
     flex-direction: column;
     align-items: baseline;
     max-width: 100%;
-    /* vertical-align: top; */
     height: auto;
     align-self: stretch;
     width: 70%;
-    /* margin-top: 400px; */
     margin: auto;
     background-color:var(--bg-color);
     text-align: start;
@@ -93,12 +91,22 @@ code {
       color: #333131;
     }
 
+@media (max-width: 978px) {
+  .view-container{
+    /* background-color: #d1d197; */
+    overflow-x: hidden;
+    word-break: keep-all;
+    width: 90%;
+  }
+}
+
 @media (max-width: 760px) {
     .view-container{
-        width: 80%;
-        padding: 12px 10px;
+        width: 97%;
+        padding: 7px 10px;
         text-overflow: clip;
-        word-break: break-all;
+        /* border: 1px solid blue; */
+        text-align: left;
     }
 .comments_section{
   grid-template-columns: minmax(1fr, 90%);
@@ -115,10 +123,9 @@ code {
 
 @media (max-width: 500px) {
     .view-container{
-        width: 95%;
-        padding: 7px 2px;
+        width: 99%;
+        padding: 5px 2px;
         text-overflow: clip;
-        word-break: break-all;
     }
     .comments_section{
   grid-template-columns: minmax(1fr, 95%);
@@ -128,8 +135,10 @@ code {
     .view-container{
         width: 100%;
         padding: 7px 2px;
-        text-overflow: clip;
+        /* text-overflow: ; */
         word-break: break-all;
+        text-overflow: clip;
+
     }
     .comments_section{
   grid-template-columns: minmax(1fr, 95%);

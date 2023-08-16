@@ -65,7 +65,7 @@ const ABlog = ({ blog, setblog }) => {
                 : null
             }
             {/* </div> */}
-            <div className='blog'>
+            <div className='blog_view_wrapper'>
                 {parse(blog?.content || '')}
             </div>
             {blog?.tags?.length ?

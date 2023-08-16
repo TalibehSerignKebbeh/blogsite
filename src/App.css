@@ -70,7 +70,6 @@ a{
     gap: 0px;
     justify-content: stretch;
     align-self: stretch;
-    overflow: hidden;
     overflow-y: scroll;
    
 }
@@ -94,12 +93,10 @@ a{
 .app-sub-wrapper.admin, .app-sub-wrapper.user{
   height: 100vh;
 display: block;
-  overflow: auto;
   width: min-content;
   max-width: auto;
   width: auto;
   display: block;
-  /* flex-grow: 1; */
 
 }
 
@@ -135,7 +132,6 @@ display: block;
 #element_anchor{
     color: #0066ff;
     margin-left: 3px;
-    text-decoration: underline;
     width: max-content;
     padding: 3px 4px 4px 4px;
     border: 1px solid var(--text-color);

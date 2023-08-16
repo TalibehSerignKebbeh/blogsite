@@ -10,9 +10,9 @@ const Preview = ({ blog, preview }) => {
       style={{ height: preview ? 'auto' : '0px', transition: 'height ease .5s' }}>
       <h1 className='title'>{blog?.title}</h1>
       <h4>{blog?.date}</h4>
-      {blog?.image && <img className='blog-banner' src={`${blog?.image}`} />}
-      {/* </div> */}
-      <div className='blog'>
+      {blog?.image &&
+        <img className='blog-banner' src={`${blog?.image}`} />}
+      <div className='blog_view_wrapper'>
         {parse(blog?.content || '')}
       </div>
       {blog?.tags?.length ?
@@ -33,13 +33,10 @@ export const BlogContainer = styled.div`
   border-radius:6px;
   padding: 0 1rem;
   magin-top:1.5rem;
-  ${'' /* background: var(--blog-view-bg); */}
   color:var(--text-color);
   text-align:start;
   height:auto;
-    ${'' /* background-color: #333131; */}
-  ${'' /* box-shadow:2px 1px 5px 0px rgba(0,0,0,0.09), 0px 1px 5px 2px rgba(0,0,0,0.09); */}
-  box-shadow: 0px 22px 56px -44px rgba(0,0,0,0.1);
+   box-shadow: 0px 22px 56px -44px rgba(0,0,0,0.1);
   .title{
     padding-top:4px;
     font-weight: 400;
@@ -100,6 +97,8 @@ export const BlogContainer = styled.div`
     > * + * {
       margin: 0.75em 0px;
       font-weight:400;
+      text-align:start;
+
     }
     outline: none;
     ${'' /* margin: 0 1rem; */}
@@ -117,7 +116,7 @@ export const BlogContainer = styled.div`
       line-height: 1.1;
       margin-top:10px;
   color:var(--text-color);
-
+   text-align:start;
     }
       h1,
     h2,
@@ -222,7 +221,6 @@ p,li,span, strong, h1, h2,h3,h4,h5,h6
 }
 p>code{
   color:var(--text-color);  
-  ${'' /* background-color:var(--code-color); */}
 }
 blockquote{
  color:var(--code-color);

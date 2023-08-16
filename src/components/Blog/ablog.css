@@ -53,3 +53,32 @@
     margin: auto;
     background-color: var(--form-bg);
 }
+
+
+/* blog html wrapper */
+.blog_view_wrapper{
+    text-align: start;
+    overflow-x: hidden;
+    max-width: max-content;
+    width: auto;
+    
+}
+
+.blog_view_wrapper>*{
+    text-align: start;
+}
+
+@media (max-width:656px) {
+
+    .blog_view_wrapper{
+        width: 100%;
+        word-break: keep-all;
+        word-wrap: normal;
+    }
+
+    .blog_view_wrapper>*{
+        padding-left: 0px !important;
+        padding-right: 0px !important;
+    }
+    
+}

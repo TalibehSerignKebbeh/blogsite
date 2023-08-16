@@ -12,7 +12,7 @@ export default function App() {
   const { role,token } = UseAuth()
   const isSuperUser = role === 'admin' || role === 'editor';
 
-  const customRole = (role === 'admin' ||role === 'editor' ? role : 'user')
+  const customRole = role|| ''
   const [isNavOpen, setisNavOpen] = useState(true);
 
 // const minPasswordLength = 8;
@@ -47,7 +47,8 @@ export default function App() {
       <div className={`app-sub-wrapper ${customRole}`}
         style={{
           alignSelf: 'stretch', margin: '0px',
-          width:'100vw', flexGrow:0,
+          width: '100%',maxWidth:'100vw',
+          flexGrow: 0,
         }}>
         {token ?
           <TopBar setisNavOpen={setisNavOpen}
