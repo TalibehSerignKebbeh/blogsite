@@ -47,7 +47,7 @@ export default function App() {
       <div className={`app-sub-wrapper ${customRole}`}
         style={{
           alignSelf: 'stretch', margin: '0px',
-          width:'100vw'
+          width:'100vw', flexGrow:0,
         }}>
         {token ?
           <TopBar setisNavOpen={setisNavOpen}

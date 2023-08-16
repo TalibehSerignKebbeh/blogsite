@@ -142,6 +142,7 @@ const CreateAccount = () => {
     }
 
     return (
+        <div className='register_wrapper'>
         <div className='signup-wrapper'>
             <form className='signup-form' onSubmit={submitForm}>
                 <h3 className='signup-title'>Create Account</h3>
@@ -234,7 +235,8 @@ const CreateAccount = () => {
                     id='element_anchor'>login now</Link>
                 </div>
             </form>
-        </div>
+            </div>
+            </div>
     );
 }
 
