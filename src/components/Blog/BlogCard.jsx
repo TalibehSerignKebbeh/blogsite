@@ -5,14 +5,10 @@ import './blogcard.css'
 import ActionBtn from './ActionBtn';
 import UseAuth from '../../hooks/useAuth';
 import BlogUserProfile from './BlogUserProfile';
-import { imageExtensions } from '../../utils/globalValues';
 
 const BlogCard = ({ blog }) => {
     const {role, username} = UseAuth()
 
-    //  blog?.image?.startsWith('http') &&
-    //         imageExtensions?.some(ext => blog?.image?.endsWith(ext)) ?
-    //     blog?.image :
     let blogImageurl =
         blog?.image?.startsWith('http') ? blog?.image :
            blog?.image? `${ImageUrl}/${blog?.image}` : null;
