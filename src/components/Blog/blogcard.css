@@ -55,6 +55,11 @@
     text-align: start;
     color: var(--text-color);
 }
+
+.blog-link>.blog-title{
+    font-size: 1.5rem;
+}
+
 .blog-title::first-letter{
     text-transform: capitalize;
 }

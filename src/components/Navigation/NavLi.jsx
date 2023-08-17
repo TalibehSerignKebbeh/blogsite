@@ -5,12 +5,14 @@ import './navlink.css'
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 
 const NavLi = ({ title, path, children }) => {
-    // console.log(children);   
+
     let childrenHeight = 0;
     if (children?.length) {
-        childrenHeight = children?.length * 26;
+        childrenHeight = children?.length * 30;
     }
     const [isExpanded, setisExpanded] = useState(false);
+
+
     return (<li id=''
         className={`main-list ${isExpanded ? 'active' : ''}`}>
         {children?.length ?
@@ -18,9 +20,14 @@ const NavLi = ({ title, path, children }) => {
                 <button onClick={() => setisExpanded(!isExpanded)}
                     className='nav-title-btn'>
                     <span className='expand-title'>{title}</span>
-                    <span className='icon'><NavigateNextIcon fontSize='small'/></span></button>
+                    <span className='icon'>
+                        <NavigateNextIcon fontSize='small' />
+                    </span>
+                </button>
                 <ul style={{
                     height: isExpanded ? `${childrenHeight}px` : '0px',
+                    paddingTop:isExpanded? '6px':'0px',
+                    paddingBottom:isExpanded? '6px':'0px',
                     
                 }}
                     className={`child-links ${isExpanded ? 'active' : ''}`}>

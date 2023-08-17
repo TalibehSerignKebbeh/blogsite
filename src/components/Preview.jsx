@@ -114,7 +114,7 @@ export const BlogContainer = styled.div`
     h5,
     h6 {
       line-height: 1.1;
-      margin-top:10px;
+      margin-top:15px;
   color:var(--text-color);
    text-align:start;
     }
@@ -146,9 +146,11 @@ export const BlogContainer = styled.div`
     pre {
       background: #0d0d0d;
       color: #fff;
-      font-family: "JetBrainsMono", monospace;
+      ${'' /* font-family: "JetBrainsMono", monospace; */}
       padding: 0.75rem 1rem;
       border-radius: 0.5rem;
+      margin-top:10px;
+  margin-bottom:10px;
       code {
         color: inherit;
         padding: 0;
@@ -229,6 +231,15 @@ blockquote{
 pre{
   background-color:var(--elements-bg);
   color:var(--text-color);
+}
+ul>p::before{
+  content:"";
+  display:block;
+  width:5px;
+  height:5px;
+  border-radius:4px;
+  background-color:'#333';
+
 }
 }
 `;
