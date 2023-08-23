@@ -7,10 +7,13 @@ import { DataGrid } from '@mui/x-data-grid';
 import UseAuth from '../hooks/useAuth';
 import format from 'date-fns/format';
 import parseISO from 'date-fns/parseISO';
+import { useAccessToken, getAuthData } from '../store/store';
 
 
 const MyBlogs = () => {
-    const {token,id} = UseAuth()
+    // const {token,id} = UseAuth()
+    const token = useAccessToken()
+    const id = getAuthData()?.id;
     const [blogs, setblogs] = useState([]);
     const [page, setpage] = useState(1);
     const [pageSize, setpageSize] = useState(10);

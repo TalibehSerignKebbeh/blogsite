@@ -1,0 +1,90 @@
+.success_container{
+    width: 100%;
+    height: max-content;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+    align-self: center;
+    border-radius: 10px;
+    transition-property: margin-top;
+    transition: all 10ms ease-in-out;
+}
+
+.wrapper{
+    min-height: min-content;
+    max-height: max-content;
+    background-color: rgb(24, 85, 24);
+    padding: 40px 10px;
+    border-radius: 10px;
+
+}
+
+.wrapper{
+    display: flex;
+    flex-direction: column;
+    row-gap: 60px;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.wrapper p{
+    color: white;
+    font-size: 1.3rem;
+}
+
+.wrapper>svg{
+    color: white;
+    transform: scale(3, 6);
+    margin-top: -20px;
+    align-self: center;
+    justify-self: center;
+}
+
+.wrapper>img{
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    margin-top: -20px;
+    align-self: center;
+    justify-self: center;
+}
+
+.wrapper a{
+    border: 1px solid whitesmoke;
+    padding: 10px 40px;
+    border-radius: 10px;
+    margin-top: -40px;
+    color: white;
+    transition-property: background-color;
+    transition: all .4s ease-in-out;
+      align-self: flex-start;
+    justify-self: start;
+}
+
+.wrapper a:hover{
+    background-color: #737373;
+  
+}
+
+.wrapper button{
+   align-self: flex-end;
+  margin-top: -40px;
+  margin-right: -10px;
+  padding: 6px 15px;
+  border-radius: 6px;
+    border: 1px solid whitesmoke;
+color: white;
+background-color: inherit;
+
+
+}
+
+
+@media (max-width: 900px) {
+    
+    .success_container{
+    align-self: flex-start;
+    margin-top: 40px;
+    }
+}

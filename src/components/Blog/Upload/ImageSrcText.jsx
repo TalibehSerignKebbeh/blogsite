@@ -4,9 +4,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCopy } from '@fortawesome/free-regular-svg-icons';
 import { useRef } from 'react';
 const ImageSrcText = ({ text }) => {
+
     const textRef = useRef(null)
     const handleCopyClick = () => {
-    const text = textRef.current.innerText;
+    // const text = textRef.current.innerText;
         navigator.clipboard.writeText(text);
         message.success("copied to clipboard")
     };

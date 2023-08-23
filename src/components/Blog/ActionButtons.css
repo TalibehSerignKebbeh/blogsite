@@ -4,12 +4,25 @@
     gap: 40px;
     align-items: center;
     width: auto;
-    max-width: 300px;
+    /* max-width: 300px; */
+    min-width: 250px;
+    max-width: max-content;
     margin: auto 10px;
     width: 100%;
     margin-top: 10px;
     margin-bottom: 10px;
     margin-left: auto;
+    justify-self: flex-end;
+    margin-left: auto;
+    margin-right: 0px;
+    justify-content: flex-end;
+}
+
+.btn_parent{
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    row-gap: 3px;
 }
 
 .btn{
@@ -17,8 +30,13 @@
     border-radius: 3px;
     outline: none;
     font-size: .9rem;
-    color: white;
+    color: white !important;
 }
+
+.btn>a{
+    color: white !important;
+}
+
 .del{   
     background-color: rgb(243, 46, 46);
 }
@@ -29,11 +47,7 @@
     background-color: white;
     color: red;
 }
-.edit{
-    /* background-color: rgb(4, 72, 140); */
-    /* color: white !important; */
-    /* color: white; */
-}
+
 
 .edit:hover{
     background-color: rgb(63, 132, 200);
@@ -51,12 +65,7 @@
     }
     
 }
-/* @media only screen and (max-width: 576px) {
-    .actions-btns{
-        background-color: aqua;
-    }
-    
-} */
+
 @media only screen and (max-width: 375px) {
     .actions-btns{
         gap: 15px;
@@ -69,4 +78,12 @@
 
     }
     
+}
+
+@media only screen and (max-width: 280px) {
+    .actions-btns{
+        flex-direction: column;
+        justify-content: flex-end;
+        align-items: flex-end;
+    }
 }

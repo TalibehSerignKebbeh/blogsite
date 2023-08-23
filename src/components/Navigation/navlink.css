@@ -12,7 +12,7 @@
    transform: rotate(0deg);
    transition: all .5s;
    font-size: .8rem;
-   color: rgb(47, 135, 223);
+   color: var(--text-color);
 }
 .main-list.active .icon{
    transform: rotate(90deg);

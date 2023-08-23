@@ -5,10 +5,12 @@ import  Stack  from '@mui/material/Stack';
 import '../../assets/css/usersTableRow.css'
 import ConfirmDelete from '../Modal/ConfirmDelete';
 import { AxiosInstance } from '../../api';
-import UseAuth from '../../hooks/useAuth';
+// import UseAuth from '../../hooks/useAuth';
+import { useAccessToken } from '../../store/store';
 
 const UserTableRow = ({ user, resetFunction }) => {
-    const {token} = UseAuth()
+    // const { token } = UseAuth()
+    const token = useAccessToken()
     const [openModal, setopenModal] = useState(false);
     const [successMessage, setsuccessMessage] = useState('');
     const [errorMessage, seterrorMessage] = useState('');
@@ -40,6 +42,8 @@ const UserTableRow = ({ user, resetFunction }) => {
 
 
     return (
+        <>
+
         <TableRow>
             <TableCell
             sx={{color:'var(--text-color)',
@@ -92,7 +96,9 @@ const UserTableRow = ({ user, resetFunction }) => {
                 </Stack>
             </TableCell>
 
-             <ConfirmDelete open={openModal}
+          
+            </TableRow>
+               <ConfirmDelete open={openModal}
         setopen={setopenModal}
         message={message}
         errorMessage={errorMessage}
@@ -107,7 +113,8 @@ const UserTableRow = ({ user, resetFunction }) => {
          }}
         deleteLoading={activating}
 />
-        </TableRow>
+        </>
+            
     );
 }
 

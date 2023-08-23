@@ -3,13 +3,22 @@ import CustomEditor from '../Editor/CustomEditor';
 import axios from 'axios';
 import { apiUrl } from '../../api';
 import './Upload.css'
-import { useContextHook } from '../../context/AuthContext';
 import CustomBtn from '../Button/CustomBtn';
 import { GetError } from '../Config';
+import { useScoketContenxt } from '../../context/socketContext';
+import DoneOutlineRounded  from '@mui/icons-material/DoneOutlineRounded';
+import SuccessComponent from '../SuccessComponent';
+import { useAccessToken, getAuthData } from '../../store/store';
 
 
 const UploadBlog = () => {
-  const { authToken } = useContextHook()
+  const {socket}= useScoketContenxt()
+
+  const username = getAuthData()?.username;
+  const name = getAuthData()?.name;
+  const userId = getAuthData()?.id;
+  const token = useAccessToken()
+  
   const [uploadMessage, setuploadMessage] = useState({
     error:``, success:``
   });
@@ -33,17 +42,17 @@ const UploadBlog = () => {
   const handleBlogSubmit = async (e) => {
     setuploadMessage({error:``, success:``})
     
-    setuploading(true)
     if (!blog?.content?.length || !blog?.title?.length) {
       return;
     }
+    setuploading(true)
     axios.post(`${apiUrl}/blogs`,
       {
          ...blog, created_at: Date.now(),
 created_timezoneOffset: new Date().getTimezoneOffset()
       }, {
         headers: {
-          Authorization: `Bearer ${authToken}`,
+          Authorization: `Bearer ${token}`,
         },
         onUploadProgress: (e) => {
           
@@ -53,13 +62,22 @@ created_timezoneOffset: new Date().getTimezoneOffset()
       )
             .then((response) => {
               console.log(response);
+              const blogId = response?.data?.blogId;
+              socket?.emit(`blogposted`,{blogId} )
               setuploadMessage({...uploadMessage, success:response?.data?.message})
             }).catch((err) => {
               console.log(err);
               setuploadMessage({...uploadMessage, error: GetError(err)})
         }).finally(()=>{setuploading(false)})
        
-    }
+  }
+  if (uploadMessage?.success?.length) {
+    return <SuccessComponent 
+      message={uploadMessage?.success}
+      link={null}
+      icon={<DoneOutlineRounded />}
+    />
+  }
     return (
       <div className='upload-container'>
          <section className='notice'>
@@ -76,7 +94,9 @@ created_timezoneOffset: new Date().getTimezoneOffset()
             <span>
             {uploadMessage?.success}
             </span>
-            <span>
+            <span onClick={() => {
+              setuploadMessage({...uploadMessage, success:''})
+            }}>
               x
             </span>
 
@@ -89,7 +109,9 @@ created_timezoneOffset: new Date().getTimezoneOffset()
               {uploadMessage?.error}
             </span>
             
-            <span>
+            <span onClick={() => {
+              setuploadMessage({...uploadMessage, error:''})
+            }}>
               x
             </span>
           </p> 

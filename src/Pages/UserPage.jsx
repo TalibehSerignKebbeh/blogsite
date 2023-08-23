@@ -10,145 +10,63 @@ import  TableCell  from '@mui/material/TableCell';
 import  TableBody  from '@mui/material/TableBody';
 import  Paper  from '@mui/material/Paper';
 import UserTableRow from "../components/User/UserTableRow";
-import { useContextHook } from "../context/AuthContext";
 import RotatingLineLoader from "../components/Loader/RotatingLineLoader";
 import '.././assets/css/users.css'
-import { useQuery } from "@tanstack/react-query";
+import { QueryClient, useQuery } from "@tanstack/react-query";
+import { useAccessToken } from "../store/store";
+import { GetError } from "../components/Config";
+import ZeroBasePaginntation from "../components/Paginnation/ZeroBasePaginntation";
 
 
 function UserPage() {
 
-  const {authToken, dark} = useContextHook()
-  const [users, setUsers] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [refreshing, setrefreshing] = useState(false);
+  const queryClient = new QueryClient()
+  const token = useAccessToken()
   const [error, setError] = useState('');
   const [page, setPage] = useState(0);
   const [pageSize, setPageSize] = useState(5);
-  const [count, setCount] = useState(0);
+  const [total, setTotal] = useState(0);
   const [keyword, setKeyword] = useState("");
 
-  const fetchData = async (page, pageSize, keyword) => {
-    let url = `/users?page=${page}&pageSize=${pageSize}`;
-    if (keyword) {
-      url += `&keyword=${keyword}`;
-    }
-    await AxiosInstance.get(url,
-    {
-        headers:{Authorization:`Bearer ${authToken}`}
-      }
-    )
-      .then((res) => {
-        return res?.data
-      }).catch((err) => {
-        return Promise.reject(err)
-
-        // if (!err?.response) {
-        //   return {
-        //     message:"no server response",
-        //   }
-        // }
-        //  if (err?.response?.status==500) { 
-        //   return {
-        //     message: 'internal server error',
-        //   }
-        // }
-
-        // if (err?.response?.data?.message) { 
-        //   return {
-        //     message: err?.response?.data?.message,
-        //   }
-        // }
-
-      })
-  }
   
-  const fetch = useQuery({
-    queryKey: ['users', page, pageSize, keyword],
-    queryFn:()=> fetchData(page, pageSize, keyword),
-    networkMode:"offlineFirst",
-    
-  })
+   const { data, failureReason, error:fetchError, isError,
+    isLoading: dataLoading, isSuccess} = useQuery({
+        queryKey: ['users', page, pageSize, keyword],
+      queryFn: () => AxiosInstance.get(`users?page=${Number(page)}&pageSize=${Number(pageSize)}${keyword?.length ? `&keyword=${keyword}` : ''}`,
+      {headers:{Authorization: `Bearer ${token}`}})
+            .then(res => res?.data)
+        .catch((err) => Promise.reject(err)),
+      refetchOnReconnect: true,
+        refetchInterval: 2000,
+    })
    
-  useEffect(() => {
-    const fetchUsersData = async () => {
-    try {
-      setLoading(true);
-      let url = `/users?page=${page}&pageSize=${pageSize}`;
-      if (keyword) {
-        url += `&keyword=${keyword}`;
-      }
-      const response = await AxiosInstance.get(url, {
-        headers:{Authorization:`Bearer ${authToken}`}
-      });
-      // console.log(response);
-      setUsers(response.data.users);
-      setPage(response.data.page);
-      setCount(response.data.count);
-      // console.log(response?.data);
-      setLoading(false);
-    } catch (error) {
-      console.log(error);
-      setLoading(false);
-      const errorMessage = !error?.response ? 'no server response'
-        : error?.response?.status === 500 ? 'internal server error'
-          : error?.response?.data?.message ?
-            error?.response?.data?.message
-            : 'uncatch error occured'
-      setError(errorMessage);
-    }
-  }
 
-    fetchUsersData()
-  }, [page, pageSize, keyword]);
-  const refetchUsers = async () => {
-    if (refreshing) return;
-    try {
-      setrefreshing(true);
-      let url = `/users?page=${page}&pageSize=${pageSize}`;
-      if (keyword) {
-        url += `&keyword=${keyword}`;
-      }
-      const response = await AxiosInstance.get(url, {
-        headers:{Authorization:`Bearer ${authToken}`}
-      });
-      // console.log(response);
-      setUsers(response.data.users);
-      setPage(response.data.page);
-      setCount(response.data.count);
-      // console.log(response?.data);
-      setrefreshing(false);
-    } catch (error) {
-      console.log(error);
-      setrefreshing(false);
-      const errorMessage = !error?.response ? 'no server response'
-        : error?.response?.status === 500 ? 'internal server error'
-          : error?.response?.data?.message ?
-            error?.response?.data?.message
-            : 'uncatch error occured'
-      setError(errorMessage);
-    }
+  
+  
+  useEffect(() => {
+    if (isError) {
+    const errorMsg = GetError(failureReason) || GetError(fetchError)
+    setError(errorMsg)
+    } else {
+      setError('')
+          }
+    return () => {
+      
+    };
+  }, [isError]);
+  useEffect(() => {
+    if (isSuccess) {
+    
+  setTotal(data?.total)
   }
-  if (fetch?.isSuccess) {
-    console.log(fetch?.data);
-  }
-  if (fetch?.isError) {
-    console.log(fetch?.error);
-    console.log(fetch?.failureReason);
-  }
- 
-  if (loading && !users?.length) {
+  return () => {
+    
+  };
+}, [isSuccess]);
+
+if (dataLoading && !data?.users?.length) {
     return <RotatingLineLoader />
   }
-
-  if (error?.length) {
-    return <div>
-      <p style={{ fontSize: '1.3rem', color: 'var(--text-color)' }}>
-        Error: {error}
-      </p>
-    </div>;
-  }
-
   return (
     
     <Box
@@ -159,18 +77,30 @@ function UserPage() {
       maxWidth:'100%',
       width: '100vw',
       textAlign: 'start',
-      overflowX: 'auto'
+      overflow: 'auto',
         
     }}
     >
-      <div className="flex_class">
+      <div style={{position:'relative'}} className="flex_class">
+        <div >
+
         <h3
           style={{
             padding: '15px 3px',
             color: 'var(--text-color)',
           textTransform: 'capitalize',
             textAlign:'start'
-          }}>Users page</h3>
+            }}>Users page</h3>
+          {error?.length ?
+            <p className="error"
+              style={{
+                position: 'absolute', top: 0,
+                left: 'auto', right: 'auto', textAlign: 'center',
+                margin:'auto'
+               
+              }}>{error}</p> : null}
+        </div>
+          
         <div className="">
           <input type="search"
             placeholder="search user"
@@ -238,16 +168,26 @@ function UserPage() {
               </TableRow>
             </TableHead>
             <TableBody>
-              {users?.map((user, index) => (
+              {data?.users?.map((user, index) => (
                 <UserTableRow 
                   user={user}
                   key={user?._id}
-                  resetFunction={refetchUsers}
+                  resetFunction={() => {
+                    queryClient.invalidateQueries({ queryKey:['users', page, pageSize, keyword]})
+                  }}
                 />
               ))}
             </TableBody>
           </Table>
       </TableContainer>
+      <ZeroBasePaginntation 
+        page={page}
+        setPage={setPage}
+        pageSize={pageSize}
+        setPageSize={setPageSize}
+        total={total}
+        totalMessage={`Total of ${total} ${total>1? 'users':'user'}`}
+      />
       </Box>
      
    

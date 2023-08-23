@@ -9,15 +9,10 @@ nav {
   overflow-x: hidden;
   overflow-y: hidden;
   flex-shrink: 0;
-  /* flex-grow: 1; */
+
 }
 
-/* :root.dark nav{
-   background-image: linear-gradient(to right,
-    rgb(30, 3, 57) ,
-     rgb(78, 1, 156));
 
-} */
 
 button{
   outline: none;
@@ -148,4 +143,21 @@ cursor: pointer;
   .menu-icon {
     display: block;
   }
+}
+
+
+/* search button styles */
+
+.search_btn{
+  padding: 6px;
+  background-color: var(--elements-bg);
+  border-radius: 4px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.search_btn>svg{
+  color: green;
+  transform: scale(1.4);
 }

@@ -4,6 +4,7 @@ import NavLi from './NavLi';
 import LogoutButton from './LogoutButton';
 import { NavLink } from 'react-router-dom';
 import UseAuth from '../../hooks/useAuth';
+import { useAccessToken, getAuthData,  } from '../../store/store';
 
 const AdminBlogLinks = [
         <NavLink className={ ({isActive})=>(isActive? 'nav-link active': 'nav-link' )}
@@ -25,8 +26,13 @@ const userBloglinks = [
 
 
 const AdminNav = ({ isNavOpen, setisNavOpen }) => {
-    const { role, isAdmin, isEditor,token } = UseAuth()
-    const isSuperUser = isAdmin || isEditor;
+    // const { isAdmin } = UseAuth()
+    const isAdmin = getAuthData()?.role ==='admin'
+    const isUser = getAuthData()?.role === 'user'
+    const token = useAccessToken()
+
+    if (!token)
+        return null
     
     return (
         <aside className={`sidebar-wrapper ${isNavOpen ? 'active' : ''}`}>
@@ -48,15 +54,16 @@ const AdminNav = ({ isNavOpen, setisNavOpen }) => {
                                     {blogLink}
                             </li>
                         ))} />
-                        : 
+                        : isUser?
                         <NavLi title={'blog'}
                         path={''}
                             children={userBloglinks?.map((blogLink, index) => (
                                <li key={index}>
                                     {blogLink}
                             </li>
-                        ))} />
-                     
+                            ))} />
+                            :
+                            null
                     }
                     {/* {role==='user' ?
                         <NavLi title={'write'}

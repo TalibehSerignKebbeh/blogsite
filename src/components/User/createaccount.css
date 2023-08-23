@@ -8,9 +8,10 @@
     justify-self: center;
     background-color: #fff; */
     margin: auto;
+    margin-top: 30px;
+    margin-bottom: 30px;
 }
 .signup-wrapper {
-    /* min-height: 100vh; */
     width: 100%;
     height: auto;
     align-self: baseline;
@@ -23,9 +24,7 @@
     padding: auto;
     flex: 1;
     margin-top: 30px;
-    /* margin-bottom: 20px; */
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-    /* overflow-y: scroll; */
 }
 
 .signup-form {
@@ -38,8 +37,6 @@
     background-color: var(--form-bg);
     box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.08);
     text-align: center;
-    /* display: flex;
-    flex-direction: column; */
     display: grid;
     grid-template-columns: 1fr;
     gap: 5px;
@@ -210,7 +207,7 @@
     border-radius: 7px;
     cursor: pointer;
     font-size: #333;
-    color: #fff;
+    color: #fff !important;
     background-color:#0066ff;
     margin-top: 30px;
     font-size: 1.3rem;

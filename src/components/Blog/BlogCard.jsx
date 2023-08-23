@@ -5,6 +5,11 @@ import './blogcard.css'
 import ActionBtn from './ActionBtn';
 import UseAuth from '../../hooks/useAuth';
 import BlogUserProfile from './BlogUserProfile';
+import isToday from 'date-fns/isToday';
+import parseISO from 'date-fns/parseISO';
+import isYesterday from 'date-fns/isYesterday';
+import formatDistanceToNow from 'date-fns/formatDistanceToNow';
+import formatDistance from 'date-fns/formatDistance';
 
 const BlogCard = ({ blog }) => {
     const {role, username} = UseAuth()
@@ -19,20 +24,26 @@ const BlogCard = ({ blog }) => {
     if (['admin', 'editor'].includes(role)) {
         blogLink=`/dash/blogs/view/${formattedTitle}`
     }
+    // console.log(formatDistanceToNow(parseISO(blog?.created_at), {includeSeconds:false,}));
+    // console.log(formatDistance(parseISO(blog?.created_at), {includeSeconds:false,},{locale:{c}}));
+    // console.log(blog?.created_at);
+    // console.log('----------------------------------');
+
     return (
         <div className='blog-card-wrapper'>
             <div className='image_wrapper'>
 
             <img src={blogImageurl} alt='banner' 
                 className='blog_card_img'
-                />
+                loading='lazy'/>
             </div>    
                 
             <section style={{paddingLeft:'6px'}}>
 
             <BlogUserProfile blog={blog}
                 msg={''}
-                name={'author'}
+                    name={'author'}
+                    dateFiled={'created_at'}
                 />
             </section>
             <div className='content'>

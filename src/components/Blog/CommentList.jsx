@@ -13,10 +13,11 @@ const CommentList = ({blogId}) => {
     const pagesize = 5;
 
   const fetchComments = async () => {
-    try {
+    
       setIsLoading(true);
-        const response = await AxiosInstance.get(`/comments/blog/${blogId}?page=${currentPage}
-      &&limit=${pagesize}&offset=${comments?.length}`);
+      await AxiosInstance.get(`/comments/blog/${blogId}?page=${currentPage}
+      &&limit=${pagesize}&offset=${comments?.length}`)
+      .then((response)=>{
       const newComments = response?.data?.comments;
       console.log(response?.data);
       setTotal(response?.data?.total)
@@ -29,43 +30,48 @@ const CommentList = ({blogId}) => {
       setcurrentPage(prev=> prev+1)
       setisOnceLoaded(true)
       setisFetchingCommentError(false)
-
-    } catch (error) {
+})
+     .catch ((error)=> {
       console.error('Error fetching comments:', error);
       setIsLoading(false);
       setisOnceLoaded(true);
       setisFetchingCommentError(true);
-    }
+    })
   };
 
   useEffect(() => {
     const fetchComments = async () => {
-    try {
+   
       setIsLoading(true);
-        const response = await AxiosInstance.get(`/comments/blog/${blogId}?page=${currentPage}
-      &limit=${pagesize}&offset=${comments?.length}`);
-     const newComments = response?.data?.comments;
-      console.log(response?.data);
-      setTotal(response?.data?.total)
-      const currentTotalLoaded = newComments?.length + comments?.length;
-      const loadedTotal = response?.data?.total;
-      setIsAllLoaded(loadedTotal === currentTotalLoaded)
-      console.log(loadedTotal, currentTotalLoaded);
-      console.log(response?.data);
-      setcomments((prevComments) => [...prevComments, ...newComments]);
-      setIsLoading(false);
-      setcurrentPage(prev=> prev+1)
-      setisOnceLoaded(true)
-      setisFetchingCommentError(false)
+      await AxiosInstance.get(`/comments/blog/${blogId}?page=${currentPage}
+      &limit=${pagesize}&offset=${comments?.length}`)
+        .then((response) => {
+          const newComments = response?.data?.comments;
+          console.log(response?.data);
+          setTotal(response?.data?.total)
+          const currentTotalLoaded = newComments?.length + comments?.length;
+          const loadedTotal = response?.data?.total;
+          setIsAllLoaded(loadedTotal === currentTotalLoaded)
+          console.log(loadedTotal, currentTotalLoaded);
+          console.log(response?.data);
+          setcomments((prevComments) => [...prevComments, ...newComments]);
+          setIsLoading(false);
+          setcurrentPage(prev => prev + 1)
+          setisOnceLoaded(true)
+          setisFetchingCommentError(false)
 
-    } catch (error) {
-      console.error('Error fetching comments:', error);
-      setIsLoading(false);
-      setisOnceLoaded(true);
-      setisFetchingCommentError(true);
+        
+        })
+    
+        .catch((error) => {
+          console.error('Error fetching comments:', error);
+          setIsLoading(false);
+          setisOnceLoaded(true);
+          setisFetchingCommentError(true);
 
+        })
+    
     }
-    };
     if (!comments?.length && !isLoading && !isOnceLoaded) {
       fetchComments()
     }

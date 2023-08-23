@@ -7,8 +7,12 @@ import { Link, useNavigate } from 'react-router-dom';
 import { GetError } from '../Config';
 import jwtDecode from 'jwt-decode';
 import useAuth from '../../hooks/useAuth'
+import {useActions} from '../../store/store'
+
+
 const Login = () => {
 
+    const {setAccessToken} = useActions()
     const [uploading, setuploading] = useState(false);
     const [user, setuser] = useState({ username: '', password: '' });
     const [errorMessage, seterrorMessage] = useState('');
@@ -16,7 +20,7 @@ const Login = () => {
     const { clearAuthToken, storeAuthToken, authToken } = useContextHook()
     const { token, role } = useAuth()
     useEffect(() => {
-        if (token && role === 'admin') {
+        if (token) {
             navigate('/dash')
         }
     }, [])
@@ -37,17 +41,9 @@ const Login = () => {
                 const decoded = jwtDecode(token)
                 const role = decoded?.AuthData?.role
                 storeAuthToken(token)
-                // navigate('/')
-                // console.log(role);
-                if (role === 'admin') {
-                    navigate(`/dash`)
-                    // setTimeout(() => {
-                    // }, 10000); 
-                } else {
-                    navigate(`/`)
-                    // setTimeout(() => {
-                    // }, 10000); 
-                }
+                setAccessToken(token)
+                navigate('/dash')
+                
             }).catch((err) => {
                 seterrorMessage(GetError(err))
                 console.log(err?.response?.data?.message);

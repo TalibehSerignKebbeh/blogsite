@@ -1,3 +1,5 @@
+import format from "date-fns/format";
+import parseISO from "date-fns/parseISO";
 
 
 export const GetError = (err) => {
@@ -18,3 +20,9 @@ export const GetError = (err) => {
     return err?.response?.data?.message
 
 }
+
+export const formattedTitle = (title) => `${title?.toLowerCase()?.split(' ')?.join('-')}`
+ 
+export const formatDate = (date, formatString) => date?.length? format(parseISO(date), formatString || 'MMM do, yyyy') : ''
+
+export const GetFullName =(user)=> user?.firstName +' '+user?.lastName

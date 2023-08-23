@@ -4,13 +4,14 @@ import ColumnCard from "./Cards/ColumnCard";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBlog, faStar, faThumbsUp } from "@fortawesome/free-solid-svg-icons";
 import { AxiosInstance } from "../../api";
-import UseAuth from "../../hooks/useAuth";
 import { useContextHook } from "../../context/AuthContext";
 import UsersBlogTable from "../Blog/Table/UsersBlogTable";
 import RotatingLineLoader from "../Loader/RotatingLineLoader";
+import { getAuthData, useAccessToken } from "../../store/store";
 
 const UserDashboard = () => {
-    const { token, id } = UseAuth()
+    const token = useAccessToken()
+    const id = getAuthData()?.id;
     const { authToken } = useContextHook()
     const [isLoading, setisLoading] = useState(false);
     const [isLoadSuccess, setisLoadSuccess] = useState(false);

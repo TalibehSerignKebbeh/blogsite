@@ -1,64 +1,62 @@
 import './App.css'
-import React,{useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import NavbarLanding from './components/Navigation/NavbarLanding';
 import { Outlet } from 'react-router-dom';
-import UseAuth from './hooks/useAuth';
 import TopBar from './components/Navigation/TopBar';
 import AdminNav from './components/Navigation/AdminNav';
-
+import { useScoketContenxt } from './context/socketContext';
+import { useAccessToken, getAuthData } from './store/store';
+import { io } from 'socket.io-client';
+import { ImageUrl } from './api';
 
 export default function App() {
-  // console.log(new Date().getTimezoneOffset())
-  const { role,token } = UseAuth()
-  const isSuperUser = role === 'admin' || role === 'editor';
+  const { socket } = useScoketContenxt()
+  const token = useAccessToken()
+  let role = getAuthData()?.role;
+  let username = getAuthData()?.username;
 
-  const customRole = role|| ''
+  const customRole = (role?.length && (role !=='undefined') && (role !==undefined))? role : ''
   const [isNavOpen, setisNavOpen] = useState(true);
 
-// const minPasswordLength = 8;
-// const maxPasswordLength = 20;
+  useEffect(() => {
+    if (token) {
+      
+      socket?.connect()
+       socket?.on('connected', (arg, callback) => {
+      console.log(arg);
+      // console.log(callback);
+      callback({status:'ok', message:'i am alive'})
+       })
+      
+   }
 
-// const passwordRegExp = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[@$!%*#?&])[a-zA-Z\d@$!%*#?&]{8,20}$/;
-
-// const passwords = [
-//   "P@ssw0rd",
-//   "Strong123!",
-//   "Weak",
-//   "OnlyLetters",
-//   "12345678",
-// ];
-
-// passwords.forEach(password => {
-//   if (passwordRegExp.test(password)) {
-//     console.log(`"${password}" is a valid password.`);
-//   } else {
-//     console.log(`"${password}" is not a valid password.`);
-//   }
-// });
+   
+    return () => {
+       socket?.disconnect()
+    };
+  }, []);
 
 
   return (
-    <div className={`App ${role}`}>
-      {token?
+    <div className={`App ${customRole}`}>
+      {token ?
         <AdminNav isNavOpen={isNavOpen}
-        setisNavOpen={setisNavOpen} />
+          setisNavOpen={setisNavOpen} />
         : <NavbarLanding />
       }
-      <div className={`app-sub-wrapper ${customRole}`}
+      <div className={`app-sub-wrapper`}
         style={{
-          alignSelf: 'stretch', margin: '0px',
-          width: '100%',maxWidth:'100vw',
+          alignSelf: 'stretch',
+          justifySelf: 'stretch',margin: '0px',
+          width: '100%', maxWidth: '100vw',
           flexGrow: 0,
         }}>
         {token ?
           <TopBar setisNavOpen={setisNavOpen}
-          isNavOpen={isNavOpen} />
+            isNavOpen={isNavOpen} />
           : null
         }
-        {/* <div>
-          <h2
-          style={{color:'var(--text-color)'}}>My second title</h2>
-        </div> */}
+        
         <Outlet />
       </div>
     </div>

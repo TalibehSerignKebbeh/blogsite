@@ -11,8 +11,8 @@ export const AuthProvider = ({ children }) => {
 
   // Store the authentication token in local storage and update the context state
   const storeAuthToken = (token) => {
-    localStorage.setItem('authToken', token);
     setAuthToken(token);
+    localStorage.setItem('authToken', token);
   };
  
   const toggleDark = () => {

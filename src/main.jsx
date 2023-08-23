@@ -4,6 +4,7 @@ import App from './App'
 import './index.css'
 import {
   createBrowserRouter,
+  Link,
   RouterProvider,
 } from "react-router-dom";
 import ErrorPage from './ErrorPage';
@@ -21,22 +22,44 @@ import Dashboard from './components/Dashboard/Dashboard';
 import EditBlog from './components/Blog/Edit/EditBlog';
 import UserPage from './Pages/UserPage'
 import AdminBlogs from './Pages/AdminBlogs';
-import { jwttoken } from './hooks/useAuth';
 import TagsBlogs from './Pages/TagsBlogs';
 import './utils/global.styles.css'
 import { QueryClientProvider, QueryClient } from '@tanstack/react-query'
 import ProfilePage from './components/User/Profile/ProfilePage';
 import MyBlogs from './Pages/MyBlogs';
 import InfiniteLoadBlogs from './InfiniteLoadBlogs';
+import { SocketProvider } from './context/socketContext';
+import BlogsSearch from './Pages/BlogsSearch';
+import ReviewBlog from './components/Blog/ReviewBlog';
+
+
+/*
+"
+    at ViewBlog (http://127.0.0.1:5173/src/components/Blog/ViewBlog.jsx:28:20)
+    at RenderedRoute (http://127.0.0.1:5173/node_modules/.vite/deps/react-router-dom.js?v=d6a629d0:3115:5)
+    at Outlet (http://127.0.0.1:5173/node_modules/.vite/deps/react-router-dom.js?v=d6a629d0:3423:26)
+    at RequiredAuth (http://127.0.0.1:5173/src/components/Auth/RequiredAuth.jsx:22:3)
+    at RenderedRoute (http://127.0.0.1:5173/node_modules/.vite/deps/react-router-dom.js?v=d6a629d0:3115:5)
+    at RenderErrorBoundary (http://127.0.0.1:5173/node_modules/.vite/deps/react-router-dom.js?v=d6a629d0:3078:5)
+    at Outlet (http://127.0.0.1:5173/node_modules/.vite/deps/react-router-dom.js?v=d6a629d0:3423:26)
+    at div
+    at div
+    at App (http://127.0.0.1:5173/src/App.jsx:31:7)
+    at RenderedRoute (http://127.0.0.1:5173/node_modules/.vite/deps/react-router-dom.js?v=d6a629d0:3115:5)
+    at RenderErrorBoundary (http://127.0.0.1:5173/node_modules/.vite/deps/react-router-dom.js?v=d6a629d0:3078:5)
+    at Routes (http://127.0.0.1:5173/node_modules/.vite/deps/react-router-dom.js?v=d6a629d0:3483:5)
+    at Router (http://127.0.0.1:5173/node_modules/.vite/deps/react-router-dom.js?v=d6a629d0:3430:15)
+    at RouterProvider (http://127.0.0.1:5173/node_modules/.vite/deps/react-router-dom.js?v=d6a629d0:3319:5)
+    at QueryClientProvider (http://127.0.0.1:5173/node_modules/.vite/deps/@tanstack_react-query.js?v=d6a629d0:2704:3)
+    at SocketProvider (http://127.0.0.1:5173/src/context/socketContext.jsx:23:3)
+    at AuthProvider (http://127.0.0.1:5173/src/context/AuthContext.jsx:21:3)"
+*/
 
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element:<AuthProvider children={<App />}>
-        <App />
-    </AuthProvider>
-        ,
+    element: <App />,
     children: [
       {
         index: true,
@@ -45,12 +68,22 @@ const router = createBrowserRouter([
           const responseData = res?.data
           return responseData;
         },
-        element: <Blogs />,
+        element:<Blogs />,
         errorElement: <ErrorPage />
-      }, {
+      },
+      {
         path: 'infinite',
         element: <InfiniteLoadBlogs />,
-        
+
+      },
+      {
+        path: '/blogs/search',
+        element: <BlogsSearch />,
+        loader: ({ params }) => {
+          console.log(params);
+          
+        }
+
       },
       {
         path: `/dash`,
@@ -63,13 +96,13 @@ const router = createBrowserRouter([
             errorElement: <ErrorPage />
 
           },
-           {
+          {
             path: "/dash/blogs/newblog",
             element: <UploadBlog />,
             errorElement: <ErrorPage />
 
           },
-            {
+          {
             path: "/dash/blogs/:blogId/edit",
             element: <EditBlog />,
             loader: async ({ params }) => {
@@ -79,15 +112,16 @@ const router = createBrowserRouter([
           },
           {
             path: "/dash/blogs/view/:title",
-            element: <ViewBlog />,
+            element: <ReviewBlog />,
             loader: async ({ params }) => {
-              const res = await AxiosInstance.get(`${apiUrl}/blogs/single?title=${params?.title}`)
-
+             const res = await AxiosInstance.get(`${apiUrl}/blogs/single?title=${params?.title}`)
+          // console.log(res);
               const blog = res?.data?.blog;
-              return blog;
+              console.log(blog);
+          return blog;
             },
           },
-          
+
           {
             element: <RequiredAuth roles={['admin']} />,
             children: [
@@ -103,28 +137,28 @@ const router = createBrowserRouter([
 
               },
               {
-            path: "/dash/users",
-            element: <UserPage />,
-            errorElement: <ErrorPage />
+                path: "/dash/users",
+                element: <UserPage />,
+                errorElement: <ErrorPage />
 
-          },
+              },
 
             ],
           },
-           {
-        element: <RequiredAuth roles={['user']} />,
-        children: [
           {
-            path: "/dash/blogs/myblogs",
-            element: <MyBlogs />,
-            errorElement: <ErrorPage />
+            element: <RequiredAuth roles={['user']} />,
+            children: [
+              {
+                path: "/dash/blogs/myblogs",
+                element: <MyBlogs />,
+                errorElement: <ErrorPage />
+
+              },
+            ]
 
           },
-        ]
 
-      },
 
-         
         ],
         errorElement: <AuthErrorPage />,
       },
@@ -133,20 +167,19 @@ const router = createBrowserRouter([
         element: <RequiredAuth roles={['user', 'admin']} />,
 
         children: [
-         {
+          {
 
             path: '/profile',
             element: <ProfilePage />,
-errorElement: <ErrorPage />,
+            errorElement: <ErrorPage />,
           },
-       ]
-     },
+        ]
+      },
       {
         path: '/blogs/:title',
         element: <ViewBlog />,
         loader: async ({ params }) => {
-          const res = await AxiosInstance.get(`${apiUrl}/blogs/single?title=${params?.title}`,
-            { headers: { Authorization: `Bearer ${jwttoken}` } })
+          const res = await AxiosInstance.get(`${apiUrl}/blogs/single?title=${params?.title}`)
           // console.log(res);
           const blog = res?.data?.blog;
           return blog;
@@ -195,11 +228,12 @@ const client = new QueryClient()
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <AuthProvider>
-      <QueryClientProvider
-        client={client}>
-
-        <RouterProvider router={router} />
-      </QueryClientProvider>
+      <SocketProvider>
+        <QueryClientProvider
+          client={client}>
+          <RouterProvider router={router} />
+        </QueryClientProvider>
+      </SocketProvider>
     </AuthProvider>
   </React.StrictMode>,
 )

@@ -10,11 +10,11 @@ import { AxiosInstance } from "../../api";
 import UseAuth from "../../hooks/useAuth";
 import { useContextHook } from "../../context/AuthContext";
 import RotatingLineLoader from "../Loader/RotatingLineLoader";
+import { useAccessToken } from "../../store/store";
 
 const AdminDashboard = () => {
 
-  const { token } = UseAuth()
-  const { authToken } = useContextHook()
+  const token = useAccessToken()
   const [isLoading, setisLoading] = useState(false);
   const [isLoadSuccess, setisLoadSuccess] = useState(false);
   const [errorMsg, seterrorMsg] = useState('');
@@ -35,13 +35,12 @@ const AdminDashboard = () => {
         { headers: { Authorization: `Bearer ${token}` } })
         .then((res) => {
           setisLoadSuccess(true)
-          const { data: { recentUsers, blogCount, unPublishBlogs,
+          const { data: { recentUsers, blogCount,
             editorCount, adminCount, subscribersCount } } = res;
           setsubscribersCount(subscribersCount)
           setblogCount(blogCount)
           seteditorCount(editorCount)
           setadminCount(adminCount)
-          setUnPublish(unPublishBlogs)
           setrecentUsers(recentUsers)
           console.log(res);
         }).catch(err => {
@@ -135,7 +134,10 @@ const AdminDashboard = () => {
         </div>
         <div className="recent-container">
 
-          <RecentBlogTable blogs={unPublishBlogs} setblogs={setUnPublish} />
+         
+              <RecentBlogTable  
+              />
+             
 
         </div>
       </div>
