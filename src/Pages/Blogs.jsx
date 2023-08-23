@@ -3,10 +3,7 @@ import BlogCard from "../components/Blog/BlogCard";
 import "./blogs.css";
 import { useLoaderData } from "react-router-dom";
 import { AxiosInstance } from "../api";
-import { Pagination } from "antd";
-import { CircularProgress } from "@mui/material";
 import RotatingLineLoader from "../components/Loader/RotatingLineLoader";
-import Loader2 from "../components/Loader/Loader2";
 import OvalLoader from "../components/Loader/OvalLoader";
 import SearchBlog from "../components/Navigation/SearchBlog";
 
