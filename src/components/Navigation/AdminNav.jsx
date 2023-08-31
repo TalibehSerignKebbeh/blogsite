@@ -4,7 +4,7 @@ import NavLi from './NavLi';
 import LogoutButton from './LogoutButton';
 import { NavLink } from 'react-router-dom';
 import UseAuth from '../../hooks/useAuth';
-import { useAccessToken, getAuthData,  } from '../../store/store';
+import { BlockedStatus } from '../../utils/globalValues';
 
 const AdminBlogLinks = [
         <NavLink className={ ({isActive})=>(isActive? 'nav-link active': 'nav-link' )}
@@ -26,19 +26,20 @@ const userBloglinks = [
 
 
 const AdminNav = ({ isNavOpen, setisNavOpen }) => {
-    // const { isAdmin } = UseAuth()
-    const isAdmin = getAuthData()?.role ==='admin'
-    const isUser = getAuthData()?.role === 'user'
-    const token = useAccessToken()
+    
+    const {isAdmin, token,isUser, status} = UseAuth()
 
-    if (!token)
+    if (!token || Object.values(BlockedStatus).includes(status))
         return null
     
     return (
         <aside className={`sidebar-wrapper ${isNavOpen ? 'active' : ''}`}>
             <div className='infor-wrapper'>
                 <h2 className='dashbordtitle'>
-                 {isAdmin?  'Admin\'s Dashboard': "User's Dashboard"}
+                    {isAdmin ? 'Admin\'s Dashboard'
+                        :
+                        isUser ? "User's Dashboard"
+                        :''}
                 </h2>
             </div>
            
@@ -65,14 +66,7 @@ const AdminNav = ({ isNavOpen, setisNavOpen }) => {
                             :
                             null
                     }
-                    {/* {role==='user' ?
-                        <NavLi title={'write'}
-                            // path={'dash/users'}
-                            path={'dash/blogs/newblog'}
-                            children={[]} 
-                            />
-                    : null} */}
-
+                
                     {isAdmin ?
                         <NavLi title={'users'}
                             path={'dash/users'}

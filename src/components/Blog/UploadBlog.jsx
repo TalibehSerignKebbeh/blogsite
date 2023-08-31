@@ -8,16 +8,14 @@ import { GetError } from '../Config';
 import { useScoketContenxt } from '../../context/socketContext';
 import DoneOutlineRounded  from '@mui/icons-material/DoneOutlineRounded';
 import SuccessComponent from '../SuccessComponent';
-import { useAccessToken, getAuthData } from '../../store/store';
+import UseAuth from '../../hooks/useAuth';
 
 
 const UploadBlog = () => {
   const {socket}= useScoketContenxt()
 
-  const username = getAuthData()?.username;
-  const name = getAuthData()?.name;
-  const userId = getAuthData()?.id;
-  const token = useAccessToken()
+  
+  const {token, username, name,id} = UseAuth()
   
   const [uploadMessage, setuploadMessage] = useState({
     error:``, success:``
@@ -36,7 +34,8 @@ const UploadBlog = () => {
       title: '', tags: [],
       image: '', content: ''
     })
-    setuploadMessage({err:"", success:''})
+
+    setuploadMessage({error:"", success:''})
   }
 
   const handleBlogSubmit = async (e) => {
@@ -73,9 +72,11 @@ created_timezoneOffset: new Date().getTimezoneOffset()
   }
   if (uploadMessage?.success?.length) {
     return <SuccessComponent 
+      resetFunction={handleReset}
       message={uploadMessage?.success}
       link={null}
-      icon={<DoneOutlineRounded />}
+      icon={<DoneOutlineRounded />
+      }
     />
   }
     return (

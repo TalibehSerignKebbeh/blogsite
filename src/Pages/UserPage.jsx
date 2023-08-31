@@ -1,7 +1,6 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect } from "react";
 import { AxiosInstance } from "../api"
 import  Box from "@mui/material/Box";
-import ConfirmDelete from "../components/Modal/ConfirmDelete";
 import  Table  from '@mui/material/Table';
 import  TableContainer  from '@mui/material/TableContainer';
 import  TableHead  from '@mui/material/TableHead';
@@ -13,15 +12,15 @@ import UserTableRow from "../components/User/UserTableRow";
 import RotatingLineLoader from "../components/Loader/RotatingLineLoader";
 import '.././assets/css/users.css'
 import { QueryClient, useQuery } from "@tanstack/react-query";
-import { useAccessToken } from "../store/store";
 import { GetError } from "../components/Config";
 import ZeroBasePaginntation from "../components/Paginnation/ZeroBasePaginntation";
+import UseAuth from "../hooks/useAuth";
 
 
 function UserPage() {
 
   const queryClient = new QueryClient()
-  const token = useAccessToken()
+  const {token} = UseAuth()
   const [error, setError] = useState('');
   const [page, setPage] = useState(0);
   const [pageSize, setPageSize] = useState(5);
@@ -44,7 +43,7 @@ function UserPage() {
   
   
   useEffect(() => {
-    if (isError) {
+    if (isError || failureReason || fetchError) {
     const errorMsg = GetError(failureReason) || GetError(fetchError)
     setError(errorMsg)
     } else {
@@ -77,7 +76,7 @@ if (dataLoading && !data?.users?.length) {
       maxWidth:'100%',
       width: '100vw',
       textAlign: 'start',
-      overflow: 'auto',
+      overflowX: 'auto',height:'fit-content',
         
     }}
     >

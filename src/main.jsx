@@ -13,7 +13,7 @@ import { apiUrl, AxiosInstance } from './api';
 import CreateAccount from './components/User/CreateAccount';
 import Blogs from './Pages/Blogs';
 import Login from './components/Auth/Login';
-import { AuthProvider } from './context/AuthContext';
+import { AppContextProvider } from './context/AppContext';
 import RequiredAuth from './components/Auth/RequiredAuth';
 import ViewBlog from './components/Blog/ViewBlog';
 import UnAuthorized from './components/Auth/UnAuthorized';
@@ -31,6 +31,8 @@ import InfiniteLoadBlogs from './InfiniteLoadBlogs';
 import { SocketProvider } from './context/socketContext';
 import BlogsSearch from './Pages/BlogsSearch';
 import ReviewBlog from './components/Blog/ReviewBlog';
+import AuthorsBlogs from './Pages/AuthorsBlogs';
+import AccountBlockPage from './Pages/AccountBlockPage';
 
 
 /*
@@ -52,7 +54,7 @@ import ReviewBlog from './components/Blog/ReviewBlog';
     at RouterProvider (http://127.0.0.1:5173/node_modules/.vite/deps/react-router-dom.js?v=d6a629d0:3319:5)
     at QueryClientProvider (http://127.0.0.1:5173/node_modules/.vite/deps/@tanstack_react-query.js?v=d6a629d0:2704:3)
     at SocketProvider (http://127.0.0.1:5173/src/context/socketContext.jsx:23:3)
-    at AuthProvider (http://127.0.0.1:5173/src/context/AuthContext.jsx:21:3)"
+    at AppContextProvider (http://127.0.0.1:5173/src/context/AuthContext.jsx:21:3)"
 */
 
 
@@ -72,17 +74,25 @@ const router = createBrowserRouter([
         errorElement: <ErrorPage />
       },
       {
+        path: 'blocked_accounts',
+        element: <AccountBlockPage />
+      },
+      {
         path: 'infinite',
         element: <InfiniteLoadBlogs />,
 
       },
       {
+        path: '/blogs/user/:author',
+        element: <AuthorsBlogs />,
+
+      },
+      {
         path: '/blogs/search',
         element: <BlogsSearch />,
-        loader: ({ params }) => {
-          console.log(params);
-          
-        }
+        // loader: ({ params }) => {
+        //   console.log(params);  
+        // }
 
       },
       {
@@ -227,13 +237,13 @@ const client = new QueryClient()
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <AuthProvider>
+    <AppContextProvider>
       <SocketProvider>
         <QueryClientProvider
           client={client}>
           <RouterProvider router={router} />
         </QueryClientProvider>
       </SocketProvider>
-    </AuthProvider>
+    </AppContextProvider>
   </React.StrictMode>,
 )

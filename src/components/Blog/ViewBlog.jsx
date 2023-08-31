@@ -6,7 +6,7 @@ import ABlog from './ABlog';
 import CommentEditor from '../Editor/CommentEditor/CommentEditor';
 import CommentList from './CommentList';
 import { useScoketContenxt } from '../../context/socketContext';
-import { getAuthData, useAccessToken } from '../../store/store';
+import UseAuth from '../../hooks/useAuth';
 
 
 const ViewBlog = () => {
@@ -14,9 +14,8 @@ const ViewBlog = () => {
     let loadedData = useLoaderData()
     const { socket } = useScoketContenxt()
     const [blog, setblog] = useState({...loadedData});
-    const token = useAccessToken()
-    const userId = getAuthData()?.id;
-    const isAdmin = getAuthData()?.role === 'admin';
+    
+    const {token, isAdmin, id:userId} = UseAuth()
     const [comments, setcomments] = useState([]);
     const [comment, setcomment] = useState('');
     // const [page, setpage] = useState(1);
@@ -42,6 +41,12 @@ const ViewBlog = () => {
                 // console.log(newblog);
                 setblog({ ...blog, visit_count: newblog?.visit_count? newblog?.visit_count : blog?.visit_count || 0})
             })
+         socket?.on(`blog_publish_${blog?._id}`, (blog) => {
+             if (blog) {
+                 setblog({...blog})
+             }
+         })
+
     }, [socket]);
 
     const handleCommentSubmit = async () => {

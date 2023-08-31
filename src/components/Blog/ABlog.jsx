@@ -9,14 +9,9 @@ import UseAuth from '../../hooks/useAuth';
 import { AxiosInstance } from '../../api';
 import { useState } from 'react';
 import BlogUserProfile from './BlogUserProfile';
-import { useAccessToken, getAuthData } from '../../store/store';
 
 const ABlog = ({ blog, setblog }) => {
-    // const { authToken } = useContextHook()
-    const token = useAccessToken()
-    const id = getAuthData()?.id;
-    const role = getAuthData()?.role;
-    const isAdmin = getAuthData()?.role === 'admin';
+    const {token, id, role, isAdmin} = UseAuth()
     
     const [likeLoading, setlikeLoading] = useState(false);
 

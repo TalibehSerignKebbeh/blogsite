@@ -1,15 +1,19 @@
 import React from 'react';
 import { Link, useNavigate, useRouteError } from 'react-router-dom';
 import './index.css'
-import { useContextHook } from '../../context/AuthContext';
+import { useContextHook } from '../../context/AppContext';
+import {notificationActions} from '../../store/notificationStore'
+import {getActions} from '../../store/store'
 
 const AuthErrorPage = () => {
     const navigate = useNavigate()
-    const {clearAuthToken} = useContextHook()
     const error = useRouteError();
+    const {clearTokens} = getActions()
+    const {ClearNotifications} = notificationActions()
     console.log(error);
     const handleNavigateToLogin = () => {
-        clearAuthToken()
+        clearTokens()
+        ClearNotifications()
         navigate(`/login`)
     }
     console.log(error);

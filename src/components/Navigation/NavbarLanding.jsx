@@ -5,50 +5,81 @@ import { useNavigate } from 'react-router-dom';
 import ToggleDark from '../ToggleDark';
 import MenuSharp from '@mui/icons-material/MenuSharp'
 import SearchBlog from './SearchBlog';
-import  SearchOutlined  from '@mui/icons-material/SearchOutlined';
+import SearchOutlined from '@mui/icons-material/SearchOutlined';
 import SearchComponent from '../Blog/SearchComponent';
+import { useContextHook } from '../../context/AppContext';
 
 
 function NavbarLanding() {
 
   const navigate = useNavigate()
   const [showMenu, setShowMenu] = useState(false);
-  const [showSearch, setshowSearch] = useState(false);
+  // const [showSearch, setshowSearch] = useState(false);
+  const [showSearchComponent, setshowSearchComponent] = useState(false);
+  const {showSearch, setshowSearch} = useContextHook()
   const menuRef = useRef(null)
 
   const handleClick = () => {
-    setShowMenu(prev => !prev);
+    setTimeout(() => {
+      setShowMenu(prev => !prev);
+    }, 70);
   };
 
+  useEffect(() => {
+    window.addEventListener('mousedown', (e) => {
+      const refRect = menuRef?.current?.getBoundingClientRect();
+      if (e.clientX < refRect?.left || e.clientX > refRect?.right
+        || e.clientY < refRect?.top || e.clientY > refRect?.bottom
+      ) {
+        if (showMenu) {
+          setTimeout(() => {
+            setShowMenu(prev => false);
+          }, 70);
+        }
+      }
+
+    })
+
+    return () => {
+
+    };
+  }, []);
 
   return (
     <nav>
       <SearchComponent setShowSearch={setshowSearch}
         showSearch={showSearch}
+        showSearchComponent={showSearchComponent}
+        setshowSearchComponent={setshowSearchComponent}
       />
-        <div className="logo">
-          <Link to="/">TechBlogs</Link>
-        </div>
-        <div>
+      <div className="logo">
+        <Link to="/">TechBlogs</Link>
+      </div>
+      <div>
 
         <ul ref={menuRef} className={showMenu ? 'nav-links active' : 'nav-links'}
         >
-           <button 
-                onClick={()=>setshowSearch(true)}
+          {showSearch ?
+            <button
+              onClick={() => {
+
+                // setshowSearch(true)
+                setshowSearchComponent(true)
+              }}
             className='search_btn'>
             <SearchOutlined />
-          </button>
+          </button> : null}
           <li>
-            <Link className='nav_link' 
-            to="/register">register
+            <Link className='nav_link'
+              to="/register">register
             </Link>
           </li>
           <li>
-            <Link className='nav_link' 
-            to="/login">login
+            <Link className='nav_link'
+              to="/login">login
             </Link>
           </li>
-           <ToggleDark />
+          <ToggleDark />
 
           <button className='close-btn' onClick={handleClick}>X</button>
         </ul>

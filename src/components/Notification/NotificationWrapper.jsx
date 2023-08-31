@@ -2,60 +2,97 @@ import React, { useState } from 'react';
 import './notification.css'
 import { useScoketContenxt } from '../../context/socketContext';
 import { useEffect } from 'react';
-import { notificationState } from '../../store/notificationStore';
 import { formatDate } from '../../components/Config'
-import { getAuthData } from '../../store/store';
 import { useRef } from 'react';
+import UseAuth from '../../hooks/useAuth';
+import { notificationActions, getNotifications } from '../../store/notificationStore';
+import { AllowedRoles } from '../../utils/globalValues';
+import NotificationItem from './NotificationItem';
 
-const NotificationWrapper = ({ data, setData }) => { 
+const NotificationWrapper = ({ setOpen, Open }) => {
+    const { StoreNotifications, ClearNotifications } = notificationActions()
+    const notifications = getNotifications()
+    const [unReads, setunReads] = useState(notifications?.filter((item) => (item && !item?.read))?.map(item => item?._id));
     const notificationWrapperRef = useRef(null)
-    const userId = getAuthData()?.id;
-    const { notifications, actions } = notificationState
-    const unreadIds = data?.filter((item) => !item?.read)?.map(item => item?._id);
-    const { SetNotifications, AddNotification } = actions
-    // console.log(notifications);
     const { socket } = useScoketContenxt()
+    const { id } = UseAuth()
 
-    
+
+
     useEffect(() => {
-        if (unreadIds?.length) {
-            socket?.emit(`read_notification`, {
-                ids: unreadIds, date: new Date(),
-                userId: userId
-            })
-            
-            socket.on(`notification_read`, (data) => {
-                const filteredNoti = data?.filter(notiDatum => !data?.includes(notiDatum?._id));
-                setData(filteredNoti)
-            })
-        }
+
+        socket.on(`notification_read`, (data) => {
+            if (data?.length) {
+                setunReads(unReads?.filter(id => !data?.includes(id)))
+                const newUnReads = unReads?.filter(id => !data?.includes(id));
+                console.log(newUnReads);
+                setunReads([newUnReads])
+                const filteredNoti =
+                    notifications?.filter(notiDatum =>
+                        !data?.includes(notiDatum?._id));
+                if (!filteredNoti?.length) {
+                    ClearNotifications()
+                    return;
+                } else {
+
+                    StoreNotifications(prev => [...filteredNoti])
+                }
+            }
+
+        })
+
         return () => {
-            
+
         };
     }, []);
 
+    useEffect(() => {
+
+        document.addEventListener('click', e => {
+
+            if (!Open && notificationWrapperRef?.current) { return };
+            // console.log(Open);
+            // console.log(Open);
+            // console.log(notificationWrapperRef?.current?.classList);
+            // console.log(notificationWrapperRef?.current?.getBoundingClientRect());
+            const refRect = notificationWrapperRef?.current?.getBoundingClientRect();
+            if (e.clientX < refRect?.left || e.clientX > refRect?.right
+                || e.clientY < refRect?.top || e.clientY > refRect?.bottom
+            ) {
+                if (Open === true) {
+                    setTimeout(() => {
+                        if (unReads?.length) {
+
+                            socket?.emit(`read_notification`, {
+                                ids: unReads, date: new Date(),
+                                userId: id
+                            })
+                        }
+                        setOpen(false)
+                    }, 10);
+                    return;
+                }
+            }
+        })
+        return () => {
+            //    window.removeEventListener() 
+        };
+    }, []);
     return (
-        <div className='notification_wrapper'
-        ref={notificationWrapperRef}>
+        <div
+
+            className={`notification_wrapper ${Open ? 'open' : ''}`}
+            ref={notificationWrapperRef}>
             <section className='notifications'>
 
-                {data?.map((notification, index) => (
-                    <section key={index}
-                        className={`notification`}
-                    >
-                        {!notification?.read ? <>
-                          <small className='new'>new</small><br />
-                        </>
-                            : null}
-                        <p className=''
-                            style={{color:'var(--text-color)'}}
-                        >{notification?.message}</p>
-                        <span>{
-                           formatDate(notification?.date)}</span>
-                    </section>
+                {notifications?.map((notification, index) => (
+                    <NotificationItem 
+                        notification={notification}
+                        key={index}
+                   />
                 ))}
             </section>
-            
+
         </div>
     );
 }

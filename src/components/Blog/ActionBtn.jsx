@@ -4,10 +4,10 @@ import { useState } from 'react';
 import './ActionButtons.css'
 import { Link, useNavigate } from 'react-router-dom';
 import { GetError } from '../Config';
-import { useAccessToken, getAuthData } from '../../store/store';
 import { useScoketContenxt } from '../../context/socketContext';
 import { useEffect } from 'react';
 import { QueryClient } from '@tanstack/react-query';
+import UseAuth from '../../hooks/useAuth';
 
 
 const ActionBtn = ({ blog, setblog, onDoneFunction }) => {
@@ -15,8 +15,8 @@ const ActionBtn = ({ blog, setblog, onDoneFunction }) => {
     const queryClient = new QueryClient()
     const { socket } = useScoketContenxt()
 
-    const token = useAccessToken()
-    const userId = getAuthData()?.id;
+    const { token, id:userId } = UseAuth()
+    
     const navigate = useNavigate()
     const [deleting, setdeleting] = useState(false);
     const [deleteMsg, setdeleteMsg] = useState({ success: '', error: '' });
@@ -81,6 +81,10 @@ const ActionBtn = ({ blog, setblog, onDoneFunction }) => {
                 if (newBlogData) {
                     setblog({ ...blog, ...newBlogData })
                 }
+                socket?.emit(`blog_published`, {
+                    blogId: blog?._id,
+                    target_user: blog?.author?._id })
+
                 queryClient.invalidateQueries({ queryKey: 'blogs' })
             })
             .catch((error) => {

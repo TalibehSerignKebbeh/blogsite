@@ -10,9 +10,12 @@ import parseISO from 'date-fns/parseISO';
 import isYesterday from 'date-fns/isYesterday';
 import formatDistanceToNow from 'date-fns/formatDistanceToNow';
 import formatDistance from 'date-fns/formatDistance';
+import { useRef } from 'react';
+import { useEffect } from 'react';
 
 const BlogCard = ({ blog }) => {
-    const {role, username} = UseAuth()
+    const { role, username } = UseAuth()
+    const blogCardRef = useRef(null)
 
     let blogImageurl =
         blog?.image?.startsWith('http') ? blog?.image :
@@ -28,9 +31,22 @@ const BlogCard = ({ blog }) => {
     // console.log(formatDistance(parseISO(blog?.created_at), {includeSeconds:false,},{locale:{c}}));
     // console.log(blog?.created_at);
     // console.log('----------------------------------');
+  
+    useEffect(() => {
+        window.addEventListener('scroll', e => {
+               console.log(window.screenX);                
 
+            if (blogCardRef) {
+                const cardRect = blogCardRef?.current?.getBoundingClientRect();
+            }
+        })
+        return () => {
+            
+        };
+    }, []);
     return (
-        <div className='blog-card-wrapper'>
+        <div className='blog-card-wrapper'
+        ref={blogCardRef}>
             <div className='image_wrapper'>
 
             <img src={blogImageurl} alt='banner' 
@@ -41,9 +57,10 @@ const BlogCard = ({ blog }) => {
             <section style={{paddingLeft:'6px'}}>
 
             <BlogUserProfile blog={blog}
-                msg={''}
+                    msg={''}
                     name={'author'}
                     dateFiled={'created_at'}
+                
                 />
             </section>
             <div className='content'>

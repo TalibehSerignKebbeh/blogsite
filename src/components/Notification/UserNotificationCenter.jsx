@@ -1,8 +1,8 @@
 import React from 'react';
 
-const UserNotificationCenter = () => {
+const UserNotificationCenter = ({open, setOpen, notifications}) => {
     return (
-        <div>
+        <div className='notification_wrapper'>
             
         </div>
     );

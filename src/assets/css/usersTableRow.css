@@ -1,20 +1,16 @@
 
 
-.active_btn{
+.status_btn{
     padding: 10px;
     border-radius: 10px;
     background-color: #e4e2e2;
     color: var(--text-color) !important;
 }
 
-.active_btn.active{
-    color: rgb(238, 25, 25) !important;
-    font-size: 1rem;
-}
 
 :root.dark .active_btn{
-    background-color: #5c5959;
-
+    background-color: #282525;
+    color: white;
 }
 
 .active_text{
@@ -27,4 +23,31 @@
 .active_text.active{
     color: #fff;
     background-color:rgb(14, 108, 14);
+}
+
+
+.edit_btn{
+    padding: 5px 8px;
+    border-radius: 3px;
+    background-color: #aaa8a8;
+}
+
+.reset_btn{
+    padding: 4px;
+    border-radius: 4px;
+    background-color: #aaa8a8;
+
+}
+
+.status_select{
+    padding: 7px;
+    border-radius: 5px;
+    border: none;
+
+}
+
+
+.status_select:focus,
+.status_select:focus-visible{
+    border: 1px solid lightgreen;
 }

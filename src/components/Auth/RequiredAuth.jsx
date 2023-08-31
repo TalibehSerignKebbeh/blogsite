@@ -1,22 +1,18 @@
 import { Navigate, Outlet, useNavigate } from "react-router-dom";
-import { useContextHook } from "../../context/AuthContext";
-// import jwtDecode from 'j'
 import UseAuth from "../../hooks/useAuth";
-import { getAuthData, useAccessToken, getActions, useActions} from '../../store/store'
+import { BlockedStatus } from "../../utils/globalValues";
 
 
 const RequiredAuth = ({ roles }) => {
-    ;
-    const token = useAccessToken()
-
-    const role = getAuthData()?.role;
-    const {setAuthData} = useActions()
+   const {token, role, status} = UseAuth()
 
     if (!token) return <Navigate to={'/login'} replace={true} />
-    if (!getAuthData() && token) {
-       setAuthData(token) 
+   
+    
+    if (Object.values(BlockedStatus)?.indexOf(status) !== -1) {
+         return <Navigate to={'/blocked_accounts'} replace={false} 
+        />
     }
-        
     if (!roles?.includes(role))
         return <Navigate to={'/unauthorized'} replace={false} 
 

@@ -96,8 +96,7 @@ background: var(--form-bg);
   justify-self: flex-start;
   width: 100%;
   height: 100%;
-  overflow-x: hidden;
-  overflow-y: auto;
+  min-height: max-content;
 }
 
 .app-sub-wrapper.admin, .app-sub-wrapper.user{

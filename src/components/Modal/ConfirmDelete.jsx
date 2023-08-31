@@ -25,7 +25,6 @@ const ConfirmDelete = ({ open, setopen, resetFunc, deleteFunction,
         resetFunc()
     }
     return (
-        <div>
           <Dialog
           open={open} onClose={handleClose}
           keepMounted={deleteLoading}
@@ -100,7 +99,6 @@ const ConfirmDelete = ({ open, setopen, resetFunc, deleteFunction,
             </Stack>
           </DialogActions>      
         </Dialog>   
-        </div>
     );
 }
 

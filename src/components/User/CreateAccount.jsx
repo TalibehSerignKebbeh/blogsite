@@ -5,6 +5,7 @@ import { AxiosInstance } from '../../api';
 import { Link, useNavigate } from 'react-router-dom';
 import FileUploadOutlined from '@mui/icons-material/FileUploadOutlined';
 import { GetError } from '../Config';
+import { useContextHook } from '../../context/AppContext';
 // import UseInput from '../input/UseInput'
 
 let allowImageTypes = ['image/jpeg', 'image/jpg',
@@ -13,6 +14,8 @@ let allowImageTypes = ['image/jpeg', 'image/jpg',
 
 const CreateAccount = () => {
 
+    const { showSearch, setshowSearch } = useContextHook()
+    setshowSearch(false)
     const navigate = useNavigate()
     const [uploading, setuploading] = useState(false);
     const [profileUrl, setprofileUrl] = useState(null);
@@ -118,6 +121,7 @@ const CreateAccount = () => {
         console.log(isValid);
         if (isValid) {
             const formData = new FormData();
+            formData.append('date', Date.now())
             Object.entries(user).forEach(([name, value]) => {
                 formData.append(name, value);
             });

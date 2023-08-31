@@ -4,7 +4,10 @@
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: 1fr;
-    align-self: center;
+    align-self: stretch;
+    justify-self: stretch;
+    justify-items: center;
+    align-content: center;
     border-radius: 10px;
     transition-property: margin-top;
     transition: all 10ms ease-in-out;
@@ -12,10 +15,14 @@
 
 .wrapper{
     min-height: min-content;
-    max-height: max-content;
-    background-color: rgb(24, 85, 24);
+    max-height: 500px;
+    min-width: max-content;
+    max-width: 500px;
+    width: max-content;
+    background-color: rgb(35, 181, 35);
     padding: 40px 10px;
     border-radius: 10px;
+    width: 100%;
 
 }
 
@@ -26,6 +33,7 @@
     justify-content: center;
     align-items: center;
     position: relative;
+    /* text-align: center; */
 }
 
 .wrapper p{

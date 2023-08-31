@@ -1,22 +1,23 @@
 import React,{useState} from 'react';
 import { AxiosInstance } from '../../api';
-import { useContextHook } from '../../context/AuthContext'
+import { useContextHook } from '../../context/AppContext'
 import { useNavigate } from 'react-router-dom';
 import LogoutTwoTone from '@mui/icons-material/LogoutTwoTone';
 import {useActions} from '../../store/store'
+import {notificationActions} from '../../store/notificationStore'
 
 const LogoutButton = () => {
-  const {clearTokens} = useActions()
+  const { clearTokens } = useActions()
+  const {ClearNotifications} = notificationActions()
   const navigate = useNavigate()
-  const { authToken, clearAuthToken } = useContextHook()
      const [logingOut, setlogingOut] = useState(false);
  const handleLogout = async () => {
     setlogingOut(true)
     await AxiosInstance.put(`/auth`)
       .then((res) => {
         console.log(res);
-        clearAuthToken()
         clearTokens()
+        ClearNotifications()
         navigate(`/`)
       }).catch((err) => {
         console.log(err);
@@ -25,10 +26,10 @@ const LogoutButton = () => {
   }
     return (
         <li>
-                <button className='logout-btn' onClick={handleLogout}>
+          <button className='logout-btn' onClick={handleLogout}>
           {logingOut ? "loading..." :
             <LogoutTwoTone sx={{
-              transform: 'scale(2.7,1.6)',
+              transform: 'scale(2.9,1.2)',
               color:"#333"
             }} />}
                 </button>

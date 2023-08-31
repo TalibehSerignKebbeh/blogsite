@@ -11,13 +11,14 @@ import { useAccessToken } from "../store/store";
 import { useQuery, QueryClient } from "@tanstack/react-query";
 import { GetFullName, formatDate, formattedTitle } from "../components/Config";
 import ZeroBasePaginntation from "../components/Paginnation/ZeroBasePaginntation";
+import UseAuth from "../hooks/useAuth";
 
 
 
 const AdminBlogs = () => {
 
     const queryClient = new QueryClient()
-    const token = useAccessToken()
+    const {token} = UseAuth()
     const responseData = useLoaderData();
 
     const [pageSize, setPageSize] = useState(5);

@@ -5,7 +5,7 @@ import { useState } from 'react';
 import './profile.css'
 import UploadFile from '@mui/icons-material/UploadRounded';
 import RotatingLineLoader from '../../Loader/RotatingLineLoader';
-import { getAuthData, useAccessToken } from '../../../store/store';
+import UseAuth from '../../../hooks/useAuth';
 
 
 let imgExtensions = ['jpg', 'jpeg', 'png', 'gif', 'webp']
@@ -14,8 +14,7 @@ let allowImageTypes = ['image/jpeg', 'image/jpg',
 
 const ProfilePage = () => {
 
-    const id = getAuthData()?.id;
-    const token = useAccessToken()
+    const {token, id} = UseAuth()
     const [profile, setprofile] = useState(null);
     const [getError, setgetError] = useState('');
     const [editMode, seteditMode] = useState(false);

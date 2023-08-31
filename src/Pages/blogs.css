@@ -1,3 +1,6 @@
+
+
+
 .blogs-landing{
     display: flex;
     flex-direction: column;
@@ -53,4 +56,41 @@
     .blogs-wrapper{
         margin: 4px auto;
     }
+}
+
+
+/* button animation css */
+#animation_btn{
+    height: 40px;
+    padding: 4px 8px;
+    border-radius: 4px;
+    display: inline-block;
+    width: auto;
+    max-width: 200px;
+    position: relative;
+    isolation: isolate;
+    border: 2px solid #198c1d;
+
+}
+
+#animation_btn::after{
+    content: '';
+    position: absolute;
+    /* height: 40px; */
+    inset: 0;
+    scale: 0 1;
+    background-color: #198c1d;
+    /* transition-property: scale; */
+    transition: scale all 450ms;
+    transition-property: scale;
+    transition-duration: 450ms;
+    transition-timing-function: ease;
+    transform-origin: right;
+    transform-style: flat;
+    z-index: -1;
+}
+#animation_btn:hover::after,
+#animation_btn:focus-visible::after{
+    scale: 1 1;
+    transform-origin: left;
 }

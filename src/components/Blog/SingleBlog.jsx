@@ -4,7 +4,7 @@ import { BlogContainer } from '../Preview';
 import { ImageUrl } from '../../api';
 import './singleblog.css'
 import { useLoaderData, useNavigate } from 'react-router-dom';
-import { useContextHook } from '../../context/AuthContext';
+import { useContextHook } from '../../context/AppContext';
 import ActionBtn from './ActionBtn';
 import RequireRole from '../Auth/RequireRole';
 
@@ -12,7 +12,7 @@ import RequireRole from '../Auth/RequireRole';
 const SingleBlog = () => {
     const navigate = useNavigate()
     let blog = useLoaderData()
-  const {authToken} = useContextHook()
+  
      let blogImageUrl =
         blog?.image?.startsWith('http') ? blog?.image :
            blog?.image? `${ImageUrl}/${blog?.image}` : image;
@@ -35,12 +35,7 @@ const SingleBlog = () => {
                             (<small className='tag' key={id}>{tag}</small>))}
                     </p> : null}
             <RequireRole children={<ActionBtn />} roles={['editor, admin']} />
-            {/* {authToken ?
-                <ActionBtn blog={blog}
-                    onDoneFunction={() => {
-                    navigate(-1)
-                }}/>
-                : null} */}
+        
         </BlogContainer>
     );
 }

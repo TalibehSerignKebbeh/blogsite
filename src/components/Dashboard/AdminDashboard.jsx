@@ -8,7 +8,7 @@ import RecentBlogTable from "../Blog/Table/RecentBlogTable";
 import { useEffect } from "react";
 import { AxiosInstance } from "../../api";
 import UseAuth from "../../hooks/useAuth";
-import { useContextHook } from "../../context/AuthContext";
+import { useContextHook } from "../../context/AppContext";
 import RotatingLineLoader from "../Loader/RotatingLineLoader";
 import { useAccessToken } from "../../store/store";
 

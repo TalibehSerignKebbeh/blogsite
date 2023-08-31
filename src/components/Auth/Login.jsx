@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 // import UseInput from '../input/UseInput'
 import './Login.css'
 import { AxiosInstance } from '../../api';
-import { useContextHook } from '../../context/AuthContext'
+import { useContextHook } from '../../context/AppContext'
 import { Link, useNavigate } from 'react-router-dom';
 import { GetError } from '../Config';
 import jwtDecode from 'jwt-decode';
@@ -11,13 +11,14 @@ import {useActions} from '../../store/store'
 
 
 const Login = () => {
-
+    const { showSearch, setshowSearch } = useContextHook()
+        setshowSearch(false)
+    
     const {setAccessToken} = useActions()
     const [uploading, setuploading] = useState(false);
     const [user, setuser] = useState({ username: '', password: '' });
     const [errorMessage, seterrorMessage] = useState('');
     const navigate = useNavigate()
-    const { clearAuthToken, storeAuthToken, authToken } = useContextHook()
     const { token, role } = useAuth()
     useEffect(() => {
         if (token) {
@@ -40,7 +41,6 @@ const Login = () => {
                 const token = res?.data?.token;
                 const decoded = jwtDecode(token)
                 const role = decoded?.AuthData?.role
-                storeAuthToken(token)
                 setAccessToken(token)
                 navigate('/dash')
                 

@@ -8,6 +8,7 @@
 
 #error-page{
     height: 100%;
+    min-width: 100%;
     width: auto;
     margin: auto;
     display: flex;
@@ -51,6 +52,9 @@
 
 } */
 
+strong{
+    text-decoration: underline;
+}
 
 @media (max-width:600px) {
     #error-page> .error_wrapper{

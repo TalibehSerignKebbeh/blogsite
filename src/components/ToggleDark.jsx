@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useContextHook } from '../context/AuthContext';
+import { useContextHook } from '../context/AppContext';
 import LightMode  from '@mui/icons-material/LightMode';
 import DarkMode from '@mui/icons-material/DarkMode';
 

@@ -2,16 +2,14 @@ import React, { useEffect, useState } from 'react';
 import { useLoaderData } from 'react-router-dom';
 import './viewblog.css'
 import { useScoketContenxt } from '../../context/socketContext';
-import { getAuthData, useAccessToken } from '../../store/store';
 import ABlog from './ABlog';
-
+import UseAuth from '../../hooks/useAuth';
 const ReviewBlog = () => {
     let loadedData = useLoaderData()
     const { socket } = useScoketContenxt()
     const [blog, setblog] = useState({...loadedData});
-    const token = useAccessToken()
-    const userId = getAuthData()?.id;
-    const isAdmin = getAuthData()?.role === 'admin';
+    const {isAdmin } = UseAuth()
+    
     let imageLink = blog?.image?.startsWith('http') ? blog?.image :
         blog?.image?.length ? `${ImageUrl}/${blog?.image}` : '';
     
@@ -39,7 +37,8 @@ const ReviewBlog = () => {
     }, [socket]);
     return (
         <div className='view-container`'>
-            <ABlog blog={blog} setblog={setblog} />
+            <ABlog blog={{...blog, image: imageLink }}
+            setblog={setblog} />
             
         </div>
     );

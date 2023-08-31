@@ -50,11 +50,14 @@
 
 .notification_value{
     /* position: absolute; */
-    font-size: 4rem;
+    font-size: 7rem;
     /* left: 1px; */
     /* top: 0px; */
     margin-left: auto;
     margin-right: 0px;
-    color: red !important;
+    background-color: red !important;
+    padding: 4px 6px;
+    border-radius: 50%;
+    color: #fff;
     z-index: 10;
 }

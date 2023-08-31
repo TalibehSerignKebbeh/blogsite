@@ -7,14 +7,13 @@ import pic_url from '../../assets/mydefaultprofile.png'
 import UseAuth from '../../hooks/useAuth';
 import { AxiosInstance } from '../../api';
 import { useState } from 'react';
-import { useContextHook } from '../../context/AuthContext';
+import { useContextHook } from '../../context/AppContext';
 import { ImageUrl } from '../../api';
 
 
 const CommentCard = ({ comment,ref }) => {
     const { token, id } = UseAuth()
 
-    const { authToken } = useContextHook()
     const [commentData, setCommentData] = useState({ ...comment })
 
     const likedComment = () => {

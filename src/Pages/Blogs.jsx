@@ -5,10 +5,11 @@ import { useLoaderData } from "react-router-dom";
 import { AxiosInstance } from "../api";
 import RotatingLineLoader from "../components/Loader/RotatingLineLoader";
 import OvalLoader from "../components/Loader/OvalLoader";
-import SearchBlog from "../components/Navigation/SearchBlog";
+import { useContextHook } from "../context/AppContext";
 
 
 const Blogs = () => {
+  const { setshowSearch } = useContextHook()
   const fetchMoreRef = useRef(null)
   const blogWrapperRef = useRef(null)
   const responseData = useLoaderData();
@@ -44,7 +45,13 @@ const Blogs = () => {
         setfetchtingMore(false);
       });
   };
-
+useEffect(() => {
+  setshowSearch(true)
+  
+  return () => {
+    
+  };
+}, []);
   useEffect(() => {
     const options = {
       root: blogWrapperRef.current, // null means it uses the viewport as the container
@@ -85,13 +92,17 @@ const Blogs = () => {
       <div className="blogs-landing"
         id="blogs_wrapper"
         ref={blogWrapperRef}>
+        {/* <button
+          id="animation_btn">Sample animation
+        </button> */}
         {!blogsToDisplay?.length && loading ? (
           <div>
             <RotatingLineLoader />
           </div>
         ) : (
             <div>
-            <div className="blogs-wrapper">
+              <div className="blogs-wrapper">
+                
               {blogsToDisplay?.map((blog, index) => (
                 <BlogCard blog={blog} key={blog?._id} />
               ))}

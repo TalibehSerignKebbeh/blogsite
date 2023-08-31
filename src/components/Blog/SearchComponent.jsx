@@ -2,21 +2,26 @@ import React, { useState } from 'react';
 import './searchComponent.css'
 import { useNavigate } from 'react-router-dom';
 
-const SearchComponent = ({ showSearch, setShowSearch }) => {
+const SearchComponent = ({ showSearch, setShowSearch,
+showSearchComponent,
+setshowSearchComponent,}) => {
     const navigate = useNavigate()
     const [keyword, setkeyword] = useState('');
 
+     if (!showSearchComponent)
+        return null
     const handleNavigateSearch = () => {
         navigate(`/blogs/search?query=${keyword}`)
         setShowSearch(false)
+        setshowSearchComponent(false)
         setkeyword('')
     }
-    if (!showSearch)
-        return null
+   
+
     return (
         <div className='search_modal_wrapper'>
             <button id='close_button'
-                onClick={() => setShowSearch(false)}>
+                onClick={() => setshowSearchComponent(false)}>
                 X
             </button>
             

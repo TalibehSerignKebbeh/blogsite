@@ -19,21 +19,20 @@
 
 .infor-wrapper{
     flex-grow: 0;
-   padding: 0px;
-   padding-top: 20px;
-   padding-bottom: 20px;
+   padding: auto;
+   padding-top: 10px;
+   padding-bottom: 10px;
     margin-bottom: auto;
-    padding: 6px auto;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     height: auto;
     border-bottom: 1px solid var(--text-color);
-
 }
 .dashbordtitle{
     opacity: .9;
+    margin: auto;
     color: var(--text-color);
 }
 

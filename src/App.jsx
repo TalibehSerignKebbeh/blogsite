@@ -5,20 +5,20 @@ import { Outlet } from 'react-router-dom';
 import TopBar from './components/Navigation/TopBar';
 import AdminNav from './components/Navigation/AdminNav';
 import { useScoketContenxt } from './context/socketContext';
-import { useAccessToken, getAuthData } from './store/store';
 import { io } from 'socket.io-client';
 import { ImageUrl } from './api';
+import UseAuth from './hooks/useAuth';
+import { BlockedStatus } from './utils/globalValues';
 
 export default function App() {
   const { socket } = useScoketContenxt()
-  const token = useAccessToken()
-  let role = getAuthData()?.role;
-  let username = getAuthData()?.username;
+  const {token, role, status} = UseAuth()
 
-  const customRole = (role?.length && (role !=='undefined') && (role !==undefined))? role : ''
+  const customRole = (role?.length && (role !=='undefined') && (role !==undefined) && !Object.values(BlockedStatus).includes(status))? role : ''
   const [isNavOpen, setisNavOpen] = useState(true);
 
   useEffect(() => {
+    console.log( Date.now());
     if (token) {
       
       socket?.connect()
@@ -27,6 +27,11 @@ export default function App() {
       // console.log(callback);
       callback({status:'ok', message:'i am alive'})
        })
+      
+      socket?.on(`error`, (error) => {
+        console.log(`Error message occured`);
+        console.dir(error)
+      })
       
    }
 
@@ -39,7 +44,7 @@ export default function App() {
 
   return (
     <div className={`App ${customRole}`}>
-      {token ?
+      {(token && !Object.values(BlockedStatus).includes(status)) ?
         <AdminNav isNavOpen={isNavOpen}
           setisNavOpen={setisNavOpen} />
         : <NavbarLanding />
@@ -51,7 +56,7 @@ export default function App() {
           width: '100%', maxWidth: '100vw',
           flexGrow: 0,
         }}>
-        {token ?
+        {(token && !Object.values(BlockedStatus).includes(status)) ?
           <TopBar setisNavOpen={setisNavOpen}
             isNavOpen={isNavOpen} />
           : null

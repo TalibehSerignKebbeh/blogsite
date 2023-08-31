@@ -4,19 +4,16 @@ import ColumnCard from "./Cards/ColumnCard";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBlog, faStar, faThumbsUp } from "@fortawesome/free-solid-svg-icons";
 import { AxiosInstance } from "../../api";
-import { useContextHook } from "../../context/AuthContext";
 import UsersBlogTable from "../Blog/Table/UsersBlogTable";
 import RotatingLineLoader from "../Loader/RotatingLineLoader";
-import { getAuthData, useAccessToken } from "../../store/store";
+import UseAuth from "../../hooks/useAuth";
 
 const UserDashboard = () => {
-    const token = useAccessToken()
-    const id = getAuthData()?.id;
-    const { authToken } = useContextHook()
+    const { token, id } = UseAuth()
+    
     const [isLoading, setisLoading] = useState(false);
     const [isLoadSuccess, setisLoadSuccess] = useState(false);
     const [errorMsg, seterrorMsg] = useState('');
-
     const [LikeBlogs, setLikeBlogs] = useState([]);
     const [usersBlogs, setusersBlogs] = useState([]);
     const [recentUsers, setrecentUsers] = useState([]);
