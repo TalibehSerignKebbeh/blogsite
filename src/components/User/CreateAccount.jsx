@@ -6,6 +6,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import FileUploadOutlined from '@mui/icons-material/FileUploadOutlined';
 import { GetError } from '../Config';
 import { useContextHook } from '../../context/AppContext';
+import { useEffect } from 'react';
 // import UseInput from '../input/UseInput'
 
 let allowImageTypes = ['image/jpeg', 'image/jpg',
@@ -15,7 +16,6 @@ let allowImageTypes = ['image/jpeg', 'image/jpg',
 const CreateAccount = () => {
 
     const { showSearch, setshowSearch } = useContextHook()
-    setshowSearch(false)
     const navigate = useNavigate()
     const [uploading, setuploading] = useState(false);
     const [profileUrl, setprofileUrl] = useState(null);
@@ -155,6 +155,14 @@ const CreateAccount = () => {
             setTouch(Object.fromEntries(Object.keys(user).map((name) => [name, true])));
         }
     }
+
+    useEffect(() => {
+    setshowSearch(false)
+        
+        return () => {
+            
+        };
+    }, []);
 
     return (
         <div className='register_wrapper'>
