@@ -110,6 +110,7 @@ grid-template-rows: 1fr auto;
   max-width: auto;
   width: auto;
   display: block;
+  overflow-y: auto;
 
 }
 

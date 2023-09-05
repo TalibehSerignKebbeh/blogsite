@@ -49,7 +49,7 @@ export default function App() {
           setisNavOpen={setisNavOpen} />
         : <NavbarLanding />
       }
-      <div className={`app-sub-wrapper`}
+      <div className={`app-sub-wrapper ${customRole}`}
         style={{
           alignSelf: 'stretch',
           justifySelf: 'stretch',margin: '0px',
