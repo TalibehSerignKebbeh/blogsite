@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { AllowedRoles } from '../../utils/globalValues';
 
 const NotificationItem = ({ notification }) => {

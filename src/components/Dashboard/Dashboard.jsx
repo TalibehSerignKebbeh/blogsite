@@ -5,7 +5,7 @@ import AdminDashboard from "./AdminDashboard";
 import UserDashboard from "./UserDashboard";
 
 const Dashboard = () => {
-  const { token, role } = UseAuth()
+  const { token, role, } = UseAuth()
  
   
   if (role === 'admin')

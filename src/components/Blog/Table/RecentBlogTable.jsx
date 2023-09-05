@@ -6,9 +6,7 @@ import { Link } from 'react-router-dom';
 import UseAuth from '../../../hooks/useAuth';
 import CloudDoneOutlined from '@mui/icons-material/CloudDoneOutlined';
 import PendingOutlined from '@mui/icons-material/PendingOutlined';
-import { useContextHook } from '../../../context/AppContext';
 import { formattedTitle } from '../../Config';
-import { useAccessToken } from '../../../store/store';
 import { useQuery,QueryClient } from '@tanstack/react-query';
 import { useEffect } from 'react';
 import { useScoketContenxt } from '../../../context/socketContext';
@@ -17,7 +15,7 @@ import  EggIcon  from '@mui/icons-material/EggSharp';
 
 const RecentBlogTable = ({ blogs, setblogs }) => {
     const queryClient = new QueryClient()
-    const token = useAccessToken()
+    const {token} = UseAuth()
     const {socket } = useScoketContenxt()
 
     const [publishingToggle, setpublishingToggle] = useState(false);
