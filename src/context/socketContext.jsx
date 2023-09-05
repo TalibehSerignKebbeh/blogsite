@@ -13,7 +13,11 @@ export const SocketProvider = ({ children }) => {
         auth: {
             role: role,
             username:username
-          }
+        },
+        reconnectionAttempts: 3,
+        reconnectionDelay: 2000,
+        reconnection: true,
+        
     }));
 
     return <SocketContext.Provider
