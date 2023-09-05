@@ -66,7 +66,7 @@ const router = createBrowserRouter([
       {
         index: true,
         loader: async () => {
-          const res = await AxiosInstance.get(`/blogs/infinite?page=${Number(1)}&size=${Number(3)}&offset=${Number(0)}`)
+          const res = await AxiosInstance.get(`/blogs/infinite?page=${Number(1)}&size=${Number(7)}&offset=${Number(0)}`)
           const responseData = res?.data
           return responseData;
         },
@@ -76,6 +76,7 @@ const router = createBrowserRouter([
       {
         path: 'blocked_accounts',
         element: <AccountBlockPage />
+
       },
       {
         path: 'infinite',

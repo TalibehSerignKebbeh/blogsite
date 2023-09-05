@@ -6,7 +6,9 @@ export const AppContext = createContext();
 
 // Create a new provider component for the authentication token context
 export const AppContextProvider = ({ children }) => {
-  const [dark, setdark] = useState(localStorage.getItem('dark') || false);
+
+  const [dark, setdark] = useState(localStorage.getItem('dark')
+    || window.matchMedia('(prefers-color-scheme: dark)').matches);
   const [showSearch, setshowSearch] = useState(true);
 
   const toggleDark = () => {
@@ -15,9 +17,15 @@ export const AppContextProvider = ({ children }) => {
     
   }
 
+  const resetMode = () => {
+    localStorage.removeItem('dark')
+    setdark(false)
+  }
+
   return (
     <AppContext.Provider value={{
       dark, setdark, toggleDark,
+      resetMode,
       showSearch, setshowSearch
     }}>
       {children}

@@ -16,7 +16,7 @@ type NotificationStoreTypes = {
 }
 
 const notificationsStore = create<NotificationStoreTypes>()(
-	persist(
+	
 		(set, get) =>
 	({
 	notifications:[],
@@ -47,13 +47,7 @@ const notificationsStore = create<NotificationStoreTypes>()(
 	}
 
 }),
-	{
-		name: 'notifications',
-		partialize: (state) => ({
-			notifications: state.notifications
-		}),
-	}
-	),)
+	)
 
 
 const notificationsSelector = (state: ExtractState<typeof notificationsStore>) => state.notifications;

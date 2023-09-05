@@ -10,7 +10,9 @@ setshowSearchComponent,}) => {
 
      if (!showSearchComponent)
         return null
-    const handleNavigateSearch = () => {
+    const handleNavigateSearch = (e) => {
+        e.preventDefault()
+        if (!keyword?.trim()?.length) return;
         navigate(`/blogs/search?query=${keyword}`)
         setShowSearch(false)
         setshowSearchComponent(false)
@@ -26,7 +28,8 @@ setshowSearchComponent,}) => {
             </button>
             
             
-            <div className='search_form'>
+            <form className='search_form'
+            onSubmit={handleNavigateSearch}>
                 <input style={{}} 
                     value={keyword}
                     placeholder='search blogs'
@@ -40,7 +43,7 @@ setshowSearchComponent,}) => {
                >
                 search
             </button>
-            </div>
+            </form>
             
         </div>
     );

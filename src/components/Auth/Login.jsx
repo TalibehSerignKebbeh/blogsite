@@ -12,7 +12,6 @@ import {useActions} from '../../store/store'
 
 const Login = () => {
     const { showSearch, setshowSearch } = useContextHook()
-        setshowSearch(false)
     
     const {setAccessToken} = useActions()
     const [uploading, setuploading] = useState(false);
@@ -21,6 +20,8 @@ const Login = () => {
     const navigate = useNavigate()
     const { token, role } = useAuth()
     useEffect(() => {
+        setshowSearch(false)
+
         if (token) {
             navigate('/dash')
         }

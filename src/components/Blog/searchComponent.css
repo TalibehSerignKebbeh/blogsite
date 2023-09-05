@@ -6,9 +6,14 @@
     bottom: 0;
     right: 0;
     left: 0;
-   background-color: rgba(8, 8, 8, 0.877);
+   background-color: rgba(237, 236, 236, 0.877);
    /* background-blend-mode: luminosity; */
    z-index: 1000;
+}
+
+:root.dark{
+   background-color: rgba(8, 8, 8, 0.877);
+
 }
 
 #close_button{
