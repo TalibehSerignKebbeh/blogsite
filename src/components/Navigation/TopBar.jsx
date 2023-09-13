@@ -59,6 +59,11 @@ const TopBar = ({ isNavOpen, setisNavOpen }) => {
                     StoreNotifications([...data])
                 }
             })
+            socket?.on(`account_status_${id}`, (data) => {
+                if (data) {
+                    AddNotifications(data)
+                }
+            })
         }
 
         // event for admin notifications

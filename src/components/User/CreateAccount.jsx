@@ -2,9 +2,9 @@ import React from 'react';
 import './createaccount.css'
 import { useState } from 'react';
 import { AxiosInstance } from '../../api';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import FileUploadOutlined from '@mui/icons-material/FileUploadOutlined';
-import { GetError } from '../Config';
+import { GetError, validateUsername } from '../Config';
 import { useContextHook } from '../../context/AppContext';
 import { useEffect } from 'react';
 // import UseInput from '../input/UseInput'
@@ -16,7 +16,6 @@ let allowImageTypes = ['image/jpeg', 'image/jpg',
 const CreateAccount = () => {
 
     const { showSearch, setshowSearch } = useContextHook()
-    const navigate = useNavigate()
     const [uploading, setuploading] = useState(false);
     const [profileUrl, setprofileUrl] = useState(null);
     const [successMessage, setSuccessMessage] = useState('')
@@ -58,7 +57,16 @@ const CreateAccount = () => {
 
             //   errors[name] = `${name} is required`;
         } else {
-            if (name === 'password' && value?.length < 5) {
+            if (name === 'username' && value?.length < 5) {
+                if (validateUsername(value)) {
+                   setErrors({ ...errors, [name]: `` })
+                    return; 
+                }
+            setErrors({ ...errors, [name]: `${name} must exceeds 4 character` })
+
+            //   errors[name] = `${name} is required`;
+        }
+           else if (name === 'password' && value?.length < 5) {
                 setErrors({ ...errors, [name]: 'Password length must exceeds 4 character' })
 
             }

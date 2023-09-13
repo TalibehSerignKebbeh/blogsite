@@ -18,7 +18,7 @@ export default function App() {
   const [isNavOpen, setisNavOpen] = useState(true);
 
   useEffect(() => {
-    console.log( Date.now());
+    // console.log( Date.now());
     if (token) {
       
       socket?.connect()
@@ -27,7 +27,6 @@ export default function App() {
       // console.log(callback);
       callback({status:'ok', message:'i am alive'})
        })
-      
       socket?.on(`error`, (error) => {
         console.log(`Error message occured`);
         console.dir(error)

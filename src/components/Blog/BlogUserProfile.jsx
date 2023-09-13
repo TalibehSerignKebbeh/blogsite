@@ -4,6 +4,7 @@ import format from 'date-fns/format';
 import parseISO from 'date-fns/parseISO';
 import './bloguserprofile.css'
 import { Link } from 'react-router-dom';
+import { formatDate } from '../Config';
 
 const BlogUserProfile = ({msg,blog, name, dateFiled}) => {
     return (
@@ -28,7 +29,7 @@ const BlogUserProfile = ({msg,blog, name, dateFiled}) => {
                     </Link>}
                 {blog[dateFiled]?.length ?
                     <p id='created_date'>
-                        {format(parseISO(blog[dateFiled]), 'do MMM, yyyy HH:mm aa')}
+                        {formatDate(blog[dateFiled])}
                     </p>
                     : null}
                 </section>

@@ -6,9 +6,10 @@ import ABlog from './ABlog';
 import UseAuth from '../../hooks/useAuth';
 const ReviewBlog = () => {
     let loadedData = useLoaderData()
+    console.log(loadedData?.author);
     const { socket } = useScoketContenxt()
     const [blog, setblog] = useState({...loadedData});
-    const {isAdmin } = UseAuth()
+    const {isAdmin, id } = UseAuth()
     
     let imageLink = blog?.image?.startsWith('http') ? blog?.image :
         blog?.image?.length ? `${ImageUrl}/${blog?.image}` : '';
@@ -20,7 +21,7 @@ const ReviewBlog = () => {
             socket?.emit(`read_notification`,
                 {
                     ids: [...blog?.notification?._id],
-                    date: new Date(), userId: userId
+                    date: new Date(), userId: id
                 }
             )
          }

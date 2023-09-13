@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState, useRef} from 'react';
 import { ImageUrl } from '../../api';
 import { Link } from 'react-router-dom';
 import './blogcard.css'
@@ -10,22 +10,22 @@ import parseISO from 'date-fns/parseISO';
 import isYesterday from 'date-fns/isYesterday';
 import formatDistanceToNow from 'date-fns/formatDistanceToNow';
 import formatDistance from 'date-fns/formatDistance';
-import { useRef } from 'react';
-import { useEffect } from 'react';
 
 const BlogCard = ({ blog }) => {
     const { role, username } = UseAuth()
+    const [isVisible, setIsVisible] = useState(false);
+
     const blogCardRef = useRef(null)
 
     let blogImageurl =
         blog?.image?.startsWith('http') ? blog?.image :
-           blog?.image? `${ImageUrl}/${blog?.image}` : null;
+            blog?.image ? `${ImageUrl}/${blog?.image}` : null;
 
     const formattedTitle = `${blog?.title?.toLowerCase()?.split(' ')?.join('-')}`
    
     let blogLink = `/blogs/${formattedTitle}`;
     if (['admin', 'editor'].includes(role)) {
-        blogLink=`/dash/blogs/view/${formattedTitle}`
+        blogLink = `/dash/blogs/view/${formattedTitle}`
     }
     // console.log(formatDistanceToNow(parseISO(blog?.created_at), {includeSeconds:false,}));
     // console.log(formatDistance(parseISO(blog?.created_at), {includeSeconds:false,},{locale:{c}}));
@@ -33,19 +33,66 @@ const BlogCard = ({ blog }) => {
     // console.log('----------------------------------');
   
     useEffect(() => {
-        window.addEventListener('scroll', e => {
-               console.log(window.screenX);                
+        //  if (blogCardRef) {
+        //      const cardRect = blogCardRef?.current?.getBoundingClientRect();
+        //      console.log('-------------------------------------');
+        //      console.log(blog?.title);
+        //         console.log(cardRect?.top > window.screenTop);
+        //         console.log(cardRect?.top, window.screenTop);
+        //     }
 
-            if (blogCardRef) {
+        window.addEventListener('scroll', (e) => {
+            console.log(window.innerHeight);
+            if (blogCardRef?.current) {
                 const cardRect = blogCardRef?.current?.getBoundingClientRect();
+                console.log('----------------\nscrolling');
+                console.log(blog?.title);
+                // console.log(cardRect?.top > window.screenTop);
+                console.log(cardRect?.top > window.screenY);
+                console.log(cardRect?.top, window.screenTop);
             }
         })
         return () => {
             
         };
     }, []);
+
+    
+    useEffect(() => {
+        const observer = new IntersectionObserver(
+            (entries) => {
+                // When the target element intersects the viewport
+                if (entries[0].isIntersecting) {
+                    setIsVisible(true);
+                } else {
+                    setIsVisible(false);
+                }
+            },
+            {
+        
+                rootMargin: '0px',
+                threshold: 0, // Adjust the threshold as needed (0.5 means at least 50% of the element is visible)
+            }
+        );
+
+        // Start observing the target element
+        if (blogCardRef.current) {
+            observer.observe(blogCardRef.current);
+        }
+
+        // Cleanup the observer when the component unmounts
+        return () => {
+            if (blogCardRef.current) {
+                observer.unobserve(blogCardRef.current);
+            }
+        };
+    }, []);
+
+
+
+   
     return (
-        <div className='blog-card-wrapper'
+        <div className={`blog-card-wrapper ${isVisible? 'visible':''}`}
         ref={blogCardRef}>
             <div className='image_wrapper'>
 

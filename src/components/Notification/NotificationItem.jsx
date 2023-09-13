@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { AllowedRoles } from '../../utils/globalValues';
+import { formatDate } from '../Config'
+
 
 const NotificationItem = ({ notification }) => {
     const [viewUser, setviewUser] = useState(false);
@@ -14,9 +16,12 @@ const NotificationItem = ({ notification }) => {
                         <p className=''
                             style={{ color: 'var(--text-color)' }}
                         >{notification?.message}</p>
-                        <span>{
-                            formatDate(notification?.date)
-                        }</span>
+            <p
+                style={{ color: 'var(--text-color)', fontSize:'.9rem' }}
+            >
+                {formatDate(notification?.date)}
+            </p>
+            
                         {((notification?.modelname === AllowedRoles.user) && notification?.user)?
                             <section className='flex_column'>
                                 <section>

@@ -20,6 +20,7 @@ import UseAuth from "../hooks/useAuth";
 function UserPage() {
 
   const queryClient = new QueryClient()
+
   const {token} = UseAuth()
   const [error, setError] = useState('');
   const [page, setPage] = useState(0);
@@ -36,7 +37,7 @@ function UserPage() {
             .then(res => res?.data)
         .catch((err) => Promise.reject(err)),
       refetchOnReconnect: true,
-        refetchInterval: 2000,
+        refetchInterval: 10000,
     })
    
 
@@ -170,7 +171,7 @@ if (dataLoading && !data?.users?.length) {
               {data?.users?.map((user, index) => (
                 <UserTableRow 
                   user={user}
-                  key={user?._id}
+                  key={index}
                   resetFunction={() => {
                     queryClient.invalidateQueries({ queryKey:['users', page, pageSize, keyword]})
                   }}

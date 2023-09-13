@@ -104,7 +104,7 @@ useEffect(() => {
               <div className="blogs-wrapper">
                 
               {blogsToDisplay?.map((blog, index) => (
-                <BlogCard blog={blog} key={blog?._id} />
+                <BlogCard blog={blog} key={index} />
               ))}
               <div id="fetchMoreElement" ref={fetchMoreRef}></div>
               {fetchtingMore &&

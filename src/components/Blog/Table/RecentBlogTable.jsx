@@ -11,6 +11,9 @@ import { useQuery,QueryClient } from '@tanstack/react-query';
 import { useEffect } from 'react';
 import { useScoketContenxt } from '../../../context/socketContext';
 import  EggIcon  from '@mui/icons-material/EggSharp';
+import RotatingLineLoader from '../../Loader/RotatingLineLoader';
+import SpinnerWings from '../../Loader/SpinnerWings';
+import ComponenetSkeleton from '../../Loader/ComponenetSkeleton';
 
 
 const RecentBlogTable = ({ blogs, setblogs }) => {
@@ -65,6 +68,9 @@ const RecentBlogTable = ({ blogs, setblogs }) => {
         };
     }, []);
 
+    if (dataLoading && !data?.blogs?.length) {
+        return <ComponenetSkeleton />
+    }
 
     return (
         <Box

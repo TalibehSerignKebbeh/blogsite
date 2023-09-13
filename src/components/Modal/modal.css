@@ -1,0 +1,118 @@
+.modal{
+    width: 100%;
+    height: 100%;
+    position: relative;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto;
+    width: 500px;
+    background-color: var(--elements-bg);
+}
+
+.modal .success_wrapper{
+    justify-self: center;
+    text-align: center;
+    margin-top: 30px;
+    padding: 14px;
+    border-radius: 5px;
+    background-color: var(--form-bg);
+}
+.modal .success_wrapper img{
+    width: 70px;
+    height: 70px;
+    margin-bottom: 15px;
+}
+.modal .success_wrapper p{
+   color: rgb(4, 139, 4);
+   text-transform: capitalize;
+}
+
+.select_wrapper{
+    padding: 20px 10px;
+    text-align: end;
+    /* background-color: #fff; */
+    justify-self: end;
+    margin-right: 10px;
+    background-color: inherit;
+}
+
+
+.select_wrapper p{
+    color: var(--text-color) !important;
+   text-transform: capitalize;
+    font-size: 1.3rem;
+    text-align: start;
+    padding: 4px 0px;
+}
+.roles_select{
+    min-width: 200px;
+    max-width: 350px;
+    width: max-content;
+    padding:  6px;
+    border-radius: 5px;
+    font-size: 1.8rem;
+    border: none;
+    outline: none;
+}
+
+#error_msg{
+    margin-top: 2px;
+    background-color: rgb(246, 21, 21) !important;
+    padding: 5px;
+    border-radius: 5px;
+    /* background-color: #dad5d5; */
+    color: white;
+    font-weight: 500;
+}
+
+.roles_select_buttons_wrapper{
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-template-rows: 1fr;
+    gap: 80px;
+    justify-items: start;
+    align-items: start;
+    justify-content: end;
+    padding: 0px 10px;
+    margin-top: 50px;
+    padding-bottom: 20px;
+
+}
+
+.roles_select_buttons_wrapper button{
+    padding: 8px 25px;
+    border-radius: 5px;
+    font-size: 1.3rem;
+}
+
+.submit_btn{
+    background-color: var(--primary-color);
+}
+
+@media (max-width: 600px) {
+    .modal{
+       width: 100%; 
+    }
+    
+}
+
+@media (max-width: 400px) {
+    .modal{
+       width:100%; 
+    }
+
+.roles_select_buttons_wrapper{
+    gap: 50px;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr;
+    /* justify-content: end; */
+    /* align-items: end; */
+    justify-items: end;
+}
+.reset_btn{
+    order: -1;
+}
+    
+}

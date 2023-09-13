@@ -10,6 +10,7 @@ import { AllowedRoles } from '../../utils/globalValues';
 import NotificationItem from './NotificationItem';
 
 const NotificationWrapper = ({ setOpen, Open }) => {
+
     const { StoreNotifications, ClearNotifications } = notificationActions()
     const notifications = getNotifications()
     const [unReads, setunReads] = useState(notifications?.filter((item) => (item && !item?.read))?.map(item => item?._id));
@@ -51,10 +52,6 @@ const NotificationWrapper = ({ setOpen, Open }) => {
         document.addEventListener('click', e => {
 
             if (!Open && notificationWrapperRef?.current) { return };
-            // console.log(Open);
-            // console.log(Open);
-            // console.log(notificationWrapperRef?.current?.classList);
-            // console.log(notificationWrapperRef?.current?.getBoundingClientRect());
             const refRect = notificationWrapperRef?.current?.getBoundingClientRect();
             if (e.clientX < refRect?.left || e.clientX > refRect?.right
                 || e.clientY < refRect?.top || e.clientY > refRect?.bottom
