@@ -92,7 +92,7 @@ const AdminDashboard = () => {
               />
             }
             amount={blogCount}
-            title={"Total blogs"}
+            title={"total blogs"}
           />
           <ColumnCard
             icon={
@@ -104,7 +104,7 @@ const AdminDashboard = () => {
               />
             }
             amount={subscribersCount || 0}
-            title={"Subscribers"}
+            title={"subscribers"}
           />
           <ColumnCard
             icon={
@@ -116,7 +116,7 @@ const AdminDashboard = () => {
               />
             }
             amount={adminCount}
-            title={"Admins"}
+            title={"admins"}
           />
           {/* <ColumnCard
             icon={
@@ -132,7 +132,6 @@ const AdminDashboard = () => {
           /> */}
         </div>
         <div className="recent-container">
-
          
               <RecentBlogTable  
               />

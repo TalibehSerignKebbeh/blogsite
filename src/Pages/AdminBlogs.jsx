@@ -12,6 +12,7 @@ import { useQuery, QueryClient } from "@tanstack/react-query";
 import { GetFullName, formatDate, formattedTitle } from "../components/Config";
 import ZeroBasePaginntation from "../components/Paginnation/ZeroBasePaginntation";
 import UseAuth from "../hooks/useAuth";
+import SpinnerWings from "../components/Loader/SpinnerWings";
 
 
 
@@ -30,7 +31,7 @@ const AdminBlogs = () => {
 
 
     const { data, failureReason, error, isError,
-        isLoading: dataLoading } = useQuery({
+        isLoading } = useQuery({
             queryKey: ['blogs', pageNum, pageSize, keyword],
             queryFn: () => AxiosInstance.get(`/blogs?page=${Number(pageNum)}&size=${Number(pageSize)}${keyword?.length ? `&keyword=${keyword}` : ''}`,
                 { headers: { Authorization: `Bearer ${token}` } })
@@ -125,9 +126,9 @@ const AdminBlogs = () => {
                     />
                 </div>
             </div>
+            {isLoading? <SpinnerWings /> : null}
             <DataGrid editMode="row"
                 rows={data?.blogs || []}
-
 
                 columns={[
                     {
@@ -267,7 +268,7 @@ const AdminBlogs = () => {
 
                 rowSelection={false}
 
-                loading={dataLoading}
+                loading={isLoading}
                 getRowId={row => row?._id}
                 pagination
                 hideFooterPagination

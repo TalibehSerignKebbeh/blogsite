@@ -35,13 +35,14 @@ export const formattedTitle = (title) => `${title?.toLowerCase()?.split(' ')?.jo
  
 export function formatDate(date, formatString) {
 
+    console.log(date);
     if (date && isValid(parseISO(date))) {
         if (isToday(parseISO(date))) {
             if (isSameMinute(parseISO(date), new Date())) {
-                return formatDistanceToNow(date) + " ago"
+                return formatDistanceToNow(parseISO(date)) + " ago"
             }
             if (isSameHour(parseISO(date), new Date())) {
-                return formatDistanceToNow(date)+ " ago"
+                return formatDistanceToNow(parseISO(date))+ " ago"
             }
         return "Today at " + format(parseISO(date), 'kk:mm bbb');
 

@@ -14,6 +14,7 @@ import  EggIcon  from '@mui/icons-material/EggSharp';
 import RotatingLineLoader from '../../Loader/RotatingLineLoader';
 import SpinnerWings from '../../Loader/SpinnerWings';
 import ComponenetSkeleton from '../../Loader/ComponenetSkeleton';
+import { Empty } from 'antd';
 
 
 const RecentBlogTable = ({ blogs, setblogs }) => {
@@ -72,6 +73,7 @@ const RecentBlogTable = ({ blogs, setblogs }) => {
         return <ComponenetSkeleton />
     }
 
+    if(!data?.blogs?.length) return null
     return (
         <Box
             sx={{
@@ -130,17 +132,18 @@ const RecentBlogTable = ({ blogs, setblogs }) => {
                 }
 
             }}>
-            <h2 className='title'>Un Publish Blogs</h2>
-            {(!dataLoading && !data?.blogs?.length) ?
-                <div style={{width:'100%', textAlign:'center'}}>
-                    <EggIcon sx={{
-                        transform: 'scale(2)',mt:4,
-                     mx: "auto", textAlign: 'center',
-                    color:'green'}}
-                        className='egg_icon'
-                   />
+               {/* <div style={{ width: '100%', textAlign: 'center' }}>
+                    
+                    <Empty description="no un publish blog" 
+                        style={{ textAlign: 'center', fontSize: "3.6rem", color: 'var(--text-color)' }}
+                        imageStyle={{width:'16rem', height:'16rem', margin:'auto', }}
+                    />
+                    
                 </div>
-                :
+                : */}
+            
+            <h2 className='title'>un publish blogs</h2>
+
                 < DataGrid
                 loading={dataLoading}
 
@@ -259,7 +262,8 @@ const RecentBlogTable = ({ blogs, setblogs }) => {
                     overflowX: 'auto',
                     // width:{ xl: '700px', lg: '700px', md: '600px', sm: '90%', xs: '99%', }
                 }}
-            />}
+                    />
+       
         </Box>
     );
 }
