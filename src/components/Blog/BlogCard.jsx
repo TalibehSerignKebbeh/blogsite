@@ -27,12 +27,7 @@ const BlogCard = ({ blog }) => {
     if (['admin', 'editor'].includes(role)) {
         blogLink = `/dash/blogs/view/${formattedTitle}`
     }
-    // console.log(formatDistanceToNow(parseISO(blog?.created_at), {includeSeconds:false,}));
-    // console.log(formatDistance(parseISO(blog?.created_at), {includeSeconds:false,},{locale:{c}}));
-    // console.log(blog?.created_at);
-    // console.log('----------------------------------');
-  
-    useEffect(() => {
+       useEffect(() => {
         //  if (blogCardRef) {
         //      const cardRect = blogCardRef?.current?.getBoundingClientRect();
         //      console.log('-------------------------------------');

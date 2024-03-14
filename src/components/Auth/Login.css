@@ -10,11 +10,12 @@
     padding-top: 40px;
     padding-bottom: 40px;
 }
-.error_message.content{
-    font-size: 1.2rem;
+.error_message{
+    font-size: 1.3rem;
+    font-weight: 500;
     color: red;
     text-align: center;
-    padding: 3px 4px;
+    padding: 10px 6px;
     border-radius: 3px;
     background-color: rgb(249, 246, 246);
 }
@@ -54,7 +55,7 @@
     padding-left: 10px;
     padding-right: 10px;
     padding-top: 0px;
-    margin-top: -10px;
+    margin-top: 30px;
     gap: 15px;
 }
 .title-wrapper>h3{
@@ -77,14 +78,14 @@
 }
 
 .login_form .input_wrapper{
-    min-width: 200px;
-    max-width: 300px;
+    min-width: 300px;
+    max-width: 400px;
     display: grid;
     grid-template-rows: auto auto;
 }
 
 .input_wrapper label {
-    font-size: 1rem;
+    font-size: 1.2rem;
     color: var(--label-color);
     font-weight: 600;
     margin-left: 1px;
@@ -97,12 +98,13 @@
     text-transform: uppercase;
 }
 
+
 .textinput {
     padding: 9px 8px;
     outline: none;
     border: 1.6px solid #336;
     width: 100%;
-    font-size: 1.2rem;
+    font-size: 1.4rem;
     font-weight: 500;
     font-family: serif;
     border-radius: 4px;
@@ -142,3 +144,4 @@
     color: #fff !important;
     background-color: #0066ff;
 }
+

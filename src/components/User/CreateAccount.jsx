@@ -2,7 +2,7 @@ import React from 'react';
 import './createaccount.css'
 import { useState } from 'react';
 import { AxiosInstance } from '../../api';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import FileUploadOutlined from '@mui/icons-material/FileUploadOutlined';
 import { GetError, validateUsername } from '../Config';
 import { useContextHook } from '../../context/AppContext';
@@ -14,11 +14,10 @@ let allowImageTypes = ['image/jpeg', 'image/jpg',
 
 
 const CreateAccount = () => {
-
+    const navigate = useNavigate()
     const { showSearch, setshowSearch } = useContextHook()
     const [uploading, setuploading] = useState(false);
     const [profileUrl, setprofileUrl] = useState(null);
-    const [successMessage, setSuccessMessage] = useState('')
     const [errorMessage, seterrorMessage] = useState('');
     const [user, setuser] = useState({
         firstName: '', lastName: "", username: '',
@@ -53,7 +52,7 @@ const CreateAccount = () => {
     const validate = (name, value) => {
 
         if (name !== 'profile' && !value?.trim()?.length) {
-            setErrors({ ...errors, [name]: `${name} is required` })
+            setErrors({ ...errors, [name]: `${name?.toLowerCase()} is required` })
 
             //   errors[name] = `${name} is required`;
         } else {
@@ -62,7 +61,7 @@ const CreateAccount = () => {
                    setErrors({ ...errors, [name]: `` })
                     return; 
                 }
-            setErrors({ ...errors, [name]: `${name} must exceeds 4 character` })
+            setErrors({ ...errors, [name]: `${name?.toLowerCase()} must exceeds 4 character` })
 
             //   errors[name] = `${name} is required`;
         }
@@ -141,11 +140,12 @@ const CreateAccount = () => {
                 }
             })
                 .then((res) => {
-                    setSuccessMessage(res?.data?.message)
-                    document.documentElement.scroll({
-                        behavior: 'smooth',
-                        top:2,
-                    })
+                    navigate('/login')
+                    // setSuccessMessage(res?.data?.message)
+                    // document.documentElement.scroll({
+                    //     behavior: 'smooth',
+                    //     top:2,
+                    // })
 
                 }).catch((err) => {
                     console.log(err);
@@ -258,26 +258,7 @@ const CreateAccount = () => {
                         </div>
                     </div>
                     <div className='input-wrapper submit'>
-                        {successMessage?.length ?
-                            <div style={{
-                                backgroundColor: '#09862e',
-                                marginLeft: '0px',
-                                marginRight: 'auto',
-                                textAlign: 'start', padding: '10px',
-                                borderRadius: '10px', color: '#fff',
-                                display: 'flex',
-                                justifyContent: 'space-between',
-                                minWidth: '200px',
-                                gap:'50px',
-                                maxWidth: '100%', alignItems: 'center',
-
-                            }}>
-                                <small>{successMessage}</small>
-                                <small
-                                    style={{ cursor: 'pointer', }}
-                                    onClick={e => setSuccessMessage('')}>x</small>
-                            </div>
-                            : null}
+                        
                         <button
                             type='submit' >{uploading ? "uploading..." : `Submit`}</button>
                     </div>

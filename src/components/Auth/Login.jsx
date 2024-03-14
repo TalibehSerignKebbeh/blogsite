@@ -59,19 +59,23 @@ const Login = () => {
                 <div className='title-wrapper'>
                     <h3>Login</h3>
                 </div>
+
+                 {errorMessage?.length ?
+                        <span className={`error_message `}>
+                        {errorMessage}
+                    </span> : null}
                 <div className='inputs_grids'>
-                    <span className={`error_message ${errorMessage?.length ? 'content' : ''}`}>
-                        {errorMessage}</span>
+                   
                     <div className='input_wrapper first'>
                         <label htmlFor='username'>username</label>
                         <input autoComplete='on' type={'text'} value={user?.username}
-                            name={'username'} id={"username"} className={'textinput'}
+                            name={'username'} id={"username"} className='textinput'
                             onChange={handleChange} placeholder={"username ..."} />
                     </div>
                     <div className='input_wrapper'>
                         <label htmlFor='password'>password</label>
                         <input autoComplete='off' type={'password'} value={user?.password}
-                            name={'password'} id={"password"} className={'textinput'}
+                            name={'password'} id={"password"} className='textinput'
                             onChange={handleChange} placeholder={"password ..."} />
                     </div>
                     <div className='input_wrapper'>

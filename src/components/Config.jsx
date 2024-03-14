@@ -9,6 +9,7 @@ import formatDistanceToNow from "date-fns/formatDistanceToNow";
 import isYesterday from "date-fns/isYesterday";
 import toDate from "date-fns/toDate";
 import parse from "date-fns/esm/parse";
+import isValid from "date-fns/isValid";
 
 
 export const GetError = (err) => {
@@ -34,7 +35,7 @@ export const formattedTitle = (title) => `${title?.toLowerCase()?.split(' ')?.jo
  
 export function formatDate(date, formatString) {
 
-    if (date) {
+    if (date && isValid(parseISO(date))) {
         if (isToday(parseISO(date))) {
             if (isSameMinute(parseISO(date), new Date())) {
                 return formatDistanceToNow(date) + " ago"
